@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string.h>
 
+#include "Aplicacion.h"
+
 using namespace std;
 
 /* 	Autores:
@@ -15,9 +17,8 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	
-	string nombre = "Gabriel";
-	
-	cout << nombre;
+	Aplicacion* app = new Aplicacion();
+	app->Menu();
 	
 	exit(0);
 }
