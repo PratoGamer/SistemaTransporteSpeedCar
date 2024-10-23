@@ -17,8 +17,9 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	
-	Aplicacion* app = new Aplicacion();
-	app->Menu();
+	/*Aplicacion* app = new Aplicacion();
+	app->Menu();*/
+	cout<<"hola mundo";
 	
 	exit(0);
 }
