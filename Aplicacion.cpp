@@ -10,7 +10,7 @@ Aplicacion::Aplicacion(){
 }
 
 void Aplicacion::Menu(){
-	cout << "SpeedCar" << endl;
+	cout << "\t *** Bienvenido a SpeedCar ***" << endl;
 	
 }
 
