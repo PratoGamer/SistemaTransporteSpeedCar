@@ -2,25 +2,27 @@
 #define PersonaH
 #include <string> 
 
+using namespace std;
+
 class Persona {
 private:
-    std::string nombre; 
-    std::string apellido; 
+    string nombre; 
+    string apellido; 
     int edad;
     float cedula;
 
 public:
     //constructores
     Persona();
-    Persona(std::string nombre, std::string apellido, int edad, float cedula); 
+    Persona(string nombre, string apellido, int edad, float cedula); 
     //set
-    void setNombre(std::string nombre); 
-    void setApellido(std::string apellido); 
+    void setNombre(string nombre); 
+    void setApellido(string apellido); 
     void setEdad(int edad);
     void setCedula(float cedula);
     //get
-    std::string getNombre(); 
-    std::string getApellido(); 
+    string getNombre(); 
+    string getApellido(); 
     int getEdad();
     float getCedula();
 };
