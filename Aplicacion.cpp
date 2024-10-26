@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "Aplicacion.h"
+#include "Sector.h"
 
 using namespace std;
 
@@ -66,6 +67,8 @@ void Aplicacion::MenuUsuario(){
 	
 	switch(this->eleccion) {
 		case 1:
+			
+			//system("pause");
 		   	break;
 		   	
 		case 2:
