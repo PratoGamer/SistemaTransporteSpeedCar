@@ -8,23 +8,25 @@ class Persona {
 private:
     string nombre; 
     string apellido; 
-    int edad;
-    float cedula;
+    string edad;
+    string cedula;
 
 public:
     //constructores
     Persona();
-    Persona(string nombre, string apellido, int edad, float cedula); 
+    Persona(string nombre, string apellido, string edad, string cedula); 
     //set
     void setNombre(string nombre); 
     void setApellido(string apellido); 
-    void setEdad(int edad);
-    void setCedula(float cedula);
+    void setEdad(string edad);
+    void setCedula(string cedula);
     //get
     string getNombre(); 
     string getApellido(); 
-    int getEdad();
-    float getCedula();
+    string getEdad();
+    string getCedula();
+    
+    void leer();
 };
 
 #endif

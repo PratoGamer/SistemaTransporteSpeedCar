@@ -12,7 +12,7 @@ class Usuario : public Persona{
 	public:
 			//constructores
 		Usuario();
-		Usuario(string nombre, string apellido, int edad, float cedula);
+		Usuario(string nombre, string apellido, string edad, string cedula);
 			//set
 		
 			//get

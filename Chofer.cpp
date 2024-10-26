@@ -7,11 +7,11 @@ using namespace std;
 Chofer::Chofer() : Persona() {
     this->marca = "";
     this->modelo = "";
-    this->anho = 0;
+    this->anho = "";
     this->placa = "";
 }
 
-Chofer::Chofer(string nombre, string apellido, int edad, float cedula, string marca, string modelo, int anho, string placa) 
+Chofer::Chofer(string nombre, string apellido, string edad, string cedula, string marca, string modelo, string anho, string placa) 
     : Persona(nombre, apellido, edad, cedula) {
     this->marca = marca;
     this->modelo = modelo;
@@ -26,7 +26,7 @@ void Chofer::setMarca(string marca) {
 void Chofer::setModelo(string modelo) {
     this->modelo = modelo;
 }
-void Chofer::setAnho(int anho) {
+void Chofer::setAnho(string anho) {
     this->anho = anho;
 }
 void Chofer::setPlaca(string placa) {
@@ -40,7 +40,7 @@ string Chofer::getMarca() {
 string Chofer::getModelo() {
     return modelo;
 }
-int Chofer::getAnho() {
+string Chofer::getAnho() {
     return anho;
 }
 string Chofer::getPlaca() {

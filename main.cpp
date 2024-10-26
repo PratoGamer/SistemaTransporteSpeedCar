@@ -21,7 +21,7 @@ using namespace std;
 int main(int argc, char** argv) {
 	
 	Aplicacion* app = new Aplicacion();
-	app->Menu();
+	app->subMenu();
 	
 	exit(0);
 }

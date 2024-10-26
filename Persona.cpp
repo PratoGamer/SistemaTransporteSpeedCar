@@ -7,11 +7,11 @@ using namespace std;
 Persona::Persona() {
     this->nombre = "";
     this->apellido = "";
-    this->edad = 0;
-    this->cedula = 0.0f;
+    this->edad = "";
+    this->cedula = "";
 }
 
-Persona::Persona(string nombre, string apellido, int edad, float cedula) {
+Persona::Persona(string nombre, string apellido, string edad, string cedula) {
     this->nombre = nombre;
     this->apellido = apellido;
     this->edad = edad;
@@ -27,11 +27,11 @@ void Persona::setApellido(string apellido) {
     this->apellido = apellido;
 }
 
-void Persona::setEdad(int edad) {
+void Persona::setEdad(string edad) {
     this->edad = edad;
 }
 
-void Persona::setCedula(float cedula) {
+void Persona::setCedula(string cedula) {
     this->cedula = cedula;
 }
 
@@ -44,10 +44,14 @@ string Persona::getApellido() {
     return apellido;
 }
 
-int Persona::getEdad() {
+string Persona::getEdad() {
     return edad;
 }
 
-float Persona::getCedula() {
+string Persona::getCedula() {
     return cedula;
+}
+
+void Persona::leer(){
+	cout << nombre;
 }

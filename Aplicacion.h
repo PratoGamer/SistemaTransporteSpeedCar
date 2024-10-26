@@ -12,7 +12,7 @@ class Aplicacion{
 		Aplicacion();
 		~Aplicacion();
 		void Menu();
-		
+		void subMenu();
 };
 
 #endif
