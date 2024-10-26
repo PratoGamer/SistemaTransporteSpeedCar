@@ -1,7 +1,7 @@
 #ifndef UsuarioH
 #define UsuarioH
 
-#include <Persona.h>
+#include "Persona.h"
 
 class Usuario : public Persona{
 	private:
@@ -9,7 +9,7 @@ class Usuario : public Persona{
 	public:
 			//constructores
 		Usuario();
-		Usuario(char nombre, char apellido, int edad, float cedula);
+		Usuario(std::string nombre, std::string apellido, int edad, float cedula);
 			//set
 		
 			//get
@@ -17,3 +17,7 @@ class Usuario : public Persona{
 };
 
 #endif
+
+
+    
+
