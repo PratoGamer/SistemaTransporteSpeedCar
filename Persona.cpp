@@ -7,24 +7,19 @@ using namespace std;
 Persona::Persona() {
     this->nombre = "";
     this->apellido = "";
-    this->edad = "";
-    this->cedula = "";
+    this->edad = 0;
+    this->cedula = 0;
 }
 
-Persona::Persona(string nombre, string apellido, string edad, string cedula) {
+Persona::Persona(string nombre, string apellido, int edad, int cedula) {
     this->nombre = nombre;
     this->apellido = apellido;
     this->edad = edad;
     this->cedula = cedula;
 }
 
-<<<<<<< HEAD
-// SET
-void Persona::setNombre(std::string nombre) {
-=======
 // set
 void Persona::setNombre(string nombre) {
->>>>>>> 9d5afcf59ae30b7bcb14adb1314f1c567b38514b
     this->nombre = nombre;
 }
 
@@ -32,21 +27,16 @@ void Persona::setApellido(string apellido) {
     this->apellido = apellido;
 }
 
-void Persona::setEdad(string edad) {
+void Persona::setEdad(int edad) {
     this->edad = edad;
 }
 
-void Persona::setCedula(string cedula) {
+void Persona::setCedula(int cedula) {
     this->cedula = cedula;
 }
 
-<<<<<<< HEAD
-// GET
-std::string Persona::getNombre() {
-=======
 // get
 string Persona::getNombre() {
->>>>>>> 9d5afcf59ae30b7bcb14adb1314f1c567b38514b
     return nombre;
 }
 
@@ -54,11 +44,11 @@ string Persona::getApellido() {
     return apellido;
 }
 
-string Persona::getEdad() {
+int Persona::getEdad() {
     return edad;
 }
 
-string Persona::getCedula() {
+int Persona::getCedula() {
     return cedula;
 }
 
