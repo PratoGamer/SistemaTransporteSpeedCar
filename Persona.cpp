@@ -1,6 +1,6 @@
 #include "Persona.h"
 
-// constructores
+// Constructores
 Persona::Persona() {
     this->nombre = "";
     this->apellido = "";
@@ -15,7 +15,7 @@ Persona::Persona(std::string nombre, std::string apellido, int edad, float cedul
     this->cedula = cedula;
 }
 
-// set
+// SET
 void Persona::setNombre(std::string nombre) {
     this->nombre = nombre;
 }
@@ -32,7 +32,7 @@ void Persona::setCedula(float cedula) {
     this->cedula = cedula;
 }
 
-// get
+// GET
 std::string Persona::getNombre() {
     return nombre;
 }
