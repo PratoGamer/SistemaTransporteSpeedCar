@@ -1,50 +1,67 @@
 #include "Persona.h"
+#include <string> 
+
+using namespace std;
 
 // Constructores
 Persona::Persona() {
     this->nombre = "";
     this->apellido = "";
-    this->edad = 0;
-    this->cedula = 0.0f;
+    this->edad = "";
+    this->cedula = "";
 }
 
-Persona::Persona(std::string nombre, std::string apellido, int edad, float cedula) {
+Persona::Persona(string nombre, string apellido, string edad, string cedula) {
     this->nombre = nombre;
     this->apellido = apellido;
     this->edad = edad;
     this->cedula = cedula;
 }
 
+<<<<<<< HEAD
 // SET
 void Persona::setNombre(std::string nombre) {
+=======
+// set
+void Persona::setNombre(string nombre) {
+>>>>>>> 9d5afcf59ae30b7bcb14adb1314f1c567b38514b
     this->nombre = nombre;
 }
 
-void Persona::setApellido(std::string apellido) {
+void Persona::setApellido(string apellido) {
     this->apellido = apellido;
 }
 
-void Persona::setEdad(int edad) {
+void Persona::setEdad(string edad) {
     this->edad = edad;
 }
 
-void Persona::setCedula(float cedula) {
+void Persona::setCedula(string cedula) {
     this->cedula = cedula;
 }
 
+<<<<<<< HEAD
 // GET
 std::string Persona::getNombre() {
+=======
+// get
+string Persona::getNombre() {
+>>>>>>> 9d5afcf59ae30b7bcb14adb1314f1c567b38514b
     return nombre;
 }
 
-std::string Persona::getApellido() {
+string Persona::getApellido() {
     return apellido;
 }
 
-int Persona::getEdad() {
+string Persona::getEdad() {
     return edad;
 }
 
-float Persona::getCedula() {
+string Persona::getCedula() {
     return cedula;
+}
+
+void Persona::leer(){
+	cout << nombre;
 }

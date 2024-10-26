@@ -21,7 +21,7 @@ using namespace std;
 int main(int argc, char** argv) {
 	
 	Aplicacion* app = new Aplicacion();
-	app->Menu();
+	app->subMenu();
 	
 	cout << "\t Fin de la Aplicacion" << endl;
 	

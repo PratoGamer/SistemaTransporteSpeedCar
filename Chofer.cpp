@@ -1,14 +1,17 @@
 #include "Chofer.h"
+#include <string> 
+
+using namespace std;
 
 // Constructores
 Chofer::Chofer() : Persona() {
     this->marca = "";
     this->modelo = "";
-    this->anho = 0;
+    this->anho = "";
     this->placa = "";
 }
 
-Chofer::Chofer(std::string nombre, std::string apellido, int edad, float cedula, std::string marca, std::string modelo, int anho, std::string placa) 
+Chofer::Chofer(string nombre, string apellido, string edad, string cedula, string marca, string modelo, string anho, string placa) 
     : Persona(nombre, apellido, edad, cedula) {
     this->marca = marca;
     this->modelo = modelo;
@@ -17,30 +20,30 @@ Chofer::Chofer(std::string nombre, std::string apellido, int edad, float cedula,
 }
 
 // Setters
-void Chofer::setMarca(std::string marca) {
+void Chofer::setMarca(string marca) {
     this->marca = marca;
 }
-void Chofer::setModelo(std::string modelo) {
+void Chofer::setModelo(string modelo) {
     this->modelo = modelo;
 }
-void Chofer::setAnho(int anho) {
+void Chofer::setAnho(string anho) {
     this->anho = anho;
 }
-void Chofer::setPlaca(std::string placa) {
+void Chofer::setPlaca(string placa) {
     this->placa = placa;
 }
 
 // Getters
-std::string Chofer::getMarca() {
+string Chofer::getMarca() {
     return marca;
 }
-std::string Chofer::getModelo() {
+string Chofer::getModelo() {
     return modelo;
 }
-int Chofer::getAnho() {
+string Chofer::getAnho() {
     return anho;
 }
-std::string Chofer::getPlaca() {
+string Chofer::getPlaca() {
     return placa;
 }
 

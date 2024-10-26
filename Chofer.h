@@ -1,29 +1,32 @@
 #ifndef ChoferH
 #define ChoferH
 #include "Persona.h"
+#include <string> 
+
+using namespace std;
 
 class Chofer : public Persona {
 private:
-    std::string marca;
-    std::string modelo;
-    int anho;
-    std::string placa;
+    string marca;
+    string modelo;
+    string anho;
+    string placa;
 public:
     // Constructores
     Chofer();
-    Chofer(std::string nombre, std::string apellido, int edad, float cedula, std::string marca, std::string modelo, int anho, std::string placa);
+    Chofer(string nombre, string apellido, string edad, string cedula, string marca, string modelo, string anho, string placa);
     
     // Setters
-    void setMarca(std::string marca);
-    void setModelo(std::string modelo);
-    void setAnho(int anho);
-    void setPlaca(std::string placa);
+    void setMarca(string marca);
+    void setModelo(string modelo);
+    void setAnho(string anho);
+    void setPlaca(string placa);
     
     // Getters
-    std::string getMarca();
-    std::string getModelo();
-    int getAnho();
-    std::string getPlaca();
+    string getMarca();
+    string getModelo();
+    string getAnho();
+    string getPlaca();
 };
 
 #endif
