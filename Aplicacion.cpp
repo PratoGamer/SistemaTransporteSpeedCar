@@ -67,17 +67,20 @@ void Aplicacion::MenuUsuario(){
 	
 	switch(this->eleccion) {
 		case 1:
-			
+			agregar();
 			//system("pause");
 		   	break;
 		   	
 		case 2:
+			modificar();
 		   	break;
 		    	
 		case 3:
+			consultar();
 		   	break;
 		   	
 		case 4:
+			eliminar();
 		   	break;
 		
 		case 5:
@@ -90,6 +93,55 @@ void Aplicacion::MenuUsuario(){
 		system("cls");
 }
 
+//Metodos MenuUsuario
+
+void Aplicacion::agregar(){
+	system("cls");
+	cout << "\t *** Agregar ***" << endl;
+	cout << endl;
+	opciones();
+	cout << endl;
+	cout << "\t Ingrese su Seleccion: ";
+	cin >> this->eleccion;
+}
+
+void Aplicacion::modificar(){
+	system("cls");
+	cout << "\t *** Modificar ***" << endl;
+	cout << endl;
+	opciones();
+	cout << endl;
+	cout << "\t Ingrese su Seleccion: ";
+	cin >> this->eleccion;
+}
+
+void Aplicacion::consultar(){
+	system("cls");
+	cout << "\t *** Consultar ***" << endl;
+	cout << endl;
+	opciones();
+	cout << endl;
+	cout << "\t Ingrese su Seleccion: ";
+	cin >> this->eleccion;
+}
+
+void Aplicacion::eliminar(){
+	system("cls");
+	cout << "\t *** Eliminar ***" << endl;
+	cout << endl;
+	opciones();
+	cout << endl;
+	cout << "\t Ingrese su Seleccion: ";
+	cin >> this->eleccion;
+}
+
+void Aplicacion::opciones(){
+	cout << "\t 1 -> Usuario." << endl;
+	cout << "\t 2 -> Chofer." << endl;
+	cout << "\t 3 -> Sector." << endl;
+}
+
+
 // Menu de Servicio Diario
 void Aplicacion::MenuServicioDiario(){
 	cout << "\t *** Menu de Servicio Diario ***" << endl;
@@ -97,27 +149,21 @@ void Aplicacion::MenuServicioDiario(){
 	
 	cout << "\t 1 -> Actualizar ubicacion del vehiculo." << endl;
 	cout << "\t 2 -> Solicitar Traslado." << endl;
-	cout << "\t 3 -> Seleccionar vehículo." << endl;
-	cout << "\t 4 -> Finalizar traslado." << endl;
-	cout << "\t 5 -> Salir." << endl;
+	cout << "\t 3 -> Salir." << endl;
 	cout << endl;
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
 	
 	switch(this->eleccion) {
 		case 1:
+			actualizarUbicacion();
 		   	break;
 		   	
 		case 2:
-		   	break;
-		    	
-		case 3:
-		   	break;
-		   	
-		case 4:
+			solicitarTraslado();
 		   	break;
 		
-		case 5:
+		case 3:
 		   	break;
 		   	
 		default:
@@ -125,8 +171,30 @@ void Aplicacion::MenuServicioDiario(){
 		  	cout << endl;
 		}
 		system("cls");
+}
+//Metodos MenuServicioDiario
+
+void Aplicacion::actualizarUbicacion(){
+	system("cls");
+	cout << "\t *** Actualizar Ubicacion ***" << endl;
+	cout << endl;
 	
+	cout << "\tNumero de Placa: "<< endl;
+	cout << "\tSector Actual: "<< endl;
 	
+	system("pause");
+}
+
+void Aplicacion::solicitarTraslado(){
+	system("cls");
+	cout << "\t *** Solicitar Traslado ***" << endl;
+	cout << endl;
+	
+	cout << "\tCedula: "<< endl;
+	cout << "\tSector Origen: "<< endl;
+	cout << "\tSector Destino: "<< endl;
+	
+	system("pause");
 }
 
 // Finalizar Dia
@@ -136,4 +204,3 @@ void Aplicacion::FinalizarDia(){
 	
 	
 }
-

@@ -22,6 +22,15 @@ class Aplicacion{
 		void MenuUsuario();
 		void MenuServicioDiario();
 		void FinalizarDia();
+		//Metodos MenuUsuario
+		void agregar();
+		void modificar();
+		void consultar();
+		void eliminar();
+		void opciones();
+		//Metodos MenuServicioDiario
+		void solicitarTraslado();
+		void actualizarUbicacion();
 };
 
 #endif
