@@ -1,6 +1,11 @@
 #ifndef AplicacionH
 #define AplicacionH
+#include <vector>
 #include <string>
+
+#include "Persona.h"
+#include "Chofer.h"
+#include "Usuario.h"
 
 using namespace std;
 
@@ -9,6 +14,10 @@ class Aplicacion{
 		// Atributos
 		int eleccion;
 		bool terminarDia;
+		
+		// Vectores para Almacenar 
+		vector <Chofer> choferes;
+		vector <Usuario> usuarios;
 		
 	public:
 		// Constructor
@@ -22,13 +31,15 @@ class Aplicacion{
 		void MenuUsuario();
 		void MenuServicioDiario();
 		void FinalizarDia();
-		//Metodos MenuUsuario
+		
+		// Metodos MenuUsuario
 		void agregar();
 		void modificar();
 		void consultar();
 		void eliminar();
 		void opciones();
-		//Metodos MenuServicioDiario
+		
+		// Metodos MenuServicioDiario
 		void solicitarTraslado();
 		void actualizarUbicacion();
 };

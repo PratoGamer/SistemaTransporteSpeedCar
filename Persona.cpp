@@ -19,7 +19,7 @@ Persona::Persona(string nombre, string apellido, int edad, int cedula) {
     this->cedula = cedula;
 }
 
-// set
+// SET
 void Persona::setNombre(string nombre) {
     this->nombre = nombre;
 }
@@ -36,7 +36,7 @@ void Persona::setCedula(int cedula) {
     this->cedula = cedula;
 }
 
-// get
+// GET
 string Persona::getNombre() {
     return nombre;
 }
@@ -53,6 +53,20 @@ int Persona::getCedula() {
     return cedula;
 }
 
+// Metodos
 void Persona::leer(){
-	cout << nombre;
+	cout << "Ingrese su Nombre: ";
+	getline(cin, nombre);
+	cout << "Ingrese su Apellido: ";
+	getline(cin, apellido);
+	cout << "Ingrese su Edad: ";
+	cin >> edad;
+	cout << "Ingrese su Cedula: ";
+	cin >> cedula;
+	cin.get();
+}
+
+void Persona::mostrar(){
+	cout << "Nombre: " << this->nombre << " | Apellido: " << this->apellido << endl;
+	cout << "Edad: " << this->edad << " | Cedula: " << this->cedula << endl;
 }

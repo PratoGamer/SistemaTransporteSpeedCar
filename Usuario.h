@@ -1,22 +1,28 @@
 #ifndef UsuarioH
 #define UsuarioH
+#include <iostream>
 #include <string> 
 
 #include "Persona.h"
 
 using namespace std;
 
+// Clase para los Usuarios
 class Usuario : public Persona{
 	private:
 		
 	public:
-			//constructores
+		// Constructores
 		Usuario();
-		Usuario(string nombre, string apellido, string edad, string cedula);
-			//set
+		Usuario(string nombre, string apellido, int edad, int cedula);
 		
-			//get
+		// SET
 		
+		// GET
+		
+		// Metodos
+		void leer();
+    	void mostrar();
 };
 
 #endif

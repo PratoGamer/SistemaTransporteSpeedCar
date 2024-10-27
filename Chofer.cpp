@@ -1,4 +1,5 @@
 #include "Chofer.h"
+#include <iostream>
 #include <string> 
 
 using namespace std;
@@ -19,7 +20,7 @@ Chofer::Chofer(string nombre, string apellido, int edad, int cedula, string marc
     this->placa = placa;
 }
 
-// Setters
+// SET
 void Chofer::setMarca(string marca) {
     this->marca = marca;
 }
@@ -33,7 +34,7 @@ void Chofer::setPlaca(string placa) {
     this->placa = placa;
 }
 
-// Getters
+// GET
 string Chofer::getMarca() {
     return marca;
 }
@@ -45,5 +46,29 @@ int Chofer::getAnho() {
 }
 string Chofer::getPlaca() {
     return placa;
+}
+
+// Metodos
+void Chofer::leer(){
+	Persona::leer();
+	cout << "Ingrese la Marca del Vehiculo: ";
+	getline(cin, marca);
+	cout << "Ingrese el Modelo del Vehiculo: ";
+	getline(cin, modelo);
+	cout << "Ingrese el Anho del Vehiculo: ";
+	cin >> anho;
+	cout << "Ingrese la Placa del Vehiculo: ";
+	getline(cin, placa);
+	
+	cout << endl;
+	
+	cout << "Ingresado Correctamente" << endl;
+}
+
+void Chofer::mostrar(){
+	Persona::mostrar();
+	
+	cout << "Marca: " << this->marca << " | Modelo: " << this->modelo << endl;
+	cout << "Anho: " << this->anho << " | Placa: " << this->placa << endl;
 }
 

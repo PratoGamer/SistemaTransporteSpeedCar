@@ -1,5 +1,10 @@
 #include <iostream>
 #include <string.h>
+#include <vector>
+
+#include "Persona.h"
+#include "Chofer.h"
+#include "Usuario.h"
 
 #include "Aplicacion.h"
 #include "Sector.h"
@@ -172,8 +177,8 @@ void Aplicacion::MenuServicioDiario(){
 		}
 		system("cls");
 }
-//Metodos MenuServicioDiario
 
+// Metodos MenuServicioDiario
 void Aplicacion::actualizarUbicacion(){
 	system("cls");
 	cout << "\t *** Actualizar Ubicacion ***" << endl;
