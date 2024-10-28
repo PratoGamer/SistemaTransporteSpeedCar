@@ -6,6 +6,7 @@
 #include "Persona.h"
 #include "Chofer.h"
 #include "Usuario.h"
+#include "Sector.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ class Aplicacion{
 		// Atributos
 		int eleccion;
 		bool terminarDia;
+		Sector misSectores;
 		
 		// Vectores para Almacenar 
 		vector <Chofer> choferes;
@@ -42,6 +44,8 @@ class Aplicacion{
 		// Metodos MenuServicioDiario
 		void solicitarTraslado();
 		void actualizarUbicacion();
+		
+		void cargarSectores();
 };
 
 #endif

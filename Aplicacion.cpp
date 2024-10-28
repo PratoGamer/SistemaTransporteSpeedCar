@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string.h>
 #include <vector>
+#include <fstream>
+#include <sstream>
 
 #include "Persona.h"
 #include "Chofer.h"
@@ -107,7 +109,9 @@ void Aplicacion::agregar() {
 	cout << endl;
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
-
+	system("cls");
+	cout << "\t *** Agregar ***" << endl;
+	cout << endl;
 	if (eleccion == 1) { 
         // Agregar Usuario
         Usuario nuevoUsuario; 
@@ -125,7 +129,6 @@ void Aplicacion::agregar() {
     }else if (eleccion == 3) {  
         // Agregar Sector
         cin.get();
-        Sector misSectores;
         string sectornuevo;
         cout << "Agregar sector nuevo: ";
         getline(cin,sectornuevo);
@@ -149,6 +152,18 @@ void Aplicacion::modificar(){
 	cin >> this->eleccion;
 }
 
+void Aplicacion::cargarSectores() {
+    ifstream txtSectores("Sectores.txt");
+    string sector;
+    while (getline(txtSectores, sector)) {
+        stringstream input_stringstream(sector);
+        while (getline(input_stringstream, sector, '-')) {
+            misSectores.agregarSector(sector);
+        }
+    }
+    txtSectores.close();
+}
+
 void Aplicacion::consultar(){
 	system("cls");
 	cout << "\t *** Consultar ***" << endl;
@@ -158,9 +173,10 @@ void Aplicacion::consultar(){
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
 	
-	if (eleccion == 3) {  
+	if (eleccion == 3) {
+		system("cls");  
         // Consultar Sectores
-        Sector misSectores;
+        cout << "\t *** Sectores ***" << endl;
         misSectores.imprimirSectores();
         cout << "Sector consultados correctamente!" << endl;
         system("pause");

@@ -72,18 +72,10 @@ int main(int argc, char** argv) {
 	
 	*/
 	
-	ifstream txtSectores("Sectores.txt");
-	string sector;
-	Sector misSectores;
-	while (getline(txtSectores, sector)) {
-    	stringstream input_stringstream(sector);
-   	 	while (getline(input_stringstream, sector, '-')) {
-       		misSectores.agregarSector(sector);
-    	}
-	}
-	txtSectores.close();
+	
 	
 	Aplicacion* app = new Aplicacion();
+	app->cargarSectores();
 	app->Menu();
 	
 	cout << "\t Fin de la Aplicacion" << endl;
