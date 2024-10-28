@@ -51,18 +51,16 @@ string Chofer::getPlaca() {
 // Metodos
 void Chofer::leer(){
 	Persona::leer();
+	cin.get();
 	cout << "Ingrese la Marca del Vehiculo: ";
 	getline(cin, marca);
 	cout << "Ingrese el Modelo del Vehiculo: ";
 	getline(cin, modelo);
-	cout << "Ingrese el Anho del Vehiculo: ";
-	cin >> anho;
 	cout << "Ingrese la Placa del Vehiculo: ";
 	getline(cin, placa);
+	cout << "Ingrese el Anho del Vehiculo: ";
+	cin >> anho;
 	
-	cout << endl;
-	
-	cout << "Ingresado Correctamente" << endl;
 }
 
 void Chofer::mostrar(){

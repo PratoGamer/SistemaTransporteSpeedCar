@@ -5,6 +5,7 @@
 using namespace std;
 
 class Sector {
+
 private:
     string sectores[21] = {
         "Centro", "La Concordia", "Barrio Obrero", "Pirineos", "Unidad Vecinal", "La castra",
@@ -12,6 +13,7 @@ private:
         "Machiri", "Barrio Sucre", "Puente Real", "La Guyana", "Las pilas",
         "Palo Gordo", "Las Flores", "Cordero", "Palmira"
     };
+    
 public:
 	Sector();
 	void imprimirSectores();

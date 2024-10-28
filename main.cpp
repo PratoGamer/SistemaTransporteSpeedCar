@@ -24,7 +24,7 @@ using namespace std;
 
 
 int main(int argc, char** argv) {
-	
+	/*
 	// Leer los datos de Usuarios en el TXT
 	
 	vector <Usuario> usuarios;
@@ -69,10 +69,10 @@ int main(int argc, char** argv) {
 		user.mostrar();
 	}
 	
-	/*
+	*/
 	Aplicacion* app = new Aplicacion();
 	app->Menu();
-	*/
+	
 	
 	
 	cout << "\t Fin de la Aplicacion" << endl;

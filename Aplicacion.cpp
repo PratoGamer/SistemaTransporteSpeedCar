@@ -73,7 +73,6 @@ void Aplicacion::MenuUsuario(){
 	switch(this->eleccion) {
 		case 1:
 			agregar();
-			//system("pause");
 		   	break;
 		   	
 		case 2:
@@ -100,14 +99,34 @@ void Aplicacion::MenuUsuario(){
 
 //Metodos MenuUsuario
 
-void Aplicacion::agregar(){
+void Aplicacion::agregar() {
 	system("cls");
 	cout << "\t *** Agregar ***" << endl;
 	cout << endl;
-	opciones();
+	opciones(); 
 	cout << endl;
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
+
+	if (eleccion == 1) { 
+        // Agregar Usuario
+        Usuario nuevoUsuario; 
+        nuevoUsuario.leer(); 
+        usuarios.push_back(nuevoUsuario); 
+        cout << "Usuario agregado correctamente!" << endl;
+
+    } else if (eleccion == 2) {  
+        // Agregar Chofer
+        Chofer nuevoChofer; 
+        nuevoChofer.leer(); 
+        choferes.push_back(nuevoChofer); 
+        cout << "Chofer agregado correctamente!" << endl;
+        
+    } else {
+        cout << "\t Opcion no valida para agregar." << endl;
+    }
+    
+    system("pause");
 }
 
 void Aplicacion::modificar(){
