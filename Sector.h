@@ -1,22 +1,17 @@
-#ifndef SectorH
-#define SectorH
-#include <string> 
+#ifndef SECTOR_H
+#define SECTOR_H
 
+#include <string>
+#include <vector>
 using namespace std;
 
 class Sector {
-
 private:
-    string sectores[21] = {
-        "Centro", "La Concordia", "Barrio Obrero", "Pirineos", "Unidad Vecinal", "La castra",
-        "La Rotaria", "Terminal", "Santa Teresa", "Las lomas", "Pueblo Nuevo", "Paramillo",
-        "Machiri", "Barrio Sucre", "Puente Real", "La Guyana", "Las pilas",
-        "Palo Gordo", "Las Flores", "Cordero", "Palmira"
-    };
-    
+    vector<string> sectores;
 public:
-	Sector();
-	void imprimirSectores();
+    Sector();
+    void imprimirSectores();
+    void agregarSector(string nuevoSector);
 };
 
 #endif

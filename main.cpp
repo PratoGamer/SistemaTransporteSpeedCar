@@ -7,6 +7,7 @@
 #include "Persona.h"
 #include "Chofer.h"
 #include "Usuario.h"
+#include "Sector.h"
 
 using namespace std;
 
@@ -70,10 +71,20 @@ int main(int argc, char** argv) {
 	}
 	
 	*/
+	
+	ifstream txtSectores("Sectores.txt");
+	string sector;
+	Sector misSectores;
+	while (getline(txtSectores, sector)) {
+    	stringstream input_stringstream(sector);
+   	 	while (getline(input_stringstream, sector, '-')) {
+       		misSectores.agregarSector(sector);
+    	}
+	}
+	txtSectores.close();
+	
 	Aplicacion* app = new Aplicacion();
 	app->Menu();
-	
-	
 	
 	cout << "\t Fin de la Aplicacion" << endl;
 	system("PAUSE");

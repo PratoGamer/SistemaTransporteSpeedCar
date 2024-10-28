@@ -122,6 +122,16 @@ void Aplicacion::agregar() {
         choferes.push_back(nuevoChofer); 
         cout << "Chofer agregado correctamente!" << endl;
         
+    }else if (eleccion == 3) {  
+        // Agregar Sector
+        cin.get();
+        Sector misSectores;
+        string sectornuevo;
+        cout << "Agregar sector nuevo: ";
+        getline(cin,sectornuevo);
+        misSectores.agregarSector(sectornuevo);
+        cout << "Sector agregado correctamente!" << endl;
+        
     } else {
         cout << "\t Opcion no valida para agregar." << endl;
     }
@@ -147,6 +157,15 @@ void Aplicacion::consultar(){
 	cout << endl;
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
+	
+	if (eleccion == 3) {  
+        // Consultar Sectores
+        Sector misSectores;
+        misSectores.imprimirSectores();
+        cout << "Sector consultados correctamente!" << endl;
+        system("pause");
+        
+    }
 }
 
 void Aplicacion::eliminar(){
