@@ -38,24 +38,23 @@ int main(int argc, char** argv) {
 	
 	while(getline(txtUsuarios, auxDatos)){
 		
-		cout << auxDatos << endl;
 		
 		stringstream input_stringstream(auxDatos);
 		
 		
 		getline(input_stringstream, auxNombre, '-');
-		cout << auxNombre << endl;
+		//cout << auxNombre << endl;
 		
 		getline(input_stringstream, auxApellido, '-');
-		cout << auxApellido << endl;
+		//cout << auxApellido << endl;
 		
 		getline(input_stringstream, auxEdad, '-');
 		auxEdadInt = atoi(auxEdad.c_str());
-		cout << auxEdadInt << endl;
+		//cout << auxEdadInt << endl;
 		
 		getline(input_stringstream, auxCedula, '-');
 		auxCedulaInt = atoi(auxCedula.c_str());
-		cout << auxCedulaInt << endl;
+		//cout << auxCedulaInt << endl;
 		
 		usuarios.push_back(Usuario(auxNombre, auxApellido, auxEdadInt, auxCedulaInt));
 		
