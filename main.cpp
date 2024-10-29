@@ -25,12 +25,13 @@ using namespace std;
 
 
 int main(int argc, char** argv) {
-	/*
+
 	// Leer los datos de Usuarios en el TXT
 	
 	vector <Usuario> usuarios;
 	
 	ifstream txtUsuarios("Usuarios.txt");
+	
 	string auxDatos, auxNombre, auxApellido, auxEdad, auxCedula;
 	int auxEdadInt, auxCedulaInt;
 	int cont = 0;
@@ -70,7 +71,7 @@ int main(int argc, char** argv) {
 		user.mostrar();
 	}
 	
-	*/
+	
 	
 	
 	
