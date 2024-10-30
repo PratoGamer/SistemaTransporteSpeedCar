@@ -19,3 +19,5 @@ Palo Gordo
 Las Flores
 Cordero
 Palmira
+zorca
+tucape

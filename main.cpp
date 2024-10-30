@@ -27,7 +27,7 @@ using namespace std;
 int main(int argc, char** argv) {
 
 	// Leer los datos de Usuarios en el TXT
-	
+	/*
 	vector <Usuario> usuarios;
 	
 	ifstream txtUsuarios("Usuarios.txt");
@@ -69,13 +69,13 @@ int main(int argc, char** argv) {
 		user = usuarios.at(i);
 		user.mostrar();
 	}
-	
+	*/
 	
 	
 	
 	
 	Aplicacion* app = new Aplicacion();
-	app->cargarSectores();
+	//app->cargarSectores();
 	app->Menu();
 	
 	cout << "\t Fin de la Aplicacion" << endl;

@@ -134,7 +134,7 @@ void Aplicacion::agregar() {
         getline(cin, sectornuevo);
         misSectores.agregarSector(sectornuevo);
         
-        cout << "Sector agregado correctamente!" << endl;
+        
         
     } else {
         cout << "\t Opcion no valida para agregar." << endl;

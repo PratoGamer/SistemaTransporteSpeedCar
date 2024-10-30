@@ -41,22 +41,22 @@ void Sector::imprimirSectores() {
 }
 
 void Sector::agregarSector(string nuevoSector) {
-    
+    string sector;
     for (size_t i = 0; i < sectores.size(); i++) {
-        const string& sector = sectores[i];
+    	sector = sectores[i];
         if (sector == nuevoSector) {
             cout << "El sector '" << nuevoSector << "' ya existe." << endl;
             return;
         }
     }
-
+	cout << "Sector agregado correctamente!" << endl;
     
     sectores.push_back(nuevoSector);
 
     
     ofstream archivo("Sectores.txt", ios::app); 
     if (archivo.is_open()) {
-        archivo << nuevoSector << endl; 
+        archivo << endl << nuevoSector; 
         archivo.close(); 
         
     } else {
