@@ -102,17 +102,17 @@ void Aplicacion::MenuUsuario(){
 //Metodos MenuUsuario
 
 void Aplicacion::agregar() {
-	system("cls");
-	cout << "\t *** Agregar ***" << endl;
-	cout << endl;
-	opciones(); 
-	cout << endl;
-	cout << "\t Ingrese su Seleccion: ";
-	cin >> this->eleccion;
-	system("cls");
-	cout << "\t *** Agregar ***" << endl;
-	cout << endl;
-	if (eleccion == 1) { 
+    system("cls");
+    cout << "\t *** Agregar ***" << endl;
+    cout << endl;
+    opciones();
+    cout << endl;
+    cout << "\t Ingrese su Seleccion: ";
+    cin >> this->eleccion;
+    system("cls");
+    cout << "\t *** Agregar ***" << endl;
+    cout << endl;
+    if (eleccion == 1) { 
         // Agregar Usuario
         Usuario nuevoUsuario; 
         nuevoUsuario.leer(); 
@@ -126,13 +126,14 @@ void Aplicacion::agregar() {
         choferes.push_back(nuevoChofer); 
         cout << "Chofer agregado correctamente!" << endl;
         
-    }else if (eleccion == 3) {  
+    } else if (eleccion == 3) {  
         // Agregar Sector
         cin.get();
         string sectornuevo;
         cout << "Agregar sector nuevo: ";
-        getline(cin,sectornuevo);
+        getline(cin, sectornuevo);
         misSectores.agregarSector(sectornuevo);
+        
         cout << "Sector agregado correctamente!" << endl;
         
     } else {
@@ -141,6 +142,7 @@ void Aplicacion::agregar() {
     
     system("pause");
 }
+
 
 void Aplicacion::modificar(){
 	system("cls");
@@ -163,6 +165,7 @@ void Aplicacion::cargarSectores() {
     }
     txtSectores.close();
 }
+
 
 void Aplicacion::consultar(){
 	system("cls");
