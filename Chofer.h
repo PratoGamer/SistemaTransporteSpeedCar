@@ -48,6 +48,11 @@ public:
     void modificarChofer(int cedula);
 	void eliminarChofer(int cedula);
     void guardarChoferes();
+    int cantChoferes();
+    string darSector(int j);
+    void imprimirChofer(int j);
+    void sumarUso(int j);
+    int cantUsosChofer(int j);
 };
 
 #endif

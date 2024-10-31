@@ -30,6 +30,11 @@ class Usuario : public Persona{
     	void eliminarUsuario(int cedula);
     	void modificarUsuario(int cedula);
     	void guardarUsuarios();
+    	int cantUsuarios();
+    	int darCedula(int i);
+    	void imprimirUsuario(int i);
+    	void sumarUso(int i);
+    	int cantUsosUsuario(int i);
 };
 
 #endif

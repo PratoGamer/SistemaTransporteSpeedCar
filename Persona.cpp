@@ -10,6 +10,7 @@ Persona::Persona() {
     this->apellido = "";
     this->edad = 0;
     this->cedula = 0;
+    this->uso = 0;
 }
 
 Persona::Persona(string nombre, string apellido, int edad, int cedula) {
@@ -17,6 +18,7 @@ Persona::Persona(string nombre, string apellido, int edad, int cedula) {
     this->apellido = apellido;
     this->edad = edad;
     this->cedula = cedula;
+    this->uso = 0;
 }
 
 // SET
@@ -69,5 +71,13 @@ void Persona::leer(){
 
 void Persona::mostrar(){
 	cout << "Nombre: " << this->nombre << " | Apellido: " << this->apellido << endl;
-	cout << "Edad: " << this->edad << " | Cedula: " << this->cedula << endl;
+	cout << "Edad: " << this->edad << " | Cedula: " << this->cedula << " | Usos: " << this->uso << endl;
+}
+
+void Persona::usado(){
+	uso++;
+}
+
+int Persona::cantUsos(){
+	return this->uso;
 }

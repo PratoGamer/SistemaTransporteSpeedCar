@@ -135,32 +135,52 @@ void Chofer::imprimirChoferes(){
 }
 
 void Chofer::actualizarUbicacion(){
+	// Variables Auxiliares
     string auxPlaca, nuevoSector;
+    int valorSector;
     bool encontrado = false;
 
     // Solicitar Datos del Usuario
-    cout << "Ingrese la placa del vehículo: ";
+    cout << "\t *** Actualizar Ubicacion del Vehiculo ***" << endl << endl;
+    
+    cout << "\t Ingrese la Placa del Vehiculo: ";
     getline(cin, auxPlaca);
 
     for (int i = 0; i < choferes.size(); ++i) {
         if (choferes[i].getPlaca() == auxPlaca) {
             // Mostrar el Sector Actual
-            cout << "Ubicación actual: " << choferes[i].getSector() << endl;
+            cout << endl << "\t Ubicacion Actual: " << choferes[i].getSector() << endl << endl;
 
             // Solicitar el Nuevo Sector
-            cout << "Ingrese el nuevo sector: ";
-            getline(cin, nuevoSector);
+            misSectores.imprimirSectores();
+            
+            while(true){
+            	cout << endl << "\t Ingrese el Nuevo Sector: ";
+            	cin >> valorSector;
+            	if( (valorSector < 0) || (valorSector > misSectores.cantSectores()) ){
+            		cout << endl << "\t Valor Invalido" << endl;
+				}
+				else{
+					break;
+				}
+			}
+			
+            nuevoSector = misSectores.darSector( (valorSector - 1) );
+
+			cout << endl << "\t Sector Seleccionado: " << nuevoSector << endl;
 
             choferes[i].setSector(nuevoSector);
 
-            cout << "Ubicación del chofer modificada correctamente." << endl;
+            cout << endl << "\t Ubicacion del Chofer Modificada Correctamente." << endl;
             encontrado = true;
             break;
         }
     }
     if (!encontrado) {
-        cout << "No se encontro ningun chofer con la placa: " << auxPlaca << endl;
+        cout << "\t No se Encontro Ningun Chofer con la Placa: " << auxPlaca << endl;
     }
+    system("PAUSE");
+    system("cls");
 }
 
 
@@ -256,4 +276,24 @@ void Chofer::guardarChoferes() {
                     << choferes[i].getSector() << endl;
     }
     txtChoferes.close();
+}
+
+int Chofer::cantChoferes(){
+	return choferes.size();
+}
+
+string Chofer::darSector(int j){
+	return choferes[j].getSector();
+}
+
+void Chofer::imprimirChofer(int j){
+	cout << "Nombre: " << choferes[j].getNombre() << " Marca: " << choferes[j].getMarca() << " Modelo: " << choferes[j].getModelo();
+}
+
+void Chofer::sumarUso(int j){
+	choferes[j].usado();
+}
+
+int Chofer::cantUsosChofer(int j){
+	return choferes[j].cantUsos();
 }

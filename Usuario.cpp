@@ -122,7 +122,6 @@ void Usuario::modificarUsuario(int cedula) {
 }
 
 //Guardar usuarios en el txt
-
 void Usuario::guardarUsuarios() {
     ofstream txtUsuarios("Usuarios.txt");
     for (int i = 0; i < usuarios.size(); ++i) {
@@ -134,3 +133,23 @@ void Usuario::guardarUsuarios() {
     txtUsuarios.close();
 }
 
+int Usuario::cantUsuarios(){
+	return usuarios.size();
+}
+
+int Usuario::darCedula(int i){
+	return usuarios[i].getCedula();
+}
+
+void Usuario::imprimirUsuario(int i){
+	cout << "\t Usuario: " << usuarios[i].getNombre() << " " << usuarios[i].getApellido() <<
+			" - " << usuarios[i].getEdad() << " - " << usuarios[i].getCedula() << endl;
+}
+
+void Usuario::sumarUso(int i){
+	usuarios[i].usado();
+}
+
+int Usuario::cantUsosUsuario(int i){
+	return usuarios[i].cantUsos();
+}

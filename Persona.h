@@ -13,6 +13,7 @@ protected:
     string apellido; 
     int edad;
     int cedula;
+    int uso;
     
 public:
     // Constructores
@@ -34,6 +35,8 @@ public:
 	// Metodos
     void leer();
     void mostrar();
+    void usado();
+    int cantUsos();
 };
 
 #endif

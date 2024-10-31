@@ -271,23 +271,25 @@ void Aplicacion::MenuServicioDiario(){
 	// Variables Control
 	bool salir = false;
 	
-	cout << "\t *** Menu de Servicio Diario ***" << endl << endl;
-	
-	cout << "\t 1 -> Actualizar Ubicacion del Vehiculo." << endl;
-	cout << "\t 2 -> Solicitar Traslado." << endl;
-	cout << "\t 3 -> Salir." << endl << endl;
-	
 	while(true){
+		cout << "\t *** Menu de Servicio Diario ***" << endl << endl;
+	
+		cout << "\t 1 -> Actualizar Ubicacion del Vehiculo." << endl;
+		cout << "\t 2 -> Solicitar Traslado." << endl;
+		cout << "\t 3 -> Salir." << endl << endl;
+		
 		cout << "\t Ingrese su Seleccion: ";
 		cin >> this->eleccion;
 		cin.get();
 		
 		switch(this->eleccion) {
 		case 1:
+			system("cls");
 			misChoferes.actualizarUbicacion();
 		   	break;
 		   	
 		case 2:
+			system("cls");
 			solicitarTraslado();
 		   	break;
 		
@@ -309,18 +311,129 @@ void Aplicacion::MenuServicioDiario(){
 }
 
 // Metodos MenuServicioDiario
-
-
 void Aplicacion::solicitarTraslado(){
-	system("cls");
-	cout << "\t *** Solicitar Traslado ***" << endl;
-	cout << endl;
+	// Variables Auxiliares
+	string auxSectorOrigen, auxSectorDestino;
+	int auxCedula, sectorOrigen, sectorDestino, selChofer = 0; 
+	bool encontrado = false;
+	bool choferDisponible = false;
+	bool choferSelecionado = false;
+	vector <int> valorChofer;
 	
-	cout << "\tCedula: "<< endl;
-	cout << "\tSector Origen: "<< endl;
-	cout << "\tSector Destino: "<< endl;
+	cout << "\t *** Solicitar Traslado ***" << endl << endl;
+	
+	cout << "\t Ingrese su Cedula: ";
+	cin >> auxCedula;
+	
+	for(int i = 0; i < misUsuarios.cantUsuarios(); i++){
+		if(auxCedula == misUsuarios.darCedula(i)){
+			cout << endl;
+			misUsuarios.imprimirUsuario(i);
+			cout << endl;
+			
+			cout << "\t -Sectores Disponibles- " << endl;
+			
+			misSectores.imprimirSectores();
+			
+			while(true){
+            	cout << endl << "\t Ingrese el Sector de Origen: ";
+            	cin >> sectorOrigen;
+            	if( (sectorOrigen < 0) || (sectorOrigen > misSectores.cantSectores()) ){
+            		cout << endl << "\t Valor Invalido" << endl;
+				}
+				else{
+					break;
+				}
+			}
+			
+			while(true){
+            	cout << endl << "\t Ingrese el Sector de Destino: ";
+            	cin >> sectorDestino;
+            	if( (sectorOrigen < 0) || (sectorDestino > misSectores.cantSectores()) ){
+            		cout << endl << "\t Valor Invalido" << endl;
+				}
+				else{
+					break;
+				}
+			}
+			auxSectorOrigen = misSectores.darSector(sectorOrigen - 1);
+			auxSectorDestino = misSectores.darSector(sectorDestino - 1);
+			
+			cout << endl << "\t Sector Origen: " << auxSectorOrigen << "\t Sector Destino: " << auxSectorDestino << endl;
+			
+			system("PAUSE");
+			system("cls");
+			
+			cout << "\t -Buscando Choferes en el Mismo Sector-" << endl << endl;
+			
+			for(int j = 0; j < misChoferes.cantChoferes(); j++){
+				if( auxSectorOrigen.compare(misChoferes.darSector(j))==0 ){
+					cout << "\t " << (j+1) << ". ";
+					misChoferes.imprimirChofer(j);
+					cout << endl;
+					
+					valorChofer.push_back( (j+1) );
+					
+					choferDisponible = true;
+				}
+			}
+			
+			if(!choferDisponible){
+				cout << "\t -No hay Ningun Chofer Disponible en su Zona Intente Mas Tarde-" << endl;
+			}
+			else{
+				while(true){
+					cout << endl << "\t Seleccione su Chofer: "; 
+					cin >> selChofer;
+					
+					for(int j = 0; j < valorChofer.size(); j++){
+						if( selChofer == valorChofer[j] ){
+							choferSelecionado = true;
+							break;
+						}
+					}
+					
+					if(!choferSelecionado){
+						cout << endl << "\t Ingrese un Valor de los Choferes Disponibles en la Lista, Valor Incorrecto" << endl;
+					}
+					else{
+						selChofer--;
+						misChoferes.sumarUso(selChofer);
+						break;
+					}
+				}
+			}
+			misUsuarios.sumarUso(i);
+			
+			if(!choferSelecionado){
+				
+			}
+			else{
+				system("PAUSE");
+				system("cls");
+				
+				float cobro;
+				cobro = rand() % (30 + 1);
+				cout << "\t -Cobro-" << endl << endl;
+				
+				cout << "\t Cobro desde: " << auxSectorOrigen << " - Hasta: " << auxSectorDestino << endl;
+				cout << "\t $: " << cobro << " | BS BCB: " << (cobro*42.02) << endl;
+				
+				cout << endl << "\t -Fin del Traslado-" << endl;
+			}
+			
+			encontrado = true;
+			break;
+		}
+	}
+	
+	if(!encontrado){
+		cout << endl << "\t No se Encontro Ningun Usuario con la Cedula: " << auxCedula << endl;
+	}
+	
 	
 	system("pause");
+	system("cls");
 }
 
 // Finalizar Dia
