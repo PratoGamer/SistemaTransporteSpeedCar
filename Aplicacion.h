@@ -16,10 +16,10 @@ class Aplicacion{
 		int eleccion;
 		bool terminarDia;
 		Sector misSectores;
+		Usuario misUsuarios;
 		
 		// Vectores para Almacenar 
 		vector <Chofer> choferes;
-		vector <Usuario> usuarios;
 		
 	public:
 		// Constructor
@@ -47,11 +47,6 @@ class Aplicacion{
 		// Metodos MenuServicioDiario
 		void solicitarTraslado();
 		void actualizarUbicacion();
-		
-		void cargarSectores();
-		
-		
-		
 };
 
 #endif

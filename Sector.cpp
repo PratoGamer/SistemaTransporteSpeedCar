@@ -9,15 +9,14 @@ using namespace std;
 
 // Constructor
 Sector::Sector() {
-    cargarSectoresDesdeArchivo(); 
+    cargarSectores(); 
 }
 
 // Cargar sectores desde el archivo
-void Sector::cargarSectoresDesdeArchivo() {
+void Sector::cargarSectores() {
     ifstream archivo("Sectores.txt");
     string sector;
     while (getline(archivo, sector)) {
-        
         if (!sector.empty()) {
             sectores.push_back(sector);  
         }
@@ -42,7 +41,7 @@ string Sector::darSector(int num){
 
 // Imprimir los Sectores
 void Sector::imprimirSectores() {
-    for (size_t i = 0; i < sectores.size(); i++) {
+    for (int i = 0; i < sectores.size(); i++) {
         cout << "\t " << (i + 1) << ". " << sectores[i] << endl;
     }
 }
@@ -50,7 +49,7 @@ void Sector::imprimirSectores() {
 // Agregar un Sector
 void Sector::agregarSector(string nuevoSector) {
     string sector;
-    for (size_t i = 0; i < sectores.size(); i++) {
+    for (int i = 0; i < sectores.size(); i++) {
     	sector = sectores[i];
         if (sector == nuevoSector) {
             cout << "El sector '" << nuevoSector << "' ya existe." << endl;
@@ -60,16 +59,37 @@ void Sector::agregarSector(string nuevoSector) {
 	cout << "Sector agregado correctamente!" << endl;
     
     sectores.push_back(nuevoSector);
-
-    
-    ofstream archivo("Sectores.txt", ios::app); 
-    if (archivo.is_open()) {
-        archivo << endl << nuevoSector; 
-        archivo.close(); 
-        
-    } else {
-        cout << "Error al abrir el archivo Sectores.txt" << endl;
-    }
 }
 
+//eliminar sector
+
+void Sector::eliminarSector(int posicion) { 
+	if (posicion >= 1 && posicion <= sectores.size()){ 
+	sectores.erase(sectores.begin() + posicion - 1); 
+	cout << "Sector eliminado correctamente." << endl; 
+	}else{
+	cout << "Posición inválida." << endl; }
+}
+
+//Modificar sector
+
+void Sector::modificarSector(int posicion, string nuevoSector){ 
+	if (posicion >= 1 && posicion <= sectores.size()){
+		sectores[posicion - 1] = nuevoSector;
+		//guardarSectores();
+		cout << "Sector modificado correctamente." << endl;
+	}else{
+		cout << "Posición inválida." << endl;
+	}
+}
+
+//Guandando los sectores en el txt
+
+void Sector::guardarSectores(){
+	ofstream archivo("sectores.txt");
+	for(int i = 0; i < sectores.size(); i++){ 
+		archivo << endl << sectores[i];
+	}
+	archivo.close();
+}
 

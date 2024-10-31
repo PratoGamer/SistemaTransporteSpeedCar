@@ -15,9 +15,12 @@ public:
     // Metodos 
     void imprimirSectores();
     void agregarSector(string nuevoSector);
-    void cargarSectoresDesdeArchivo(); 
+    void cargarSectores(); 
     string darSector(int num);
     int cantSectores();
+    void eliminarSector(int posicion);
+    void modificarSector(int posicion, string nuevoSector);
+    void guardarSectores();
     
     
 };

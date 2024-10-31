@@ -23,33 +23,13 @@ Aplicacion::Aplicacion(){
 
 // Cargar los Datos de Chofer y Usuario
 void Aplicacion::cargarDatosChoferUsuario(){
-	// Cargar Datos de los Usuarios
-	ifstream txtUsuarios("Usuarios.txt");
-	
-	// Variables Auxiliares
-	string auxDatos, auxNombre, auxApellido, auxEdad, auxCedula;
-	int auxEdadInt, auxCedulaInt;
-	
-	while(getline(txtUsuarios, auxDatos)){
-		
-		stringstream input_stringstream(auxDatos);
-		
-		getline(input_stringstream, auxNombre, '-');
-		getline(input_stringstream, auxApellido, '-');
-		getline(input_stringstream, auxEdad, '-');
-		auxEdadInt = atoi(auxEdad.c_str());
-		getline(input_stringstream, auxCedula, '-');
-		auxCedulaInt = atoi(auxCedula.c_str());
-		
-		usuarios.push_back(Usuario(auxNombre, auxApellido, auxEdadInt, auxCedulaInt));
-		
-	}
-	txtUsuarios.close();
 	
 	// Cargar Datos de Choferes
 	ifstream txtChoferes("Choferes.txt");
 	
 	// Variables Auxiliares
+	string auxDatos, auxNombre, auxApellido, auxEdad, auxCedula;
+	int auxEdadInt, auxCedulaInt;
 	string auxMarca, auxModelo, auxAnho, auxPlaca, auxSector;
 	int auxAnhoInt;
 	int cantSectores;
@@ -200,13 +180,15 @@ void Aplicacion::agregar() {
     cout << "\t *** Agregar ***" << endl;
     cout << endl;
     if (eleccion == 1) { 
+    	system("cls");
         // Agregar Usuario
         Usuario nuevoUsuario; 
         nuevoUsuario.leer(); 
-        usuarios.push_back(nuevoUsuario); 
+        //usuarios.push_back(nuevoUsuario); 
         cout << "Usuario agregado correctamente!" << endl;
 
-    } else if (eleccion == 2) {  
+    } else if (eleccion == 2) {
+		system("cls");  
         // Agregar Chofer
         Chofer nuevoChofer; 
         nuevoChofer.leer(); 
@@ -220,9 +202,6 @@ void Aplicacion::agregar() {
         cout << "Agregar sector nuevo: ";
         getline(cin, sectornuevo);
         misSectores.agregarSector(sectornuevo);
-        
-        
-        
     } else {
         cout << "\t Opcion no valida para agregar." << endl;
     }
@@ -239,20 +218,28 @@ void Aplicacion::modificar(){
 	cout << endl;
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
-}
-
-void Aplicacion::cargarSectores() {
-    ifstream txtSectores("Sectores.txt");
-    string sector;
-    while (getline(txtSectores, sector)) {
-        stringstream input_stringstream(sector);
-        while (getline(input_stringstream, sector, '-')) {
-            misSectores.agregarSector(sector);
-        }
+	if (eleccion == 1) { 
+       	system("cls");
+       	int cedula;
+       	cout << "Ingrese el numero de cedula: ";
+       	cin >> cedula;
+       	misUsuarios.modificarUsuario(cedula);
+    } else if (eleccion == 2) {  
+        system("cls");
+        
+    } else if (eleccion == 3) {
+		system("cls");  
+        // Modificar Sectores
+        cout << "\t *** Sectores ***" << endl;
+        misSectores.imprimirSectores();
+        cout << "Ingrese el numero del sector que desea modificar: " << endl;
+        cin >> this->eleccion;
+        string nuevoSector;
+        cout << "Ingrese el nuevo sector: ";
+        cin >> nuevoSector;
+        misSectores.modificarSector(eleccion, nuevoSector);
     }
-    txtSectores.close();
 }
-
 
 void Aplicacion::consultar(){
 	system("cls");
@@ -263,14 +250,20 @@ void Aplicacion::consultar(){
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
 	
-	if (eleccion == 3) {
+	if (eleccion == 1) { 
+		system("cls");
+       	misUsuarios.imprimirUsuarios();
+       	system("pause");
+    } else if (eleccion == 2) {  
+        system("cls");
+        
+    } else if (eleccion == 3) {
 		system("cls");  
         // Consultar Sectores
         cout << "\t *** Sectores ***" << endl;
         misSectores.imprimirSectores();
         cout << "Sector consultados correctamente!" << endl;
-        system("pause");
-        
+        system("pause"); 
     }
 }
 
@@ -282,6 +275,24 @@ void Aplicacion::eliminar(){
 	cout << endl;
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
+	if (eleccion == 1) { 
+		system("cls"); 
+		int cedula;
+       	cout << "Ingrese el numero de cedula: ";
+       	cin >> cedula;
+		misUsuarios.eliminarUsuario(cedula);
+    } else if (eleccion == 2) {  
+        system("cls");
+        
+    } else if (eleccion == 3) {
+		system("cls");  
+        // Eliminar Sectores
+        cout << "\t *** Sectores ***" << endl;
+        misSectores.imprimirSectores();
+        cout << "Ingrese el numero del sector que desea eliminar: " << endl;
+        cin >> this->eleccion;
+        misSectores.eliminarSector(eleccion);
+    }
 }
 
 void Aplicacion::opciones(){
@@ -407,4 +418,5 @@ void Aplicacion::FinalizarDia(){
 	cout << "\t *** Fin del Dia ***" << endl;
 	cout << endl;
 	
+	misSectores.guardarSectores();
 }
