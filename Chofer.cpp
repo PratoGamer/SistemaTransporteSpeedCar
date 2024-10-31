@@ -10,14 +10,16 @@ Chofer::Chofer() : Persona() {
     this->modelo = "";
     this->anho = 0;
     this->placa = "";
+    this->sector = "";
 }
 
-Chofer::Chofer(string nombre, string apellido, int edad, int cedula, string marca, string modelo, int anho, string placa) 
+Chofer::Chofer(string nombre, string apellido, int edad, int cedula, string marca, string modelo, int anho, string placa, string sector) 
     : Persona(nombre, apellido, edad, cedula) {
     this->marca = marca;
     this->modelo = modelo;
     this->anho = anho;
     this->placa = placa;
+    this->sector = sector;
 }
 
 // SET
@@ -33,6 +35,9 @@ void Chofer::setAnho(int anho) {
 void Chofer::setPlaca(string placa) {
     this->placa = placa;
 }
+void Chofer::setSector(string sector) {
+    this->sector = sector;
+}
 
 // GET
 string Chofer::getMarca() {
@@ -46,6 +51,9 @@ int Chofer::getAnho() {
 }
 string Chofer::getPlaca() {
     return placa;
+}
+string Chofer::getSector() {
+    return sector;
 }
 
 // Metodos
@@ -67,6 +75,6 @@ void Chofer::mostrar(){
 	Persona::mostrar();
 	
 	cout << "Marca: " << this->marca << " | Modelo: " << this->modelo << endl;
-	cout << "Anho: " << this->anho << " | Placa: " << this->placa << endl;
+	cout << "Anho: " << this->anho << " | Placa: " << this->placa << " | Sector: " << this->sector << endl;
 }
 

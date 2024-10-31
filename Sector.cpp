@@ -1,20 +1,11 @@
+#include "Sector.h"
+
 #include <string>
 #include <vector>
 #include <fstream>
 #include <iostream>
+
 using namespace std;
-
-class Sector {
-private:
-    vector<string> sectores;
-
-public:
-    Sector();
-    void imprimirSectores();
-    void agregarSector(string nuevoSector);
-    void cargarSectoresDesdeArchivo(); 
-    
-};
 
 // Constructor
 Sector::Sector() {
@@ -34,12 +25,29 @@ void Sector::cargarSectoresDesdeArchivo() {
     archivo.close();
 }
 
+// Da la Cantidad de Sectores
+int Sector::cantSectores(){
+	return sectores.size();
+}
+
+// Da un Sector
+string Sector::darSector(int num){
+	if( (num < 0) || (num > sectores.size() ) ){
+		return " ";
+	}
+	else{
+		return sectores.at(num);	
+	}
+}
+
+// Imprimir los Sectores
 void Sector::imprimirSectores() {
     for (size_t i = 0; i < sectores.size(); i++) {
-        cout << (i + 1) << ". " << sectores[i] << endl;
+        cout << "\t " << (i + 1) << ". " << sectores[i] << endl;
     }
 }
 
+// Agregar un Sector
 void Sector::agregarSector(string nuevoSector) {
     string sector;
     for (size_t i = 0; i < sectores.size(); i++) {

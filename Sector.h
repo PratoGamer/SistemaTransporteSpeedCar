@@ -9,9 +9,17 @@ class Sector {
 private:
     vector<string> sectores;
 public:
+	// Constructor
     Sector();
+    
+    // Metodos 
     void imprimirSectores();
     void agregarSector(string nuevoSector);
+    void cargarSectoresDesdeArchivo(); 
+    string darSector(int num);
+    int cantSectores();
+    
+    
 };
 
 #endif

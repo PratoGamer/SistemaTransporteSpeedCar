@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include <vector>
+#include <stdlib.h>
 #include <fstream>
 #include <sstream>
 
@@ -17,6 +18,93 @@ using namespace std;
 Aplicacion::Aplicacion(){
 	eleccion = 0;
 	terminarDia = false;
+	cargarDatosChoferUsuario();
+}
+
+// Cargar los Datos de Chofer y Usuario
+void Aplicacion::cargarDatosChoferUsuario(){
+	// Cargar Datos de los Usuarios
+	ifstream txtUsuarios("Usuarios.txt");
+	
+	// Variables Auxiliares
+	string auxDatos, auxNombre, auxApellido, auxEdad, auxCedula;
+	int auxEdadInt, auxCedulaInt;
+	
+	while(getline(txtUsuarios, auxDatos)){
+		
+		stringstream input_stringstream(auxDatos);
+		
+		getline(input_stringstream, auxNombre, '-');
+		getline(input_stringstream, auxApellido, '-');
+		getline(input_stringstream, auxEdad, '-');
+		auxEdadInt = atoi(auxEdad.c_str());
+		getline(input_stringstream, auxCedula, '-');
+		auxCedulaInt = atoi(auxCedula.c_str());
+		
+		usuarios.push_back(Usuario(auxNombre, auxApellido, auxEdadInt, auxCedulaInt));
+		
+	}
+	txtUsuarios.close();
+	
+	// Cargar Datos de Choferes
+	ifstream txtChoferes("Choferes.txt");
+	
+	// Variables Auxiliares
+	string auxMarca, auxModelo, auxAnho, auxPlaca, auxSector;
+	int auxAnhoInt;
+	int cantSectores;
+	
+	cantSectores = misSectores.cantSectores();
+	
+	while(getline(txtChoferes, auxDatos)){
+		
+		stringstream input_stringstream(auxDatos);
+		
+		getline(input_stringstream, auxNombre, '-');
+		getline(input_stringstream, auxApellido, '-');
+		getline(input_stringstream, auxEdad, '-');
+		auxEdadInt = atoi(auxEdad.c_str());
+		getline(input_stringstream, auxCedula, '-');
+		auxCedulaInt = atoi(auxCedula.c_str());
+		getline(input_stringstream, auxMarca, '-');
+		getline(input_stringstream, auxModelo, '-');
+		getline(input_stringstream, auxPlaca, '-');
+		getline(input_stringstream, auxAnho, '-');
+		auxAnhoInt = atoi(auxAnho.c_str());
+		
+		auxSector = misSectores.darSector( rand() % (cantSectores + 1) );
+		
+		choferes.push_back(Chofer(auxNombre, auxApellido, auxEdadInt, auxCedulaInt, auxMarca, auxModelo, auxAnhoInt, auxPlaca, auxSector));
+		
+	}
+	txtChoferes.close();
+	
+	/*
+	Usuario user;
+	
+	cout << "Carga de usuarios" << endl << endl;
+	
+	for(int num = 0; num < usuarios.size(); num++){
+		user = usuarios.at(num);
+		user.mostrar();
+	}
+	
+	cout << endl << endl;
+	
+	Chofer driver;
+	
+	cout << "Carga de choferes" << endl << endl;
+	
+	for(int num = 0; num < choferes.size(); num++){
+		driver = choferes.at(num);
+		driver.mostrar();
+	}
+	
+	cout << endl << endl;
+	
+	cout << "Usuarios: " << usuarios.size() << " | Choferes: " << choferes.size() << endl;
+	*/
+	
 }
 
 // Menu Principal
@@ -100,7 +188,6 @@ void Aplicacion::MenuUsuario(){
 }
 
 //Metodos MenuUsuario
-
 void Aplicacion::agregar() {
     system("cls");
     cout << "\t *** Agregar ***" << endl;
@@ -206,17 +293,21 @@ void Aplicacion::opciones(){
 
 // Menu de Servicio Diario
 void Aplicacion::MenuServicioDiario(){
-	cout << "\t *** Menu de Servicio Diario ***" << endl;
-	cout << endl;
+	// Variables Control
+	bool salir = false;
 	
-	cout << "\t 1 -> Actualizar ubicacion del vehiculo." << endl;
+	cout << "\t *** Menu de Servicio Diario ***" << endl << endl;
+	
+	cout << "\t 1 -> Actualizar Ubicacion del Vehiculo." << endl;
 	cout << "\t 2 -> Solicitar Traslado." << endl;
-	cout << "\t 3 -> Salir." << endl;
-	cout << endl;
-	cout << "\t Ingrese su Seleccion: ";
-	cin >> this->eleccion;
+	cout << "\t 3 -> Salir." << endl << endl;
 	
-	switch(this->eleccion) {
+	while(true){
+		cout << "\t Ingrese su Seleccion: ";
+		cin >> this->eleccion;
+		cin.get();
+		
+		switch(this->eleccion) {
 		case 1:
 			actualizarUbicacion();
 		   	break;
@@ -226,23 +317,75 @@ void Aplicacion::MenuServicioDiario(){
 		   	break;
 		
 		case 3:
+			salir = true;
 		   	break;
 		   	
 		default:
 		  	cout << "\t Seleccion no Valida" << endl;
 		  	cout << endl;
 		}
-		system("cls");
+		
+		if(salir){
+			break;
+		}
+		
+	}
+	system("cls");
 }
 
 // Metodos MenuServicioDiario
 void Aplicacion::actualizarUbicacion(){
+	// Variables Auxiliares
+	string auxPlaca;
+	int auxSector;
+	bool encontrado = false;
+	Chofer driver;
+	
 	system("cls");
-	cout << "\t *** Actualizar Ubicacion ***" << endl;
+	cout << "\t *** Actualizar Ubicacion del Vehiculo ***" << endl;
 	cout << endl;
 	
-	cout << "\tNumero de Placa: "<< endl;
-	cout << "\tSector Actual: "<< endl;
+	cout << "\t Ingrese el Numero de Placa del Vehiculo: ";
+	getline(cin, auxPlaca);
+	
+	cout << endl;
+	
+	for(int num = 0; num < choferes.size(); num++){
+		driver = choferes.at(num);
+		if( auxPlaca.compare(driver.getPlaca()) == 0 ){
+			
+			cout << "\t Ubicacion Actual: " << driver.getSector() << endl << endl;
+			
+			cout << "\t Seleccione la Nueva Ubicacion: " << endl;
+			misSectores.imprimirSectores();
+			
+			while(true){
+				cout << endl << "\t Ingrese el Sector de su Seleccion: ";
+				cin >> auxSector;
+				if( (auxSector < 0) || (auxSector > (misSectores.cantSectores())) ){
+					cout << "\t Valor Invalido Intente Otra Vez" << endl;
+				}
+				else{
+					auxSector--;
+					cout << "\t Sector Seleccionado: " << misSectores.darSector(auxSector) << endl;
+					cout << endl;
+					break;
+				}
+			}
+			
+			driver.setSector(misSectores.darSector(auxSector));
+			choferes[num] = driver;
+			
+			cout << "\t Actualizacion de Ubicacion de Vehiculo con Exito" << endl;
+			
+			encontrado = true;
+			break;
+		}
+	}
+	
+	if(encontrado == false){
+		cout << "\t No se Encontro Ningun Conductor con la Placa: " << auxPlaca << endl;
+	}
 	
 	system("pause");
 }
@@ -263,6 +406,5 @@ void Aplicacion::solicitarTraslado(){
 void Aplicacion::FinalizarDia(){
 	cout << "\t *** Fin del Dia ***" << endl;
 	cout << endl;
-	
 	
 }

@@ -25,6 +25,9 @@ class Aplicacion{
 		// Constructor
 		Aplicacion();
 		
+		// Cargar Datos
+		void cargarDatosChoferUsuario();
+		
 		// Destructor
 		~Aplicacion();
 		
@@ -46,6 +49,9 @@ class Aplicacion{
 		void actualizarUbicacion();
 		
 		void cargarSectores();
+		
+		
+		
 };
 
 #endif
