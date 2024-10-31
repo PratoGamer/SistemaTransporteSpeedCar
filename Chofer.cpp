@@ -135,64 +135,37 @@ void Chofer::imprimirChoferes(){
 }
 
 void Chofer::actualizarUbicacion(){
-	// Variables Auxiliares
-	string auxPlaca;
-	int auxSector;
-	bool encontrado = false;
-	Chofer driver;
-	
-	system("cls");
-	cout << "\t *** Actualizar Ubicacion del Vehiculo ***" << endl;
-	cout << endl;
-	
-	cout << "\t Ingrese el Numero de Placa del Vehiculo: ";
-	getline(cin, auxPlaca);
-	
-	cout << endl;
-	
-	for(int num = 0; num < choferes.size(); num++){
-		driver = choferes.at(num);
-		if( auxPlaca.compare(driver.getPlaca()) == 0 ){
-			
-			cout << "\t Ubicacion Actual: " << driver.getSector() << endl << endl;
-			
-			cout << "\t Seleccione la Nueva Ubicacion: " << endl;
-			misSectores.imprimirSectores();
-			
-			while(true){
-				cout << endl << "\t Ingrese el Sector de su Seleccion: ";
-				cin >> auxSector;
-				if( (auxSector < 0) || (auxSector > (misSectores.cantSectores())) ){
-					cout << "\t Valor Invalido Intente Otra Vez" << endl;
-				}
-				else{
-					auxSector--;
-					cout << "\t Sector Seleccionado: " << misSectores.darSector(auxSector) << endl;
-					cout << endl;
-					break;
-				}
-			}
-			
-			driver.setSector(misSectores.darSector(auxSector));
-			choferes[num] = driver;
-			
-			cout << "\t Actualizacion de Ubicacion de Vehiculo con Exito" << endl;
-			
-			encontrado = true;
-			break;
-		}
-	}
-	
-	if(encontrado == false){
-		cout << "\t No se Encontro Ningun Conductor con la Placa: " << auxPlaca << endl;
-	}
-	
-	system("pause");
+    string auxPlaca, nuevoSector;
+    bool encontrado = false;
+
+    // Solicitar Datos del Usuario
+    cout << "Ingrese la placa del vehículo: ";
+    getline(cin, auxPlaca);
+
+    for (int i = 0; i < choferes.size(); ++i) {
+        if (choferes[i].getPlaca() == auxPlaca) {
+            // Mostrar el Sector Actual
+            cout << "Ubicación actual: " << choferes[i].getSector() << endl;
+
+            // Solicitar el Nuevo Sector
+            cout << "Ingrese el nuevo sector: ";
+            getline(cin, nuevoSector);
+
+            choferes[i].setSector(nuevoSector);
+
+            cout << "Ubicación del chofer modificada correctamente." << endl;
+            encontrado = true;
+            break;
+        }
+    }
+    if (!encontrado) {
+        cout << "No se encontro ningun chofer con la placa: " << auxPlaca << endl;
+    }
 }
+
 
 void Chofer::agregarChofer() {
     // Variables Auxiliares para los Datos del Nuevo Chofer
-    string nombre, apellido, marca, modelo, placa, sector;
     int edad, cedula, anho;
 
     // Solicitar Datos del Usuario
@@ -205,7 +178,7 @@ void Chofer::agregarChofer() {
     cin >> edad;
     cout << "Ingrese la cedula: ";
     cin >> cedula;
-    cin.ignore(); // Limpiar el buffer de entrada
+    cin.ignore();
     cout << "Ingrese la marca del vehiculo: ";
     getline(cin, marca);
     cout << "Ingrese el modelo del vehiculo: ";
@@ -214,7 +187,7 @@ void Chofer::agregarChofer() {
     getline(cin, placa);
     cout << "Ingrese el ano del vehiculo: ";
     cin >> anho;
-    cin.ignore(); // Limpiar el buffer de entrada
+    cin.ignore();
     cout << "Ingrese el sector: ";
     getline(cin, sector);
 
