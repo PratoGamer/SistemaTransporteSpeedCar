@@ -24,41 +24,6 @@ Aplicacion::Aplicacion(){
 // Cargar los Datos de Chofer y Usuario
 void Aplicacion::cargarDatosChoferUsuario(){
 	
-	// Cargar Datos de Choferes
-	ifstream txtChoferes("Choferes.txt");
-	
-	// Variables Auxiliares
-	string auxDatos, auxNombre, auxApellido, auxEdad, auxCedula;
-	int auxEdadInt, auxCedulaInt;
-	string auxMarca, auxModelo, auxAnho, auxPlaca, auxSector;
-	int auxAnhoInt;
-	int cantSectores;
-	
-	cantSectores = misSectores.cantSectores();
-	
-	while(getline(txtChoferes, auxDatos)){
-		
-		stringstream input_stringstream(auxDatos);
-		
-		getline(input_stringstream, auxNombre, '-');
-		getline(input_stringstream, auxApellido, '-');
-		getline(input_stringstream, auxEdad, '-');
-		auxEdadInt = atoi(auxEdad.c_str());
-		getline(input_stringstream, auxCedula, '-');
-		auxCedulaInt = atoi(auxCedula.c_str());
-		getline(input_stringstream, auxMarca, '-');
-		getline(input_stringstream, auxModelo, '-');
-		getline(input_stringstream, auxPlaca, '-');
-		getline(input_stringstream, auxAnho, '-');
-		auxAnhoInt = atoi(auxAnho.c_str());
-		
-		auxSector = misSectores.darSector( rand() % (cantSectores + 1) );
-		
-		choferes.push_back(Chofer(auxNombre, auxApellido, auxEdadInt, auxCedulaInt, auxMarca, auxModelo, auxAnhoInt, auxPlaca, auxSector));
-		
-	}
-	txtChoferes.close();
-	
 	/*
 	Usuario user;
 	
@@ -180,20 +145,10 @@ void Aplicacion::agregar() {
     cout << "\t *** Agregar ***" << endl;
     cout << endl;
     if (eleccion == 1) { 
-    	system("cls");
         // Agregar Usuario
-        Usuario nuevoUsuario; 
-        nuevoUsuario.leer(); 
-        //usuarios.push_back(nuevoUsuario); 
-        cout << "Usuario agregado correctamente!" << endl;
-
+        misUsuarios.agregarUsuario();
     } else if (eleccion == 2) {
-		system("cls");  
-        // Agregar Chofer
-        Chofer nuevoChofer; 
-        nuevoChofer.leer(); 
-        choferes.push_back(nuevoChofer); 
-        cout << "Chofer agregado correctamente!" << endl;
+        misChoferes.agregarChofer();
         
     } else if (eleccion == 3) {  
         // Agregar Sector
@@ -226,7 +181,10 @@ void Aplicacion::modificar(){
        	misUsuarios.modificarUsuario(cedula);
     } else if (eleccion == 2) {  
         system("cls");
-        
+        int cedula;
+       	cout << "Ingrese el numero de cedula: ";
+       	cin >> cedula;
+        misChoferes.modificarChofer(cedula);
     } else if (eleccion == 3) {
 		system("cls");  
         // Modificar Sectores
@@ -256,7 +214,9 @@ void Aplicacion::consultar(){
        	system("pause");
     } else if (eleccion == 2) {  
         system("cls");
-        
+        misChoferes.imprimirChoferes();
+        cout << "Choferes consultados correctamente!" << endl;
+        system("pause");
     } else if (eleccion == 3) {
 		system("cls");  
         // Consultar Sectores
@@ -283,15 +243,19 @@ void Aplicacion::eliminar(){
 		misUsuarios.eliminarUsuario(cedula);
     } else if (eleccion == 2) {  
         system("cls");
-        
+        int cedula;
+       	cout << "Ingrese el numero de cedula: ";
+       	cin >> cedula;
+		misChoferes.eliminarChofer(cedula);
     } else if (eleccion == 3) {
 		system("cls");  
         // Eliminar Sectores
+        int cedula;
         cout << "\t *** Sectores ***" << endl;
         misSectores.imprimirSectores();
         cout << "Ingrese el numero del sector que desea eliminar: " << endl;
-        cin >> this->eleccion;
-        misSectores.eliminarSector(eleccion);
+        cin >> cedula;
+        misSectores.eliminarSector(cedula);
     }
 }
 
@@ -320,7 +284,7 @@ void Aplicacion::MenuServicioDiario(){
 		
 		switch(this->eleccion) {
 		case 1:
-			actualizarUbicacion();
+			misChoferes.actualizarUbicacion();
 		   	break;
 		   	
 		case 2:
@@ -345,61 +309,7 @@ void Aplicacion::MenuServicioDiario(){
 }
 
 // Metodos MenuServicioDiario
-void Aplicacion::actualizarUbicacion(){
-	// Variables Auxiliares
-	string auxPlaca;
-	int auxSector;
-	bool encontrado = false;
-	Chofer driver;
-	
-	system("cls");
-	cout << "\t *** Actualizar Ubicacion del Vehiculo ***" << endl;
-	cout << endl;
-	
-	cout << "\t Ingrese el Numero de Placa del Vehiculo: ";
-	getline(cin, auxPlaca);
-	
-	cout << endl;
-	
-	for(int num = 0; num < choferes.size(); num++){
-		driver = choferes.at(num);
-		if( auxPlaca.compare(driver.getPlaca()) == 0 ){
-			
-			cout << "\t Ubicacion Actual: " << driver.getSector() << endl << endl;
-			
-			cout << "\t Seleccione la Nueva Ubicacion: " << endl;
-			misSectores.imprimirSectores();
-			
-			while(true){
-				cout << endl << "\t Ingrese el Sector de su Seleccion: ";
-				cin >> auxSector;
-				if( (auxSector < 0) || (auxSector > (misSectores.cantSectores())) ){
-					cout << "\t Valor Invalido Intente Otra Vez" << endl;
-				}
-				else{
-					auxSector--;
-					cout << "\t Sector Seleccionado: " << misSectores.darSector(auxSector) << endl;
-					cout << endl;
-					break;
-				}
-			}
-			
-			driver.setSector(misSectores.darSector(auxSector));
-			choferes[num] = driver;
-			
-			cout << "\t Actualizacion de Ubicacion de Vehiculo con Exito" << endl;
-			
-			encontrado = true;
-			break;
-		}
-	}
-	
-	if(encontrado == false){
-		cout << "\t No se Encontro Ningun Conductor con la Placa: " << auxPlaca << endl;
-	}
-	
-	system("pause");
-}
+
 
 void Aplicacion::solicitarTraslado(){
 	system("cls");
@@ -419,4 +329,6 @@ void Aplicacion::FinalizarDia(){
 	cout << endl;
 	
 	misSectores.guardarSectores();
+	misUsuarios.guardarUsuarios();
+	misChoferes.guardarChoferes();
 }

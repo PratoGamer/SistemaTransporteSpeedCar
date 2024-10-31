@@ -1,19 +1,24 @@
 #ifndef ChoferH
 #define ChoferH
 #include "Persona.h"
+#include "Sector.h"
 #include <iostream>
 #include <string> 
+#include <vector>
 
 using namespace std;
 
 // Clase para los Choferes
 class Chofer : public Persona {
 private:
+	vector <Chofer> choferes;
     string marca;
     string modelo;
     int anho;
     string placa;
     string sector;
+    
+    Sector misSectores;
 public:
     // Constructores
     Chofer();
@@ -36,6 +41,13 @@ public:
     // Metodos
     void leer();
     void mostrar();
+    void cargarChoferes();
+    void imprimirChoferes();
+    void actualizarUbicacion();
+    void agregarChofer();
+    void modificarChofer(int cedula);
+	void eliminarChofer(int cedula);
+    void guardarChoferes();
 };
 
 #endif

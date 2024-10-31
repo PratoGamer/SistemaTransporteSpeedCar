@@ -1,6 +1,10 @@
 #include "Chofer.h"
+#include <string>
+#include <vector>
+#include <fstream>
 #include <iostream>
-#include <string> 
+#include <sstream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -11,6 +15,7 @@ Chofer::Chofer() : Persona() {
     this->anho = 0;
     this->placa = "";
     this->sector = "";
+    cargarChoferes();
 }
 
 Chofer::Chofer(string nombre, string apellido, int edad, int cedula, string marca, string modelo, int anho, string placa, string sector) 
@@ -78,3 +83,204 @@ void Chofer::mostrar(){
 	cout << "Anho: " << this->anho << " | Placa: " << this->placa << " | Sector: " << this->sector << endl;
 }
 
+void Chofer::cargarChoferes(){
+	// Cargar Datos de Choferes
+	ifstream txtChoferes("Choferes.txt");
+	
+	// Variables Auxiliares
+	string auxDatos, auxNombre, auxApellido, auxEdad, auxCedula;
+	int auxEdadInt, auxCedulaInt;
+	string auxMarca, auxModelo, auxAnho, auxPlaca, auxSector;
+	int auxAnhoInt;
+	int cantSectores;
+	
+	cantSectores = misSectores.cantSectores();
+	
+	while(getline(txtChoferes, auxDatos)){
+		
+		stringstream input_stringstream(auxDatos);
+		
+		getline(input_stringstream, auxNombre, '-');
+		getline(input_stringstream, auxApellido, '-');
+		getline(input_stringstream, auxEdad, '-');
+		auxEdadInt = atoi(auxEdad.c_str());
+		getline(input_stringstream, auxCedula, '-');
+		auxCedulaInt = atoi(auxCedula.c_str());
+		getline(input_stringstream, auxMarca, '-');
+		getline(input_stringstream, auxModelo, '-');
+		getline(input_stringstream, auxPlaca, '-');
+		getline(input_stringstream, auxAnho, '-');
+		auxAnhoInt = atoi(auxAnho.c_str());
+		
+		auxSector = misSectores.darSector( rand() % (cantSectores + 1) );
+		
+		choferes.push_back(Chofer(auxNombre, auxApellido, auxEdadInt, auxCedulaInt, auxMarca, auxModelo, auxAnhoInt, auxPlaca, auxSector));
+		
+	}
+	txtChoferes.close();
+}
+
+void Chofer::imprimirChoferes(){
+    for (int i = 0; i < choferes.size(); ++i) {
+        cout << choferes[i].getNombre() << ", "
+             << choferes[i].getApellido() << ", "
+             << choferes[i].getEdad() << ", "
+             << choferes[i].getCedula() << ", "
+             << choferes[i].getMarca() << ", "
+             << choferes[i].getModelo() << ", "
+             << choferes[i].getPlaca() << ", "
+             << choferes[i].getAnho() << ", "
+             << choferes[i].getSector() << endl;
+    }
+}
+
+void Chofer::actualizarUbicacion(){
+	// Variables Auxiliares
+	string auxPlaca;
+	int auxSector;
+	bool encontrado = false;
+	Chofer driver;
+	
+	system("cls");
+	cout << "\t *** Actualizar Ubicacion del Vehiculo ***" << endl;
+	cout << endl;
+	
+	cout << "\t Ingrese el Numero de Placa del Vehiculo: ";
+	getline(cin, auxPlaca);
+	
+	cout << endl;
+	
+	for(int num = 0; num < choferes.size(); num++){
+		driver = choferes.at(num);
+		if( auxPlaca.compare(driver.getPlaca()) == 0 ){
+			
+			cout << "\t Ubicacion Actual: " << driver.getSector() << endl << endl;
+			
+			cout << "\t Seleccione la Nueva Ubicacion: " << endl;
+			misSectores.imprimirSectores();
+			
+			while(true){
+				cout << endl << "\t Ingrese el Sector de su Seleccion: ";
+				cin >> auxSector;
+				if( (auxSector < 0) || (auxSector > (misSectores.cantSectores())) ){
+					cout << "\t Valor Invalido Intente Otra Vez" << endl;
+				}
+				else{
+					auxSector--;
+					cout << "\t Sector Seleccionado: " << misSectores.darSector(auxSector) << endl;
+					cout << endl;
+					break;
+				}
+			}
+			
+			driver.setSector(misSectores.darSector(auxSector));
+			choferes[num] = driver;
+			
+			cout << "\t Actualizacion de Ubicacion de Vehiculo con Exito" << endl;
+			
+			encontrado = true;
+			break;
+		}
+	}
+	
+	if(encontrado == false){
+		cout << "\t No se Encontro Ningun Conductor con la Placa: " << auxPlaca << endl;
+	}
+	
+	system("pause");
+}
+
+void Chofer::agregarChofer() {
+    // Variables Auxiliares para los Datos del Nuevo Chofer
+    string nombre, apellido, marca, modelo, placa, sector;
+    int edad, cedula, anho;
+
+    // Solicitar Datos del Usuario
+    cout << "Ingrese el nombre: ";
+    cin.ignore();
+    getline(cin, nombre);
+    cout << "Ingrese el apellido: ";
+    getline(cin, apellido);
+    cout << "Ingrese la edad: ";
+    cin >> edad;
+    cout << "Ingrese la cedula: ";
+    cin >> cedula;
+    cin.ignore(); // Limpiar el buffer de entrada
+    cout << "Ingrese la marca del vehiculo: ";
+    getline(cin, marca);
+    cout << "Ingrese el modelo del vehiculo: ";
+    getline(cin, modelo);
+    cout << "Ingrese la placa del vehiculo: ";
+    getline(cin, placa);
+    cout << "Ingrese el ano del vehiculo: ";
+    cin >> anho;
+    cin.ignore(); // Limpiar el buffer de entrada
+    cout << "Ingrese el sector: ";
+    getline(cin, sector);
+
+    Chofer nuevoChofer(nombre, apellido, edad, cedula, marca, modelo, anho, placa, sector);
+    choferes.push_back(nuevoChofer);
+
+    cout << "Nuevo chofer agregado correctamente." << endl;
+}
+
+void Chofer::modificarChofer(int cedula) {
+    for (int i = 0; i < choferes.size(); ++i) {
+        if (choferes[i].getCedula() == cedula) {
+            string nuevoNombre, nuevoApellido, nuevaMarca, nuevoModelo, nuevaPlaca, nuevoSector;
+            int nuevaEdad, nuevoAnho;
+            cout << "Nuevo nombre: ";
+            cin.ignore();
+            getline(cin, nuevoNombre);
+            cout << "Nuevo apellido: ";
+            getline(cin, nuevoApellido);
+            cout << "Nueva edad: ";
+            cin >> nuevaEdad;
+            cout << "Nueva marca del vehiculo: ";
+            cin.ignore();
+            getline(cin, nuevaMarca);
+            cout << "Nuevo modelo del vehiculo: ";
+            getline(cin, nuevoModelo);
+            cout << "Nueva placa del vehiculo: ";
+            getline(cin, nuevaPlaca);
+            cout << "Nuevo anho del vehiculo: ";
+            cin >> nuevoAnho;
+            cin.ignore();
+            cout << "Nuevo sector: ";
+            getline(cin, nuevoSector);
+
+            choferes[i] = Chofer(nuevoNombre, nuevoApellido, nuevaEdad, cedula, nuevaMarca, nuevoModelo, nuevoAnho, nuevaPlaca, nuevoSector);
+            cout << "Chofer modificado correctamente." << endl;
+            return;
+        }
+    }
+    cout << "Chofer con la cedula " << cedula << " no encontrado." << endl;
+}
+
+
+void Chofer::eliminarChofer(int cedula) {
+    for (int i = 0; i < choferes.size(); ++i) {
+        if (choferes[i].getCedula() == cedula) {
+            choferes.erase(choferes.begin() + i);
+            cout << "Chofer eliminado correctamente." << endl;
+            return;
+        }
+    }
+    cout << "Chofer con la cedula " << cedula << " no encontrado." << endl;
+}
+
+void Chofer::guardarChoferes() {
+    ofstream txtChoferes("Choferes.txt");
+    for (int i = 0; i < choferes.size(); ++i) {
+        txtChoferes << choferes[i].getNombre() << "-"
+                    << choferes[i].getApellido() << "-"
+                    << choferes[i].getEdad() << "-"
+                    << choferes[i].getCedula() << "-"
+                    << choferes[i].getMarca() << "-"
+                    << choferes[i].getModelo() << "-"
+                    << choferes[i].getPlaca() << "-"
+                    << choferes[i].getAnho() << "-"
+                    << choferes[i].getSector() << endl;
+    }
+    txtChoferes.close();
+}

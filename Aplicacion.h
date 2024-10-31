@@ -17,9 +17,7 @@ class Aplicacion{
 		bool terminarDia;
 		Sector misSectores;
 		Usuario misUsuarios;
-		
-		// Vectores para Almacenar 
-		vector <Chofer> choferes;
+		Chofer misChoferes;
 		
 	public:
 		// Constructor

@@ -64,6 +64,28 @@ void Usuario::imprimirUsuarios() {
     }
 }
 
+void Usuario::agregarUsuario() {
+    string nombre, apellido;
+    int edad, cedula;
+
+    // Solicitar Datos del Usuario
+    cout << "Ingrese el nombre: ";
+    cin.ignore();
+    getline(cin, nombre);
+    cout << "Ingrese el apellido: ";
+    getline(cin, apellido);
+    cout << "Ingrese la edad: ";
+    cin >> edad;
+    cout << "Ingrese la cedula: ";
+    cin >> cedula;
+    
+    Usuario nuevoUsuario(nombre, apellido, edad, cedula);
+    usuarios.push_back(nuevoUsuario);
+
+    cout << "Nuevo usuario agregado correctamente." << endl;
+}
+
+
 void Usuario::eliminarUsuario(int cedula) {
     for (int i = 0; i < usuarios.size(); ++i) {
         if (usuarios[i].getCedula() == cedula) {
@@ -72,7 +94,7 @@ void Usuario::eliminarUsuario(int cedula) {
             return;
         }
     }
-    cout << "Usuario con la cédula " << cedula << " no encontrado." << endl;
+    cout << "Usuario con la cedula " << cedula << " no encontrado." << endl;
 }
 
 void Usuario::modificarUsuario(int cedula) {
@@ -81,14 +103,14 @@ void Usuario::modificarUsuario(int cedula) {
             string nuevoNombre, nuevoApellido;
             int nuevaEdad, nuevaCedula;
 
-            cout << "Ingrese el nuevo nombre: ";
+            cout << "Nuevo nombre: ";
             cin.ignore();
             getline(cin, nuevoNombre);
-            cout << "Ingrese el nuevo apellido: ";
+            cout << "Nuevo apellido: ";
             getline(cin, nuevoApellido);
-            cout << "Ingrese la nueva edad: ";
+            cout << "Nueva edad: ";
             cin >> nuevaEdad;
-            cout << "Ingrese la nueva cédula: ";
+            cout << "Nueva cedula: ";
             cin >> nuevaCedula;
 
             usuarios[i] = Usuario(nuevoNombre, nuevoApellido, nuevaEdad, nuevaCedula);
@@ -96,5 +118,19 @@ void Usuario::modificarUsuario(int cedula) {
             return;
         }
     }
-    cout << "Usuario con la cédula " << cedula << " no encontrado." << endl;
+    cout << "Usuario con la cedula " << cedula << " no encontrado." << endl;
 }
+
+//Guardar usuarios en el txt
+
+void Usuario::guardarUsuarios() {
+    ofstream txtUsuarios("Usuarios.txt");
+    for (int i = 0; i < usuarios.size(); ++i) {
+        txtUsuarios << usuarios[i].getNombre() << "-"
+                    << usuarios[i].getApellido() << "-"
+                    << usuarios[i].getEdad() << "-"
+                    << usuarios[i].getCedula() << endl;
+    }
+    txtUsuarios.close();
+}
+

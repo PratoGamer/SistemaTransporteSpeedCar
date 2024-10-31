@@ -2,6 +2,8 @@
 #define PersonaH
 #include <string> 
 
+#include "Sector.h"
+
 using namespace std;
 
 // Clase para Heredar
