@@ -19,7 +19,7 @@ public:
     string darSector(int num);
     int cantSectores();
     void eliminarSector(int posicion);
-    void modificarSector(int posicion, string nuevoSector);
+    void modificarSector(int posicion);
     void guardarSectores();
     
     

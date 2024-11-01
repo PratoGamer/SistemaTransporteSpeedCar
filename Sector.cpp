@@ -53,6 +53,7 @@ void Sector::agregarSector(string nuevoSector) {
     	sector = sectores[i];
         if (sector == nuevoSector) {
             cout << endl <<  "\tEl sector '" << nuevoSector << "' ya existe." << endl;
+            system("pause");
             return;
         }
     }
@@ -64,23 +65,36 @@ void Sector::agregarSector(string nuevoSector) {
 //eliminar sector
 void Sector::eliminarSector(int posicion) { 
 	if (posicion >= 1 && posicion <= sectores.size()){ 
-	sectores.erase(sectores.begin() + posicion - 1); 
-	cout << endl << "\tSector eliminado correctamente." << endl; 
-	}else{
-	cout << endl << "\tPosicion invalida." << endl; }
-}
-
-//Modificar sector
-void Sector::modificarSector(int posicion, string nuevoSector){ 
-	if (posicion >= 1 && posicion <= sectores.size()){
-		sectores[posicion - 1] = nuevoSector;;
-		cout << endl << "\tSector modificado correctamente." << endl;
+		sectores.erase(sectores.begin() + posicion - 1); 
+		cout << endl << "\tSector eliminado correctamente." << endl; 
 	}else{
 		cout << endl << "\tPosicion invalida." << endl;
 	}
 }
 
-//Guandando los sectores en el txt
+//Modificar sector
+void Sector::modificarSector(int posicion){ 
+		string nuevoSector;
+	if (posicion >= 1 && posicion <= sectores.size()){
+		cout << "\tIngrese el nuevo sector: ";
+		cin.ignore();
+        getline(cin , nuevoSector);
+        for (int i = 0 ; i < sectores.size() ; i++){
+        	if(sectores[i] == nuevoSector){
+        		cout << "\tEste sector ya existe";
+        		system("pause");
+        		return;
+			}
+		}
+		sectores[posicion - 1] = nuevoSector;;
+		cout << endl << "\tSector modificado correctamente." << endl;
+	}else{
+		cout << endl << "\tPosicion invalida." << endl;
+	}
+	system("pause");
+}
+
+//Metodo para actualizar el txt donde se guardan los datos sectores
 void Sector::guardarSectores(){
 	ofstream archivo("sectores.txt");
 	for(int i = 0; i < sectores.size(); i++){ 

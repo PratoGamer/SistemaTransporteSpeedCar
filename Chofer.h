@@ -57,8 +57,8 @@ public:
     bool disponibilidad(int i);
     void noDisponible(int i);
     void actualizarSector(int i, string destino);
-    void disponiblePorPlaca(string placa);
-    
+    void finalizarTrasladoChofer(string placa);
+    // Metodo generarreporte
     void generarReporte(ofstream& reporte);
 };
 
