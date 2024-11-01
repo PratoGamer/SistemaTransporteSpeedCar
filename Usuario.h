@@ -17,13 +17,7 @@ class Usuario : public Persona{
 		Usuario();
 		Usuario(string nombre, string apellido, int edad, int cedula);
 		
-		// SET
-		
-		// GET
-		
 		// Metodos
-		void leer();
-    	void mostrar();
     	void cargarUsuarios();
     	void imprimirUsuarios();
     	void agregarUsuario();
@@ -35,6 +29,7 @@ class Usuario : public Persona{
     	void imprimirUsuario(int i);
     	void sumarUso(int i);
     	int cantUsosUsuario(int i);
+    	void generarReporte(ofstream& reporte);
 };
 
 #endif

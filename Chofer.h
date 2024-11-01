@@ -17,6 +17,7 @@ private:
     int anho;
     string placa;
     string sector;
+    bool disponible;
     
     Sector misSectores;
 public:
@@ -30,6 +31,7 @@ public:
     void setAnho(int anho);
     void setPlaca(string placa);
     void setSector(string sector);
+    void setDisponible(bool disponible);
     
     // GET
     string getMarca();
@@ -37,10 +39,9 @@ public:
     int getAnho();
     string getPlaca();
     string getSector();
+    bool getDisponible();
     
     // Metodos
-    void leer();
-    void mostrar();
     void cargarChoferes();
     void imprimirChoferes();
     void actualizarUbicacion();
@@ -53,6 +54,12 @@ public:
     void imprimirChofer(int j);
     void sumarUso(int j);
     int cantUsosChofer(int j);
+    void generarReporte(ofstream& reporte);
+    
+    bool disponibilidad(int i);
+    void noDisponible(int i);
+    void actualizarSector(int i, string destino);
+    void disponiblePorPlaca(string placa);
 };
 
 #endif

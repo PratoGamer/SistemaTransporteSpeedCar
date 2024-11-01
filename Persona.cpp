@@ -56,23 +56,6 @@ int Persona::getCedula() {
 }
 
 // Metodos
-void Persona::leer(){
-	cin.get();
-	cout << "\nIngrese su Nombre: ";
-	getline(cin, nombre);
-	cout << "Ingrese su Apellido: ";
-	getline(cin, apellido);
-	cout << "Ingrese su Edad: ";
-	cin >> edad;
-	cout << "Ingrese su Cedula: ";
-	cin >> cedula;
-	
-}
-
-void Persona::mostrar(){
-	cout << "Nombre: " << this->nombre << " | Apellido: " << this->apellido << endl;
-	cout << "Edad: " << this->edad << " | Cedula: " << this->cedula << " | Usos: " << this->uso << endl;
-}
 
 void Persona::usado(){
 	uso++;

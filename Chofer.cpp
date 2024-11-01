@@ -25,6 +25,7 @@ Chofer::Chofer(string nombre, string apellido, int edad, int cedula, string marc
     this->anho = anho;
     this->placa = placa;
     this->sector = sector;
+    this->disponible = true;
 }
 
 // SET
@@ -43,6 +44,9 @@ void Chofer::setPlaca(string placa) {
 void Chofer::setSector(string sector) {
     this->sector = sector;
 }
+void Chofer::setDisponible(bool disponible) {
+    this->disponible = disponible;
+}
 
 // GET
 string Chofer::getMarca() {
@@ -60,34 +64,14 @@ string Chofer::getPlaca() {
 string Chofer::getSector() {
     return sector;
 }
-
-// Metodos
-void Chofer::leer(){
-	Persona::leer();
-	cin.get();
-	cout << "Ingrese la Marca del Vehiculo: ";
-	getline(cin, marca);
-	cout << "Ingrese el Modelo del Vehiculo: ";
-	getline(cin, modelo);
-	cout << "Ingrese la Placa del Vehiculo: ";
-	getline(cin, placa);
-	cout << "Ingrese el Anho del Vehiculo: ";
-	cin >> anho;
-	
+bool Chofer::getDisponible() {
+    return disponible;
 }
 
-void Chofer::mostrar(){
-	Persona::mostrar();
-	
-	cout << "Marca: " << this->marca << " | Modelo: " << this->modelo << endl;
-	cout << "Anho: " << this->anho << " | Placa: " << this->placa << " | Sector: " << this->sector << endl;
-}
-
+//
 void Chofer::cargarChoferes(){
-	// Cargar Datos de Choferes
 	ifstream txtChoferes("Choferes.txt");
 	
-	// Variables Auxiliares
 	string auxDatos, auxNombre, auxApellido, auxEdad, auxCedula;
 	int auxEdadInt, auxCedulaInt;
 	string auxMarca, auxModelo, auxAnho, auxPlaca, auxSector;
@@ -119,10 +103,12 @@ void Chofer::cargarChoferes(){
 	}
 	txtChoferes.close();
 }
+// Metodos
 
+//Mostrar datos
 void Chofer::imprimirChoferes(){
     for (int i = 0; i < choferes.size(); ++i) {
-        cout << choferes[i].getNombre() << ", "
+        cout << "\t" << choferes[i].getNombre() << ", "
              << choferes[i].getApellido() << ", "
              << choferes[i].getEdad() << ", "
              << choferes[i].getCedula() << ", "
@@ -130,12 +116,13 @@ void Chofer::imprimirChoferes(){
              << choferes[i].getModelo() << ", "
              << choferes[i].getPlaca() << ", "
              << choferes[i].getAnho() << ", "
-             << choferes[i].getSector() << endl;
+             << choferes[i].getSector() << ", "
+			 << choferes[i].getDisponible() <<endl;
     }
 }
 
+//Actualizar la ubicacion
 void Chofer::actualizarUbicacion(){
-	// Variables Auxiliares
     string auxPlaca, nuevoSector;
     int valorSector;
     bool encontrado = false;
@@ -143,15 +130,15 @@ void Chofer::actualizarUbicacion(){
     // Solicitar Datos del Usuario
     cout << "\t *** Actualizar Ubicacion del Vehiculo ***" << endl << endl;
     
-    cout << "\t Ingrese la Placa del Vehiculo: ";
+    cout << endl << "\t Ingrese la Placa del Vehiculo: ";
     getline(cin, auxPlaca);
 
     for (int i = 0; i < choferes.size(); ++i) {
         if (choferes[i].getPlaca() == auxPlaca) {
-            // Mostrar el Sector Actual
+            // Mostrar el sector actual
             cout << endl << "\t Ubicacion Actual: " << choferes[i].getSector() << endl << endl;
 
-            // Solicitar el Nuevo Sector
+            // Solicitar el sector nuevo
             misSectores.imprimirSectores();
             
             while(true){
@@ -177,7 +164,7 @@ void Chofer::actualizarUbicacion(){
         }
     }
     if (!encontrado) {
-        cout << "\t No se Encontro Ningun Chofer con la Placa: " << auxPlaca << endl;
+        cout << endl << "\t No se Encontro Ningun Chofer con la Placa: " << auxPlaca << endl;
     }
     system("PAUSE");
     system("cls");
@@ -185,36 +172,35 @@ void Chofer::actualizarUbicacion(){
 
 
 void Chofer::agregarChofer() {
-    // Variables Auxiliares para los Datos del Nuevo Chofer
     int edad, cedula, anho;
 
     // Solicitar Datos del Usuario
-    cout << "Ingrese el nombre: ";
+    cout << "\tIngrese el nombre: ";
     cin.ignore();
     getline(cin, nombre);
-    cout << "Ingrese el apellido: ";
+    cout << "\tIngrese el apellido: ";
     getline(cin, apellido);
-    cout << "Ingrese la edad: ";
+    cout << "\tIngrese la edad: ";
     cin >> edad;
-    cout << "Ingrese la cedula: ";
+    cout << "\tIngrese la cedula: ";
     cin >> cedula;
     cin.ignore();
-    cout << "Ingrese la marca del vehiculo: ";
+    cout << "\tIngrese la marca del vehiculo: ";
     getline(cin, marca);
-    cout << "Ingrese el modelo del vehiculo: ";
+    cout << "\tIngrese el modelo del vehiculo: ";
     getline(cin, modelo);
-    cout << "Ingrese la placa del vehiculo: ";
+    cout << "\tIngrese la placa del vehiculo: ";
     getline(cin, placa);
-    cout << "Ingrese el ano del vehiculo: ";
+    cout << "\tIngrese el ano del vehiculo: ";
     cin >> anho;
     cin.ignore();
-    cout << "Ingrese el sector: ";
+    cout << "\tIngrese el sector: ";
     getline(cin, sector);
 
     Chofer nuevoChofer(nombre, apellido, edad, cedula, marca, modelo, anho, placa, sector);
     choferes.push_back(nuevoChofer);
 
-    cout << "Nuevo chofer agregado correctamente." << endl;
+    cout << endl << "\tNuevo chofer agregado correctamente." << endl;
 }
 
 void Chofer::modificarChofer(int cedula) {
@@ -222,32 +208,32 @@ void Chofer::modificarChofer(int cedula) {
         if (choferes[i].getCedula() == cedula) {
             string nuevoNombre, nuevoApellido, nuevaMarca, nuevoModelo, nuevaPlaca, nuevoSector;
             int nuevaEdad, nuevoAnho;
-            cout << "Nuevo nombre: ";
+            cout << "\tNuevo nombre: ";
             cin.ignore();
             getline(cin, nuevoNombre);
-            cout << "Nuevo apellido: ";
+            cout << "\tNuevo apellido: ";
             getline(cin, nuevoApellido);
-            cout << "Nueva edad: ";
+            cout << "\tNueva edad: ";
             cin >> nuevaEdad;
-            cout << "Nueva marca del vehiculo: ";
+            cout << "\tNueva marca del vehiculo: ";
             cin.ignore();
             getline(cin, nuevaMarca);
-            cout << "Nuevo modelo del vehiculo: ";
+            cout << "\tNuevo modelo del vehiculo: ";
             getline(cin, nuevoModelo);
-            cout << "Nueva placa del vehiculo: ";
+            cout << "\tNueva placa del vehiculo: ";
             getline(cin, nuevaPlaca);
-            cout << "Nuevo anho del vehiculo: ";
+            cout << "\tNuevo anho del vehiculo: ";
             cin >> nuevoAnho;
             cin.ignore();
-            cout << "Nuevo sector: ";
+            cout << "\tNuevo sector: ";
             getline(cin, nuevoSector);
 
             choferes[i] = Chofer(nuevoNombre, nuevoApellido, nuevaEdad, cedula, nuevaMarca, nuevoModelo, nuevoAnho, nuevaPlaca, nuevoSector);
-            cout << "Chofer modificado correctamente." << endl;
+            cout << endl << "\tChofer modificado correctamente." << endl;
             return;
         }
     }
-    cout << "Chofer con la cedula " << cedula << " no encontrado." << endl;
+    cout << endl << "\tChofer con la cedula " << cedula << " no encontrado." << endl;
 }
 
 
@@ -255,11 +241,11 @@ void Chofer::eliminarChofer(int cedula) {
     for (int i = 0; i < choferes.size(); ++i) {
         if (choferes[i].getCedula() == cedula) {
             choferes.erase(choferes.begin() + i);
-            cout << "Chofer eliminado correctamente." << endl;
+            cout << endl << "\tChofer eliminado correctamente." << endl;
             return;
         }
     }
-    cout << "Chofer con la cedula " << cedula << " no encontrado." << endl;
+    cout << endl << "\tChofer con la cedula " << cedula << " no encontrado." << endl;
 }
 
 void Chofer::guardarChoferes() {
@@ -273,7 +259,7 @@ void Chofer::guardarChoferes() {
                     << choferes[i].getModelo() << "-"
                     << choferes[i].getPlaca() << "-"
                     << choferes[i].getAnho() << "-"
-                    << choferes[i].getSector() << endl;
+                    << choferes[i].getSector() << "-" << endl;
     }
     txtChoferes.close();
 }
@@ -287,7 +273,7 @@ string Chofer::darSector(int j){
 }
 
 void Chofer::imprimirChofer(int j){
-	cout << "Nombre: " << choferes[j].getNombre() << " Marca: " << choferes[j].getMarca() << " Modelo: " << choferes[j].getModelo();
+	cout << "Nombre: " << choferes[j].getNombre() << " Marca: " << choferes[j].getMarca() << " Modelo: " << choferes[j].getModelo() << " Placa: " << choferes[j].getPlaca();
 }
 
 void Chofer::sumarUso(int j){
@@ -296,4 +282,53 @@ void Chofer::sumarUso(int j){
 
 int Chofer::cantUsosChofer(int j){
 	return choferes[j].cantUsos();
+}
+
+void Chofer::generarReporte(ofstream& reporte){
+    for (int i = 0; i < choferes.size(); ++i) {
+        if (choferes[i].cantUsos() > 0) {
+            reporte << choferes[i].getNombre() << "-"
+                    << choferes[i].getApellido() << "-"
+                    << choferes[i].getEdad() << "-"
+                    << choferes[i].getCedula() << endl;
+        }
+    }
+}
+
+bool Chofer::disponibilidad(int i) {
+    return choferes[i].disponible;
+}
+
+void Chofer::noDisponible(int i){
+	choferes[i].disponible = false;
+}
+
+void Chofer::actualizarSector(int i, string destino){
+	choferes[i].sector = destino;
+}
+
+void Chofer::disponiblePorPlaca(string placa) {
+	for(int i = 0; i < choferes.size(); ++i) {
+        if(choferes[i].placa == placa && !choferes[i].disponible) {
+        	system("cls");
+				
+			float cobro;
+			cobro = rand() % (30 + 1);
+			cout << "\t -Cobro-" << endl << endl;
+				
+			cout << "\t Cobro Hasta el destino: " << choferes[i].sector << endl;
+			cout << "\t $: " << cobro << "usd | BS BCB: " << (cobro*42.02) << "bss" << endl;
+        	
+        	cout << endl << "\t -Fin del Traslado-" << endl;
+        	
+        	system("pause");
+        	system("cls");
+        	
+        	choferes[i].disponible = true;
+            return;
+        }
+    }
+    cout << endl << "\tAun no a realizado un traslado" << endl;
+    system("pause");
+    system("cls");
 }

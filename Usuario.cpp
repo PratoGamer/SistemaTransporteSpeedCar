@@ -16,12 +16,10 @@ Usuario::Usuario() : Persona(){
 Usuario::Usuario(string nombre, string apellido, int edad, int cedula) : Persona(nombre, apellido, edad, cedula){
 	
 }
-
+//Cargando datos
 void Usuario::cargarUsuarios(){
-	// Cargar Datos de los Usuarios
 	ifstream txtUsuarios("Usuarios.txt");
 	
-	// Variables Auxiliares
 	string auxDatos, auxNombre, auxApellido, auxEdad, auxCedula;
 	int auxEdadInt, auxCedulaInt;
 	
@@ -43,82 +41,72 @@ void Usuario::cargarUsuarios(){
 }
 
 // Metodos
-void Usuario::leer(){
-	Persona::leer();
-	
-	cout << endl;
-	
-	cout << "Ingresado Correctamente" << endl;
-}
-
-void Usuario::mostrar(){
-	Persona::mostrar();
-}
 
 void Usuario::imprimirUsuarios() {
     for (int i = 0; i < usuarios.size(); ++i) {
-        cout << usuarios[i].getNombre() << " "
+        cout << "\t" << usuarios[i].getNombre() << " "
              << usuarios[i].getApellido() << " "
              << usuarios[i].getEdad() << " "
              << usuarios[i].getCedula() << endl;
     }
 }
-
+//Agregar usuarios
 void Usuario::agregarUsuario() {
     string nombre, apellido;
     int edad, cedula;
 
     // Solicitar Datos del Usuario
-    cout << "Ingrese el nombre: ";
+    cout << "\tIngrese el nombre: ";
     cin.ignore();
     getline(cin, nombre);
-    cout << "Ingrese el apellido: ";
+    cout << "\tIngrese el apellido: ";
     getline(cin, apellido);
-    cout << "Ingrese la edad: ";
+    cout << "\tIngrese la edad: ";
     cin >> edad;
-    cout << "Ingrese la cedula: ";
+    cout << "\tIngrese la cedula: ";
     cin >> cedula;
     
     Usuario nuevoUsuario(nombre, apellido, edad, cedula);
     usuarios.push_back(nuevoUsuario);
 
-    cout << "Nuevo usuario agregado correctamente." << endl;
+    cout << endl << "\tNuevo usuario agregado correctamente." << endl;
 }
 
-
+//Eliminar usuario
 void Usuario::eliminarUsuario(int cedula) {
     for (int i = 0; i < usuarios.size(); ++i) {
         if (usuarios[i].getCedula() == cedula) {
             usuarios.erase(usuarios.begin() + i);
-            cout << "Usuario eliminado correctamente." << endl;
+            cout << endl << "/tUsuario eliminado correctamente." << endl;
             return;
         }
     }
-    cout << "Usuario con la cedula " << cedula << " no encontrado." << endl;
+    cout << endl << "\tUsuario con la cedula " << cedula << " no encontrado." << endl;
 }
 
+//Modificar usuario
 void Usuario::modificarUsuario(int cedula) {
     for (int i = 0; i < usuarios.size(); ++i) {
         if (usuarios[i].getCedula() == cedula) {
             string nuevoNombre, nuevoApellido;
             int nuevaEdad, nuevaCedula;
-
-            cout << "Nuevo nombre: ";
+			
+            cout << "\tNuevo nombre: ";
             cin.ignore();
             getline(cin, nuevoNombre);
-            cout << "Nuevo apellido: ";
+            cout << "\tNuevo apellido: ";
             getline(cin, nuevoApellido);
-            cout << "Nueva edad: ";
+            cout << "\tNueva edad: ";
             cin >> nuevaEdad;
-            cout << "Nueva cedula: ";
+            cout << "\tNueva cedula: ";
             cin >> nuevaCedula;
 
             usuarios[i] = Usuario(nuevoNombre, nuevoApellido, nuevaEdad, nuevaCedula);
-            cout << "Usuario modificado correctamente." << endl;
+            cout << endl << "Usuario modificado correctamente." << endl;
             return;
         }
     }
-    cout << "Usuario con la cedula " << cedula << " no encontrado." << endl;
+    cout << endl << "Usuario con la cedula " << cedula << " no encontrado." << endl;
 }
 
 //Guardar usuarios en el txt
@@ -153,3 +141,15 @@ void Usuario::sumarUso(int i){
 int Usuario::cantUsosUsuario(int i){
 	return usuarios[i].cantUsos();
 }
+
+void Usuario::generarReporte(ofstream& reporte){
+    for (int i = 0; i < usuarios.size(); ++i) {
+        if (usuarios[i].cantUsos() > 0) {
+            reporte << usuarios[i].nombre << "-"
+                    << usuarios[i].apellido << "-"
+                    << usuarios[i].edad << "-"
+                    << usuarios[i].cedula << endl;
+        }
+    }
+}
+

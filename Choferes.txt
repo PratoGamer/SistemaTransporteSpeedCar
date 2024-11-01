@@ -1,20 +1,20 @@
-Diego-Mendoza-28-27586413-Honda-Civic-BC4D76-2016-Cordero
-Laura-Perez-34-10458236-Nissan-Altima-HJ7K90-2019-Santa Teresa
-Carlos-Gonzalez-45-11674829-Ford-Fusion-AH4P25-2015-Pueblo Nuevo
-Sofia-Hernandez-22-20983547-Toyota-Corolla-NV9K51-2020-La Castra
-Marcos-Ruiz-31-34872618-Chevrolet-Sonic-RX5Q12-2018-Paramillo
-Gabriela-Martinez-27-75645321-Kia-Soul-BL3F08-2021-Las Pilas
-Felipe-Soto-39-19362048-Mazda-3-PQ7W55-2017-Barrio Obrero
-Valentina-Carrillo-24-67842217-Volkswagen-Jetta-CM3X69-2022-Paramillo
-Andres-Lopez-42-28731645-Hyundai-Elantra-TZ8N43-2019-Terminal
-Vanessa-Nunez-30-46253476-Renault-Duster-FR5M77-2020-Las Pilas
-Javier-Torres-37-22457830-Dodge-Durango-AW3B06-2014-Barrio Obrero
-Marcela-Sandoval-29-13578962-Subaru-Impreza-PH6K14-2018-Palo Gordo
-Alejandro-Alvarez-26-40929376-Benz-C~Class-YA2K11-2021-La Rotaria
-Mariana-Caicedo-33-15482691-Volkswagen-Passat-MQ7X88-2016-La Guayana
-Manuel-Olivares-40-74832915-Ram-1500-BL8P44-2015-Pirineos
-Rita-Calderon-23-10159381-Jeep-Wrangler-PL3M29-2022-Las Lomas
-Luis-Palacios-35-67104928-Toyota-RAV4-OT6F15-2019-La Rotaria
-Paola-Ramirez-21-53012487-BMW-3 Series-CB9R27-2021-La Rotaria
-Gustavo-Serrano-48-68243901-Ford-Focus-SJ5M33-2017-Zorca
-Natalia-Cuervo-26-28413542-Chrysler-300-AF2H67-2020-Las Lomas
+Diego-Mendoza-28-27586413-Honda-Civic-BC4D76-2016-
+Laura-Perez-34-10458236-Nissan-Altima-HJ7K90-2019-
+Carlos-Gonzalez-45-11674829-Ford-Fusion-AH4P25-2015-
+Sofia-Hernandez-22-20983547-Toyota-Corolla-NV9K51-2020-
+Marcos-Ruiz-31-34872618-Chevrolet-Sonic-RX5Q12-2018-
+Gabriela-Martinez-27-75645321-Kia-Soul-BL3F08-2021-
+Felipe-Soto-39-19362048-Mazda-3-PQ7W55-2017-
+Valentina-Carrillo-24-67842217-Volkswagen-Jetta-CM3X69-2022-
+Andres-Lopez-42-28731645-Hyundai-Elantra-TZ8N43-2019-
+Vanessa-Nunez-30-46253476-Renault-Duster-FR5M77-2020-
+Javier-Torres-37-22457830-Dodge-Durango-AW3B06-2014-
+Marcela-Sandoval-29-13578962-Subaru-Impreza-PH6K14-2018-
+Alejandro-Alvarez-26-40929376-Benz-C~Class-YA2K11-2021-
+Mariana-Caicedo-33-15482691-Volkswagen-Passat-MQ7X88-2016-
+Manuel-Olivares-40-74832915-Ram-1500-BL8P44-2015-
+Rita-Calderon-23-10159381-Jeep-Wrangler-PL3M29-2022-
+Luis-Palacios-35-67104928-Toyota-RAV4-OT6F15-2019-
+Paola-Ramirez-21-53012487-BMW-3 Series-CB9R27-2021-
+Gustavo-Serrano-48-68243901-Ford-Focus-SJ5M33-2017-
+Natalia-Cuervo-26-28413542-Chrysler-300-AF2H67-2020-

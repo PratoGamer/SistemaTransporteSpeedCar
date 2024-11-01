@@ -44,7 +44,11 @@ class Aplicacion{
 		
 		// Metodos MenuServicioDiario
 		void solicitarTraslado();
+		void finalizarTraslado();
 		void actualizarUbicacion();
+		
+		// Metodo Crear reporte
+		void generarReporte();
 };
 
 #endif

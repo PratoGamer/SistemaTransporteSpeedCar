@@ -33,8 +33,6 @@ public:
     int getCedula();
 
 	// Metodos
-    void leer();
-    void mostrar();
     void usado();
     int cantUsos();
 };

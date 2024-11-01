@@ -18,38 +18,6 @@ using namespace std;
 Aplicacion::Aplicacion(){
 	eleccion = 0;
 	terminarDia = false;
-	cargarDatosChoferUsuario();
-}
-
-// Cargar los Datos de Chofer y Usuario
-void Aplicacion::cargarDatosChoferUsuario(){
-	
-	/*
-	Usuario user;
-	
-	cout << "Carga de usuarios" << endl << endl;
-	
-	for(int num = 0; num < usuarios.size(); num++){
-		user = usuarios.at(num);
-		user.mostrar();
-	}
-	
-	cout << endl << endl;
-	
-	Chofer driver;
-	
-	cout << "Carga de choferes" << endl << endl;
-	
-	for(int num = 0; num < choferes.size(); num++){
-		driver = choferes.at(num);
-		driver.mostrar();
-	}
-	
-	cout << endl << endl;
-	
-	cout << "Usuarios: " << usuarios.size() << " | Choferes: " << choferes.size() << endl;
-	*/
-	
 }
 
 // Menu Principal
@@ -83,56 +51,65 @@ void Aplicacion::Menu(){
 		  		cout << "\t Seleccion no Valida" << endl;
 		  		cout << endl;
 		}
-		
 		if(terminarDia){
 			break;
 		}
-		
 	}
 }
 
 // Menu de Usuario
 void Aplicacion::MenuUsuario(){
-	cout << "\t *** Menu de Usuario ***" << endl;
-	cout << endl;
+	bool salir = false;
+	while(true){
+		system("cls");
+		cout << "\t *** Menu de Usuario ***" << endl;
+		cout << endl;
 	
-	cout << "\t 1 -> Agregar." << endl;
-	cout << "\t 2 -> Modificar." << endl;
-	cout << "\t 3 -> Consultar." << endl;
-	cout << "\t 4 -> Eliminar." << endl;
-	cout << "\t 5 -> Salir." << endl;
-	cout << endl;
-	cout << "\t Ingrese su Seleccion: ";
-	cin >> this->eleccion;
+		cout << "\t 1 -> Agregar." << endl;
+		cout << "\t 2 -> Modificar." << endl;
+		cout << "\t 3 -> Consultar." << endl;
+		cout << "\t 4 -> Eliminar." << endl;
+		cout << "\t 5 -> Salir." << endl;
+		cout << endl;
+		cout << "\t Ingrese su Seleccion: ";
+		cin >> this->eleccion;
 	
-	switch(this->eleccion) {
-		case 1:
-			agregar();
-		   	break;
+		switch(this->eleccion) {
+			case 1:
+				agregar();
+		   		break;
 		   	
-		case 2:
-			modificar();
-		   	break;
+			case 2:
+				modificar();
+		   		break;
 		    	
-		case 3:
-			consultar();
-		   	break;
+			case 3:
+				consultar();
+		   		break;
 		   	
-		case 4:
-			eliminar();
-		   	break;
+			case 4:
+				eliminar();
+		   		break;
 		
-		case 5:
-		   	break;
+			case 5:
+				salir = true;
+		   		break;
 		   	
-		default:
-		  	cout << "\t Seleccion no Valida" << endl;
-		  	cout << endl;
+			default:
+		  		cout << "\t Seleccion no Valida" << endl;
+		  		cout << endl;
 		}
+		
+		if(salir){
+			break;
+		}
+	}
 		system("cls");
 }
 
 //Metodos MenuUsuario
+
+//Metodo para agregar
 void Aplicacion::agregar() {
     system("cls");
     cout << "\t *** Agregar ***" << endl;
@@ -148,23 +125,21 @@ void Aplicacion::agregar() {
         // Agregar Usuario
         misUsuarios.agregarUsuario();
     } else if (eleccion == 2) {
+    	// Agregar Chofer
         misChoferes.agregarChofer();
-        
     } else if (eleccion == 3) {  
         // Agregar Sector
         cin.get();
         string sectornuevo;
-        cout << "Agregar sector nuevo: ";
+        cout << "\tAgregar sector nuevo: ";
         getline(cin, sectornuevo);
         misSectores.agregarSector(sectornuevo);
     } else {
         cout << "\t Opcion no valida para agregar." << endl;
     }
-    
     system("pause");
 }
-
-
+//Metodo para modificar
 void Aplicacion::modificar(){
 	system("cls");
 	cout << "\t *** Modificar ***" << endl;
@@ -173,32 +148,36 @@ void Aplicacion::modificar(){
 	cout << endl;
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
+	system("cls");
+	cout << "\t *** Modificar ***" << endl;
+	cout << endl;
+	int cedula;
 	if (eleccion == 1) { 
-       	system("cls");
-       	int cedula;
-       	cout << "Ingrese el numero de cedula: ";
+		// Modificar Usuario
+       	cout << "\tIngrese el numero de cedula: ";
        	cin >> cedula;
+       	cout << endl;
        	misUsuarios.modificarUsuario(cedula);
-    } else if (eleccion == 2) {  
-        system("cls");
-        int cedula;
-       	cout << "Ingrese el numero de cedula: ";
+    } else if (eleccion == 2) {
+    	// Modificar Chofer
+       	cout << "\tIngrese el numero de cedula: ";
        	cin >> cedula;
+       	cout << endl;
         misChoferes.modificarChofer(cedula);
     } else if (eleccion == 3) {
-		system("cls");  
         // Modificar Sectores
         cout << "\t *** Sectores ***" << endl;
         misSectores.imprimirSectores();
-        cout << "Ingrese el numero del sector que desea modificar: " << endl;
+        cout << "\tIngrese el numero del sector que desea modificar: " << endl;
         cin >> this->eleccion;
         string nuevoSector;
-        cout << "Ingrese el nuevo sector: ";
+        cout << "\tIngrese el nuevo sector: ";
         cin >> nuevoSector;
         misSectores.modificarSector(eleccion, nuevoSector);
     }
 }
 
+//Metodo para consultar
 void Aplicacion::consultar(){
 	system("cls");
 	cout << "\t *** Consultar ***" << endl;
@@ -207,26 +186,28 @@ void Aplicacion::consultar(){
 	cout << endl;
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
-	
+	system("cls");
+	cout << "\t *** Consultar ***" << endl;
+	cout << endl;
 	if (eleccion == 1) { 
-		system("cls");
+	 	// Consultar Usuarios
        	misUsuarios.imprimirUsuarios();
+       	cout << endl << "\tUsuarios consultados correctamente!" << endl;
        	system("pause");
-    } else if (eleccion == 2) {  
-        system("cls");
-        misChoferes.imprimirChoferes();
-        cout << "Choferes consultados correctamente!" << endl;
+    } else if (eleccion == 2) {
+        // Consultar Choferes
+	    misChoferes.imprimirChoferes();
+        cout << endl << "\tChoferes consultados correctamente!" << endl;
         system("pause");
     } else if (eleccion == 3) {
-		system("cls");  
         // Consultar Sectores
-        cout << "\t *** Sectores ***" << endl;
         misSectores.imprimirSectores();
-        cout << "Sector consultados correctamente!" << endl;
+        cout << endl << "\tSector consultados correctamente!" << endl;
         system("pause"); 
     }
 }
 
+//Metodo para eliminar
 void Aplicacion::eliminar(){
 	system("cls");
 	cout << "\t *** Eliminar ***" << endl;
@@ -235,40 +216,37 @@ void Aplicacion::eliminar(){
 	cout << endl;
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
+	system("cls"); 
+	cout << "\t *** Eliminar ***" << endl;
+	cout << endl;
+	int cedula;
 	if (eleccion == 1) { 
-		system("cls"); 
-		int cedula;
-       	cout << "Ingrese el numero de cedula: ";
+		// Eliminar Usuario
+       	cout << "\tIngrese el numero de cedula: ";
        	cin >> cedula;
 		misUsuarios.eliminarUsuario(cedula);
-    } else if (eleccion == 2) {  
-        system("cls");
-        int cedula;
-       	cout << "Ingrese el numero de cedula: ";
+    } else if (eleccion == 2) {
+        // Eliminar Chofer
+       	cout << "\tIngrese el numero de cedula: ";
        	cin >> cedula;
 		misChoferes.eliminarChofer(cedula);
     } else if (eleccion == 3) {
-		system("cls");  
-        // Eliminar Sectores
-        int cedula;
-        cout << "\t *** Sectores ***" << endl;
+        // Eliminar Sector
         misSectores.imprimirSectores();
-        cout << "Ingrese el numero del sector que desea eliminar: " << endl;
+        cout << "\tIngrese el numero del sector que desea eliminar: " << endl;
         cin >> cedula;
         misSectores.eliminarSector(cedula);
     }
 }
-
+//opciones de submenu usuario
 void Aplicacion::opciones(){
 	cout << "\t 1 -> Usuario." << endl;
 	cout << "\t 2 -> Chofer." << endl;
 	cout << "\t 3 -> Sector." << endl;
 }
 
-
 // Menu de Servicio Diario
 void Aplicacion::MenuServicioDiario(){
-	// Variables Control
 	bool salir = false;
 	
 	while(true){
@@ -276,7 +254,8 @@ void Aplicacion::MenuServicioDiario(){
 	
 		cout << "\t 1 -> Actualizar Ubicacion del Vehiculo." << endl;
 		cout << "\t 2 -> Solicitar Traslado." << endl;
-		cout << "\t 3 -> Salir." << endl << endl;
+		cout << "\t 3 -> Finalizar Traslado." << endl;
+		cout << "\t 4 -> Salir." << endl << endl;
 		
 		cout << "\t Ingrese su Seleccion: ";
 		cin >> this->eleccion;
@@ -294,6 +273,11 @@ void Aplicacion::MenuServicioDiario(){
 		   	break;
 		
 		case 3:
+			system("cls");
+			finalizarTraslado();
+			break;
+		
+		case 4:
 			salir = true;
 		   	break;
 		   	
@@ -305,14 +289,14 @@ void Aplicacion::MenuServicioDiario(){
 		if(salir){
 			break;
 		}
-		
 	}
 	system("cls");
 }
 
 // Metodos MenuServicioDiario
+
+//soliictar traslado
 void Aplicacion::solicitarTraslado(){
-	// Variables Auxiliares
 	string auxSectorOrigen, auxSectorDestino;
 	int auxCedula, sectorOrigen, sectorDestino, selChofer = 0; 
 	bool encontrado = false;
@@ -367,7 +351,7 @@ void Aplicacion::solicitarTraslado(){
 			cout << "\t -Buscando Choferes en el Mismo Sector-" << endl << endl;
 			
 			for(int j = 0; j < misChoferes.cantChoferes(); j++){
-				if( auxSectorOrigen.compare(misChoferes.darSector(j))==0 ){
+				if( auxSectorOrigen.compare(misChoferes.darSector(j))==0 && misChoferes.disponibilidad(j)){
 					cout << "\t " << (j+1) << ". ";
 					misChoferes.imprimirChofer(j);
 					cout << endl;
@@ -389,6 +373,9 @@ void Aplicacion::solicitarTraslado(){
 					for(int j = 0; j < valorChofer.size(); j++){
 						if( selChofer == valorChofer[j] ){
 							choferSelecionado = true;
+							//aqui
+							misChoferes.actualizarSector(selChofer - 1, auxSectorDestino);
+							misChoferes.noDisponible(selChofer - 1);
 							break;
 						}
 					}
@@ -405,23 +392,6 @@ void Aplicacion::solicitarTraslado(){
 			}
 			misUsuarios.sumarUso(i);
 			
-			if(!choferSelecionado){
-				
-			}
-			else{
-				system("PAUSE");
-				system("cls");
-				
-				float cobro;
-				cobro = rand() % (30 + 1);
-				cout << "\t -Cobro-" << endl << endl;
-				
-				cout << "\t Cobro desde: " << auxSectorOrigen << " - Hasta: " << auxSectorDestino << endl;
-				cout << "\t $: " << cobro << " | BS BCB: " << (cobro*42.02) << endl;
-				
-				cout << endl << "\t -Fin del Traslado-" << endl;
-			}
-			
 			encontrado = true;
 			break;
 		}
@@ -436,6 +406,32 @@ void Aplicacion::solicitarTraslado(){
 	system("cls");
 }
 
+//finalizar traslado
+void Aplicacion::finalizarTraslado() {
+	cout << "\t *** Finalizar Traslado ***" << endl << endl;
+	string placa;
+	cout << "\tIngrese la placa: ";
+	getline(cin, placa);
+	misChoferes.disponiblePorPlaca(placa);
+}
+
+//Metodo Crear reporte
+
+void Aplicacion::generarReporte() {
+    ofstream reporte("Reporte.txt");
+
+    // Escribir encabezado para Choferes
+    reporte << "Choferes:" << endl;
+    misChoferes.generarReporte(reporte);
+
+    // Separador entre secciones
+    reporte << endl << "Usuarios:" << endl;
+    misUsuarios.generarReporte(reporte);
+
+    reporte.close();
+    cout << "Reporte generado correctamente." << endl;
+}
+
 // Finalizar Dia
 void Aplicacion::FinalizarDia(){
 	cout << "\t *** Fin del Dia ***" << endl;
@@ -444,4 +440,5 @@ void Aplicacion::FinalizarDia(){
 	misSectores.guardarSectores();
 	misUsuarios.guardarUsuarios();
 	misChoferes.guardarChoferes();
+	generarReporte();
 }
