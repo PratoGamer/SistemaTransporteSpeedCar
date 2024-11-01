@@ -25,13 +25,13 @@ Aplicacion::Aplicacion(){
 void Aplicacion::Menu(){
 	//Mostrando el menu
 	while(true){
-		cout << "\t *** Bienvenido a SpeedCar ***" << endl << endl;
-		cout << "\t 1 -> Usuario." << endl;
-		cout << "\t 2 -> Servicio Diario." << endl;
-		cout << "\t 3 -> Finalizar Dia." << endl;
+		cout << "\t*** Bienvenido a SpeedCar ***" << endl << endl;
+		cout << "\t1 -> Usuario." << endl;
+		cout << "\t2 -> Servicio Diario." << endl;
+		cout << "\t3 -> Finalizar Dia." << endl;
 		cout << endl;
 		
-		cout << "\t Ingrese su Seleccion: ";
+		cout << "\tIngrese su Seleccion: ";
 		cin >> this->eleccion;
 		system("cls");
 		switch(this->eleccion) {
@@ -52,7 +52,7 @@ void Aplicacion::Menu(){
 		    	break;
 		    	
 		  	default:
-		  		cout << "\t Seleccion no Valida" << endl;
+		  		cout << "\tSeleccion no Valida" << endl;
 		  		cout << endl;
 		}
 		if(terminarDia){
@@ -69,11 +69,11 @@ void Aplicacion::MenuUsuario(){
 		system("cls");
 		cout << "\t *** Menu de Usuario ***" << endl << endl;
 	
-		cout << "\t 1 -> Agregar." << endl;
-		cout << "\t 2 -> Modificar." << endl;
-		cout << "\t 3 -> Consultar." << endl;
-		cout << "\t 4 -> Eliminar." << endl;
-		cout << "\t 5 -> Salir." << endl;
+		cout << "\t1 -> Agregar." << endl;
+		cout << "\t2 -> Modificar." << endl;
+		cout << "\t3 -> Consultar." << endl;
+		cout << "\t4 -> Eliminar." << endl;
+		cout << "\t5 -> Salir." << endl;
 		cout << endl;
 		cout << "\t Ingrese su Seleccion: ";
 		cin >> this->eleccion;
@@ -104,7 +104,7 @@ void Aplicacion::MenuUsuario(){
 		   		break;
 		   	
 			default:
-		  		cout << "\t Seleccion no Valida" << endl;
+		  		cout << "\tSeleccion no Valida" << endl;
 		  		cout << endl;
 		}
 		
@@ -120,14 +120,14 @@ void Aplicacion::MenuUsuario(){
 //Metodo para agregar
 void Aplicacion::agregar() {
     system("cls");
-    cout << "\t *** Agregar ***" << endl << endl;
+    cout << "\t*** Agregar ***" << endl << endl;
     // Mostrando las opciones que tiene el submenu
     opciones();
     cout << endl;
-    cout << "\t Ingrese su Seleccion: ";
+    cout << "\tIngrese su Seleccion: ";
     cin >> this->eleccion;
     system("cls");
-    cout << "\t *** Agregar ***" << endl;
+    cout << "\t*** Agregar ***" << endl;
     cout << endl;
     if (eleccion == 1) { 
         // Usando el metodo agregar de la clase Usuario
@@ -145,7 +145,7 @@ void Aplicacion::agregar() {
     } else if (eleccion == 4) {
     	return;
 	}else {
-        cout << "\t Opcion no valida." << endl;
+        cout << "\tOpcion no valida." << endl;
     }
     system("pause");
 }
@@ -153,14 +153,14 @@ void Aplicacion::agregar() {
 //Metodo para modificar
 void Aplicacion::modificar(){
 	system("cls");
-	cout << "\t *** Modificar ***" << endl << endl;
+	cout << "\t*** Modificar ***" << endl << endl;
 	// Mostrando las opciones que tiene el submenu
 	opciones();
 	cout << endl;
 	cout << "\t Ingrese su Seleccion: ";
 	cin >> this->eleccion;
 	system("cls");
-	cout << "\t *** Modificar ***" << endl;
+	cout << "\t*** Modificar ***" << endl;
 	cout << endl;
 	int cedula;
 	if (eleccion == 1) { 
@@ -186,21 +186,21 @@ void Aplicacion::modificar(){
     } else if (eleccion == 4) {
     	return;
 	} else {
-        cout << "\t Opcion no valida." << endl;
+        cout << "\tOpcion no valida." << endl;
     }
 }
 
 //Metodo para consultar
 void Aplicacion::consultar(){
 	system("cls");
-	cout << "\t *** Consultar ***" << endl << endl;
+	cout << "\t*** Consultar ***" << endl << endl;
 	// Mostrando las opciones que tiene el submenu
 	opciones();
 	cout << endl;
-	cout << "\t Ingrese su Seleccion: ";
+	cout << "\tIngrese su Seleccion: ";
 	cin >> this->eleccion;
 	system("cls");
-	cout << "\t *** Consultar ***" << endl;
+	cout << "\t*** Consultar ***" << endl;
 	cout << endl;
 	if (eleccion == 1) { 
 	 	// Usando el metodo consultar de la clase Usuarios
@@ -220,7 +220,7 @@ void Aplicacion::consultar(){
     }else if (eleccion == 4) {
     	return;
 	}else {
-        cout << "\t Opcion no valida para agregar." << endl;
+        cout << "\tOpcion no valida para agregar." << endl;
     }
 }
 
@@ -259,16 +259,16 @@ void Aplicacion::eliminar(){
     }else if (eleccion == 4) {
     	return;
 	}else {
-        cout << "\t Opcion no valida para agregar." << endl;
+        cout << "\tOpcion no valida para agregar." << endl;
     }
 }
 
 //opciones de submenu usuario
 void Aplicacion::opciones(){
-	cout << "\t 1 -> Usuario." << endl;
-	cout << "\t 2 -> Chofer." << endl;
-	cout << "\t 3 -> Sector." << endl;
-	cout << "\t 4 -> Salir." << endl;	
+	cout << "\t1 -> Usuario." << endl;
+	cout << "\t2 -> Chofer." << endl;
+	cout << "\t3 -> Sector." << endl;
+	cout << "\t4 -> Salir." << endl;	
 }
 
 // Menu de Servicio Diario
@@ -278,12 +278,12 @@ void Aplicacion::MenuServicioDiario(){
 	while(true){
 		cout << "\t *** Menu de Servicio Diario ***" << endl << endl;
 	
-		cout << "\t 1 -> Actualizar Ubicacion del Vehiculo." << endl;
-		cout << "\t 2 -> Solicitar Traslado." << endl;
-		cout << "\t 3 -> Finalizar Traslado." << endl;
-		cout << "\t 4 -> Salir." << endl << endl;
+		cout << "\t1 -> Actualizar Ubicacion del Vehiculo." << endl;
+		cout << "\t2 -> Solicitar Traslado." << endl;
+		cout << "\t3 -> Finalizar Traslado." << endl;
+		cout << "\t4 -> Salir." << endl << endl;
 		
-		cout << "\t Ingrese su Seleccion: ";
+		cout << "\tIngrese su Seleccion: ";
 		cin >> this->eleccion;
 		cin.get();
 		system("cls");
@@ -308,7 +308,7 @@ void Aplicacion::MenuServicioDiario(){
 		   	break;
 		   	
 		default:
-		  	cout << "\t Seleccion no Valida" << endl;
+		  	cout << "\tSeleccion no Valida" << endl;
 		  	cout << endl;
 		}
 		
@@ -330,9 +330,9 @@ void Aplicacion::solicitarTraslado(){
 	bool choferSelecionado = false;
 	vector <int> valorChofer;
 	
-	cout << "\t *** Solicitar Traslado ***" << endl << endl;
+	cout << "\t*** Solicitar Traslado ***" << endl << endl;
 	
-	cout << "\t Ingrese su Cedula: ";
+	cout << "\tIngrese su Cedula: ";
 	cin >> auxCedula;
 	
 	for(int i = 0; i < misUsuarios.cantUsuarios(); i++){
@@ -342,16 +342,16 @@ void Aplicacion::solicitarTraslado(){
 			misUsuarios.imprimirUsuario(i);
 			cout << endl;
 			
-			cout << "\t *** Sectores Disponibles ***" << endl;
+			cout << "\t*** Sectores Disponibles ***" << endl;
 			//Mostrando los sectores que estan disponibles
 			misSectores.imprimirSectores();
 			
 			while(true){
 				//Pidiendo donde se encuentra y comparando que sea una opc valida
-            	cout << endl << "\t Ingrese el Sector de Origen: ";
+            	cout << endl << "\tIngresar número del sector de origen: ";
             	cin >> sectorOrigen;
             	if( (sectorOrigen < 0) || (sectorOrigen > misSectores.cantSectores()) ){
-            		cout << endl << "\t Valor Invalido" << endl;
+            		cout << endl << "\tValor Invalido" << endl;
 				}
 				else{
 					break;
@@ -360,10 +360,10 @@ void Aplicacion::solicitarTraslado(){
 			
 			while(true){
 				//Pidiendo hacia donde se dirige y comparando que sea una opc valida
-            	cout << endl << "\t Ingrese el Sector de Destino: ";
+            	cout << endl << "\Ingresar número del sector de Destino: ";
             	cin >> sectorDestino;
             	if( (sectorOrigen < 0) || (sectorDestino > misSectores.cantSectores()) ){
-            		cout << endl << "\t Valor Invalido" << endl;
+            		cout << endl << "\tValor Invalido" << endl;
 				}
 				else{
 					break;
@@ -373,12 +373,12 @@ void Aplicacion::solicitarTraslado(){
 			auxSectorOrigen = misSectores.darSector(sectorOrigen - 1);
 			auxSectorDestino = misSectores.darSector(sectorDestino - 1);
 			
-			cout << endl << "\t Sector Origen: " << auxSectorOrigen << "\t Sector Destino: " << auxSectorDestino << endl;
+			cout << endl << "\tSector Origen: " << auxSectorOrigen << "\t Sector Destino: " << auxSectorDestino << endl;
 			
 			system("PAUSE");
 			system("cls");
 			//Buscando choferes que se encuentren en el sector origen seleccionado
-			cout << "\t Buscando Choferes en el Mismo Sector" << endl << endl;
+			cout << "\tBuscando Choferes en el Mismo Sector" << endl << endl;
 			
 			for(int j = 0; j < misChoferes.cantChoferes(); j++){
 				if( auxSectorOrigen.compare(misChoferes.darSector(j))==0 && misChoferes.disponibilidad(j)){
@@ -394,12 +394,12 @@ void Aplicacion::solicitarTraslado(){
 			}
 			//En caso que no se encuentre un chofer en el sector origen se muestra este mensaje
 			if(!choferDisponible){
-				cout << "\t No hay Ningun Chofer Disponible en su Zona Intente Mas Tarde" << endl;
+				cout << "\tNo hay Ningun Chofer Disponible en su Zona Intente Mas Tarde" << endl;
 			}
 			else{
 				// si se encuentran choferes se muestra una lista con las opc y se pide seleccionar uno
 				while(true){
-					cout << endl << "\t Seleccione su Chofer: "; 
+					cout << endl << "\tSeleccione su Chofer: "; 
 					cin >> selChofer;
 					
 					for(int j = 0; j < valorChofer.size(); j++){
@@ -432,7 +432,7 @@ void Aplicacion::solicitarTraslado(){
 	}
 	// en caso de que el usuario no se encuentre agg
 	if(!encontrado){
-		cout << endl << "\t No se Encontro Ningun Usuario con la Cedula: " << auxCedula << endl;
+		cout << endl << "\tNo se Encontro Ningun Usuario con la Cedula: " << auxCedula << endl;
 	}
 	
 	system("pause");

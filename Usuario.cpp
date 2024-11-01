@@ -82,7 +82,7 @@ void Usuario::eliminarUsuario(int cedula) {
     	// if para buscar el usuario a eliminar
         if (usuarios[i].getCedula() == cedula) {
             usuarios.erase(usuarios.begin() + i);
-            cout << endl << "/tUsuario eliminado correctamente." << endl;
+            cout << endl << "\tUsuario eliminado correctamente." << endl;
             return;
         }
     }

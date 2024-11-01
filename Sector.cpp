@@ -53,7 +53,6 @@ void Sector::agregarSector(string nuevoSector) {
     	sector = sectores[i];
         if (sector == nuevoSector) {
             cout << endl <<  "\tEl sector '" << nuevoSector << "' ya existe." << endl;
-            system("pause");
             return;
         }
     }
