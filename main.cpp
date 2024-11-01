@@ -5,9 +5,9 @@
 using namespace std;
 
 /* 	Autores:
-	-> Luis Rojas
-	-> Elianny Romero
-	-> Gabriel Prato
+	-> Luis Rojas CI: 28230278
+	-> Elianny Romero CI: 30646057
+	-> Gabriel Prato CI: 29907722
 	
 	Entrega:
 	31-10-24
