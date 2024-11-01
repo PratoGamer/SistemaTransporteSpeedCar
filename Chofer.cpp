@@ -284,17 +284,6 @@ int Chofer::cantUsosChofer(int j){
 	return choferes[j].cantUsos();
 }
 
-void Chofer::generarReporte(ofstream& reporte){
-    for (int i = 0; i < choferes.size(); ++i) {
-        if (choferes[i].cantUsos() > 0) {
-            reporte << choferes[i].getNombre() << "-"
-                    << choferes[i].getApellido() << "-"
-                    << choferes[i].getEdad() << "-"
-                    << choferes[i].getCedula() << endl;
-        }
-    }
-}
-
 bool Chofer::disponibilidad(int i) {
     return choferes[i].disponible;
 }
@@ -331,4 +320,15 @@ void Chofer::disponiblePorPlaca(string placa) {
     cout << endl << "\tAun no a realizado un traslado" << endl;
     system("pause");
     system("cls");
+}
+
+void Chofer::generarReporte(ofstream& reporte){
+    for (int i = 0; i < choferes.size(); ++i) {
+        if (choferes[i].cantUsos() > 0) {
+            reporte << choferes[i].getNombre() << "-"
+                    << choferes[i].getApellido() << "-"
+                    << choferes[i].getEdad() << "-"
+                    << choferes[i].getCedula() << endl;
+        }
+    }
 }

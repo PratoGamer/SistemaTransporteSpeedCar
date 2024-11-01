@@ -1,18 +1,8 @@
 #include <iostream>
-#include <string>
-#include <stdlib.h>
-#include <sstream>
 
 #include "Aplicacion.h"
-#include "Persona.h"
-#include "Chofer.h"
-#include "Usuario.h"
-#include "Sector.h"
 
 using namespace std;
-
-#include <vector>
-#include <fstream>
 
 /* 	Autores:
 	-> Luis Rojas

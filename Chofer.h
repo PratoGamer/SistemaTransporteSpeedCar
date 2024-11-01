@@ -54,12 +54,12 @@ public:
     void imprimirChofer(int j);
     void sumarUso(int j);
     int cantUsosChofer(int j);
-    void generarReporte(ofstream& reporte);
-    
     bool disponibilidad(int i);
     void noDisponible(int i);
     void actualizarSector(int i, string destino);
     void disponiblePorPlaca(string placa);
+    
+    void generarReporte(ofstream& reporte);
 };
 
 #endif
