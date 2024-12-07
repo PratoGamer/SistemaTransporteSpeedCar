@@ -166,3 +166,6 @@ void Usuario::generarReporte(ofstream& reporte){
     }
 }
 
+Usuario Usuario::darUsuario(int pos){
+	return usuarios[pos];
+}

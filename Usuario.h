@@ -30,6 +30,7 @@ class Usuario : public Persona{
     	void sumarUso(int i);
     	int cantUsosUsuario(int i);
     	void generarReporte(ofstream& reporte);
+    	Usuario darUsuario(int pos);
 };
 
 #endif
