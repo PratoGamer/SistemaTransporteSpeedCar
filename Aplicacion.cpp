@@ -19,6 +19,7 @@ using namespace std;
 Aplicacion::Aplicacion(){
 	eleccion = 0;
 	terminarDia = false;
+	cargarColas();
 }
 
 // Menu principal
@@ -321,10 +322,10 @@ void Aplicacion::MenuServicioDiario(){
 
 // Metodos del Menu Servicio Diario
 
-//soliictar traslado
+//solicitar traslado
 void Aplicacion::solicitarTraslado(){
 	string auxSectorOrigen, auxSectorDestino;
-	int auxCedula, sectorOrigen, sectorDestino, selChofer = 0; 
+	int auxCedula, sectorOrigen, sectorDestino, selChofer = 0, resp; 
 	bool encontrado = false;
 	bool choferDisponible = false;
 	bool choferSelecionado = false;
@@ -360,7 +361,7 @@ void Aplicacion::solicitarTraslado(){
 			
 			while(true){
 				//Pidiendo hacia donde se dirige y comparando que sea una opc valida
-            	cout << endl << "\Ingresar número del sector de Destino: ";
+            	cout << endl << "\tIngresar número del sector de Destino: ";
             	cin >> sectorDestino;
             	if( (sectorOrigen < 0) || (sectorDestino > misSectores.cantSectores()) ){
             		cout << endl << "\tValor Invalido" << endl;
@@ -369,6 +370,7 @@ void Aplicacion::solicitarTraslado(){
 					break;
 				}
 			}
+			
 			//guardando origen y destino
 			auxSectorOrigen = misSectores.darSector(sectorOrigen - 1);
 			auxSectorDestino = misSectores.darSector(sectorDestino - 1);
@@ -377,6 +379,7 @@ void Aplicacion::solicitarTraslado(){
 			
 			system("PAUSE");
 			system("cls");
+			
 			//Buscando choferes que se encuentren en el sector origen seleccionado
 			cout << "\tBuscando Choferes en el Mismo Sector" << endl << endl;
 			
@@ -395,6 +398,15 @@ void Aplicacion::solicitarTraslado(){
 			//En caso que no se encuentre un chofer en el sector origen se muestra este mensaje
 			if(!choferDisponible){
 				cout << "\tNo hay Ningun Chofer Disponible en su Zona Intente Mas Tarde" << endl;
+				
+				//CONSULTA PARA TOMAR LA COLA
+				cout <<"\tDesea entrar en la cola de espera? \n\t1)Si\n\t2)No\n"<<endl;
+				cin >>resp;
+				
+				if(resp==1){
+					agregarUsuarioCola(sectorOrigen,i);
+				}
+
 			}
 			else{
 				// si se encuentran choferes se muestra una lista con las opc y se pide seleccionar uno
@@ -487,3 +499,40 @@ void Aplicacion::FinalizarDia(){
 	//generando el reporte
 	generarReporte();
 }
+
+// Metodos para las Colas
+void Aplicacion::cargarColas(){
+	int i;
+	ColaSector auxCola;
+	Usuario auxUsuario;
+	
+	for(i = 0; i < misSectores.cantSectores(); i++){
+		misColasSectores.push_back(ColaSector());
+	}
+	
+	/*auxCola = misColasSectores[0];
+	auxCola.agregar(misUsuarios.darUsuario(0));
+	
+	auxUsuario = auxCola.obtener();*/
+	
+	//cout << auxUsuario.getNombre() << endl;
+}
+void Aplicacion::agregarUsuarioCola(int origen, int posUser){
+	
+	ColaSector auxCola;
+	Usuario auxUsuario;
+	
+	auxUsuario = misUsuarios.darUsuario(posUser); //se obtiene el usuario
+	//Ajuste que se queria hacer para no dar servicio a alguien que ya estaba en una cola, no se pudo 
+	//if(auxUsuario.getEspera()==false){
+		
+		auxCola = misColasSectores[origen];//se saca la cola del vector de cola
+    	auxCola.agregar(auxUsuario);//se guarda el usuario en la cola
+    	misColasSectores[origen] = auxCola;//se vuelve a guardar la cola ajustada con el nuevo usuario en espera
+    	cout<<"\n\tSe ha agregado a "<<auxUsuario.getNombre()<<" a la cola"<<endl;
+    	fflush(stdin);
+	//}
+}
+
+
+

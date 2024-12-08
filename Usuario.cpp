@@ -15,7 +15,7 @@ Usuario::Usuario() : Persona(){
 }
 
 Usuario::Usuario(string nombre, string apellido, int edad, int cedula) : Persona(nombre, apellido, edad, cedula){
-	
+	//this->espera=false;
 }
 
 // Metodos
@@ -166,3 +166,17 @@ void Usuario::generarReporte(ofstream& reporte){
     }
 }
 
+Usuario Usuario::darUsuario(int pos){
+	return usuarios[pos];
+}
+//Ajuste que se queria hacer para no dar servicio a alguien que ya estaba en una cola, no se pudo 
+/*bool Usuario::getEspera(){
+	return this->espera;
+}
+void Usuario::cambioEstado(){
+	if(this->espera){
+		this->espera = false;
+	}else{
+		this->espera = true;
+	}
+}*/

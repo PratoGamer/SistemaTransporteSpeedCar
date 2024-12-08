@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o Aplicacion.o Persona.o Chofer.o Sector.o Usuario.o
-LINKOBJ  = main.o Aplicacion.o Persona.o Chofer.o Sector.o Usuario.o
+OBJ      = Aplicacion.o Persona.o Chofer.o Sector.o Usuario.o ColaSector.o main.o
+LINKOBJ  = Aplicacion.o Persona.o Chofer.o Sector.o Usuario.o ColaSector.o main.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -24,9 +24,6 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-main.o: main.cpp
-	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
-
 Aplicacion.o: Aplicacion.cpp
 	$(CPP) -c Aplicacion.cpp -o Aplicacion.o $(CXXFLAGS)
 
@@ -41,3 +38,9 @@ Sector.o: Sector.cpp
 
 Usuario.o: Usuario.cpp
 	$(CPP) -c Usuario.cpp -o Usuario.o $(CXXFLAGS)
+
+ColaSector.o: ColaSector.cpp
+	$(CPP) -c ColaSector.cpp -o ColaSector.o $(CXXFLAGS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
