@@ -8,6 +8,7 @@
 #include "Usuario.h"
 #include "Sector.h"
 #include "ColaSector.h"
+#include "ListaSector.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ class Aplicacion{
 		Usuario misUsuarios;
 		Chofer misChoferes;
 		vector<ColaSector> misColasSectores;
+		vector<ListaSector> misListasSectores;
+		int auxNuevoSector;
 		
 	public:
 		// Constructor
@@ -55,6 +58,10 @@ class Aplicacion{
 		// Metodos para las Colas
 		void cargarColas();
 		void agregarUsuarioCola(int origen, int posUser);
+		void obtenerCola(int posicion);
+		
+		// Metodos para las Listas
+		void cargarListas();
 };
 
 #endif

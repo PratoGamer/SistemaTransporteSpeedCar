@@ -1,10 +1,9 @@
 #include "ColaSector.h"
 
+#include <iostream>
 #include <string>
 #include <vector>
 #include <queue>
-#include <fstream>
-#include <iostream>
 
 using namespace std;
 
@@ -22,7 +21,7 @@ void ColaSector::eliminar(){
 }
 
 Usuario ColaSector::obtener(){
-	return cola.back();
+	return cola.front();
 }
 
 int ColaSector::cantElementos(){
@@ -32,18 +31,4 @@ int ColaSector::cantElementos(){
 bool ColaSector::vacia(){
 	return cola.empty();
 }
-
-/*void ColaSector::mostrarCola(){
-	int i;
-	Usuario aux;
-	cout<<"\n\tMostrando la cola\n"<<endl;
-	for(i=0;i<cola.size();i++){
-		aux=cola[i];
-		cout<<aux.getNombre()<<endl;
-	}
-	for(auto it = cola.begin(); it!=cola.end();++it){
-		aux = it;
-		cout<<aux.getNombre()<<endl;
-	}
-}*/
 

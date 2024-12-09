@@ -21,7 +21,6 @@ public:
     Usuario obtener();
     int cantElementos();
     bool vacia();
-    //void  mostrarCola();
     
 };
 

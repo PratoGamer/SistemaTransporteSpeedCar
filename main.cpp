@@ -8,9 +8,10 @@ using namespace std;
 	-> Luis Rojas CI: 28230278
 	-> Elianny Romero CI: 30646057
 	-> Gabriel Prato CI: 29907722
+	-> Osmar Porras CI: 31509694
 	
 	Entrega:
-	03-11-24
+	11-12-24
 */
 
 

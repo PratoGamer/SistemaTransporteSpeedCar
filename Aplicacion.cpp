@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <queue>
 
 #include "Persona.h"
 #include "Chofer.h"
@@ -20,6 +21,7 @@ Aplicacion::Aplicacion(){
 	eleccion = 0;
 	terminarDia = false;
 	cargarColas();
+	cargarListas();
 }
 
 // Menu principal
@@ -51,8 +53,7 @@ void Aplicacion::Menu(){
 		    	this->FinalizarDia();
 		    	terminarDia = true;
 		    	break;
-		    	
-		  	default:
+			default:
 		  		cout << "\tSeleccion no Valida" << endl;
 		  		cout << endl;
 		}
@@ -291,7 +292,8 @@ void Aplicacion::MenuServicioDiario(){
 		switch(this->eleccion) {
 		case 1:
 			// Submenu para el metodo para actualizar ubicacion
-			misChoferes.actualizarUbicacion();
+			auxNuevoSector = misChoferes.actualizarUbicacion();
+			obtenerCola(auxNuevoSector - 1);
 		   	break;
 		   	
 		case 2:
@@ -400,15 +402,14 @@ void Aplicacion::solicitarTraslado(){
 				cout << "\tNo hay Ningun Chofer Disponible en su Zona Intente Mas Tarde" << endl;
 				
 				//CONSULTA PARA TOMAR LA COLA
-				cout <<"\tDesea entrar en la cola de espera? \n\t1)Si\n\t2)No\n"<<endl;
+				cout << "\tDesea entrar en la cola de espera? \n\t1 -> Si\n\t2 -> No"<<endl;
+				cout << "\tIngrese su Seleccion: ";
 				cin >>resp;
 				
 				if(resp==1){
-					agregarUsuarioCola(sectorOrigen,i);
+					agregarUsuarioCola(sectorOrigen - 1,i);
 				}
-
-			}
-			else{
+			}else{
 				// si se encuentran choferes se muestra una lista con las opc y se pide seleccionar uno
 				while(true){
 					cout << endl << "\tSeleccione su Chofer: "; 
@@ -503,19 +504,11 @@ void Aplicacion::FinalizarDia(){
 // Metodos para las Colas
 void Aplicacion::cargarColas(){
 	int i;
-	ColaSector auxCola;
-	Usuario auxUsuario;
 	
 	for(i = 0; i < misSectores.cantSectores(); i++){
 		misColasSectores.push_back(ColaSector());
 	}
 	
-	/*auxCola = misColasSectores[0];
-	auxCola.agregar(misUsuarios.darUsuario(0));
-	
-	auxUsuario = auxCola.obtener();*/
-	
-	//cout << auxUsuario.getNombre() << endl;
 }
 void Aplicacion::agregarUsuarioCola(int origen, int posUser){
 	
@@ -533,6 +526,86 @@ void Aplicacion::agregarUsuarioCola(int origen, int posUser){
     	fflush(stdin);
 	//}
 }
+
+void Aplicacion::obtenerCola(int posicion){
+	ColaSector auxColas;
+	Usuario auxUsuario;
+	auxColas = misColasSectores[posicion];
+	
+	// Esto esta bien
+	
+	if(auxColas.vacia()){
+		return;
+	}else{
+		cout << "\tSe encontro una Solicitud de traslado, desea aceptarla: ";
+		cout << "\n\t1 -> Si";
+		cout << "\n\t2 -> No";
+		cout << endl;
+		cout << "\tIngrese su Seleccion: ";
+		cin >> this->eleccion;
+		if(eleccion == 1){
+			while(!auxColas.vacia()){
+				system("cls");
+				auxUsuario = auxColas.obtener();
+			
+				// Mostrar el Nombre del Usuario a Preguntar
+				cout << "\t*** USUARIO: " << auxUsuario.getNombre() << " ***" << endl << endl;
+				
+				// Seleccion
+				cout << endl << "\tAun desea el traslado?: ";
+				cout << endl << "\t1 -> Si";
+				cout << endl << "\t2 -> No";
+				cout << endl;
+				cout << "\tIngrese su Seleccion: ";
+				cin >> this->eleccion;
+				
+				if(eleccion == 1){
+					auxColas.eliminar();
+					system("cls");
+					misColasSectores[posicion] = auxColas;
+					return;
+				}else if(eleccion == 2){
+					cout << endl << "Su Solicitud ha Sido Eliminada" << endl;
+					auxColas.eliminar();
+					system("pause");
+				}
+			}
+			
+			cout << endl << "No Hay mas Usuarios en Cola" << endl;
+			system("pause");
+			
+		}
+	}
+	// Guardar los Cambios en el Sector que se Modifico
+	misColasSectores[posicion] = auxColas;
+	system("cls");
+}
+
+// Metodos para las Listas
+void Aplicacion::cargarListas(){
+	int i;
+	
+	for(i = 0; i < misSectores.cantSectores(); i++){
+		misListasSectores.push_back(ListaSector());
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

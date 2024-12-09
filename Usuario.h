@@ -12,9 +12,6 @@ using namespace std;
 class Usuario : public Persona{
 	private:
 		vector <Usuario> usuarios;
-		//Ajuste que se queria hacer para no dar servicio a alguien que ya estaba en una cola, no se pudo 
-		//bool espera;
-		
 	public:
 		// Constructores
 		Usuario();
@@ -34,12 +31,6 @@ class Usuario : public Persona{
     	int cantUsosUsuario(int i);
     	void generarReporte(ofstream& reporte);
     	Usuario darUsuario(int pos);
-    	
-    	//Ajuste que se queria hacer para no dar servicio a alguien que ya estaba en una cola, no se pudo 
-    	/*GET
-    	bool getEspera();
-    	//SET (o mas bien cambio de estado)
-    	void cambioEstado();*/
 };
 
 #endif
