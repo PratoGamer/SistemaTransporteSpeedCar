@@ -539,6 +539,8 @@ void Aplicacion::obtenerCola(int posicion){
 	Usuario auxUsuario;
 	auxColas = misColasSectores[posicion];
 	
+	// Esto esta bien
+	
 	if(auxColas.vacia()){
 		return;
 	}else{
@@ -567,6 +569,8 @@ void Aplicacion::obtenerCola(int posicion){
 				return;
 			}
 			auxUsuario = auxColas.obtener();
+			
+			// Mostrar el Nombre
 			cout << auxUsuario.getNombre() << endl;	
 		}else if(eleccion == 2){
 			return;

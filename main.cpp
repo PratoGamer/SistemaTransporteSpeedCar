@@ -19,7 +19,6 @@ int main(int argc, char** argv) {
 	
 	app->Menu();
 	
-	
 	cout << "\tFin de la Aplicacion" << endl;
 	system("PAUSE");
 	
