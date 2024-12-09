@@ -551,31 +551,41 @@ void Aplicacion::obtenerCola(int posicion){
 		cout << "\tIngrese su Seleccion: ";
 		cin >> this->eleccion;
 		if(eleccion == 1){
-			system("cls");
-			cout << "\t*** USUARIO ***" << endl << endl;
-			cout << endl << "\tAun desea el traslado?: ";
-			cout << endl << "\t1 -> Si";
-			cout << endl << "\t2 -> No";
-			cout << endl;
-			cout << "\tIngrese su Seleccion: ";
-			cin >> this->eleccion;
+			while(!auxColas.vacia()){
+				system("cls");
+				auxUsuario = auxColas.obtener();
 			
-			if(eleccion == 1){
+				// Mostrar el Nombre del Usuario a Preguntar
+				cout << "\t*** USUARIO: " << auxUsuario.getNombre() << " ***" << endl << endl;
 				
-			}else if(eleccion == 2){
-				//AQUI SE DEBE ELIMINAR LA SOLICITUD
-				cout << endl << "Su solicitud a sido eliminada" << endl;
-				system("pause");
-				return;
+				// Seleccion
+				cout << endl << "\tAun desea el traslado?: ";
+				cout << endl << "\t1 -> Si";
+				cout << endl << "\t2 -> No";
+				cout << endl;
+				cout << "\tIngrese su Seleccion: ";
+				cin >> this->eleccion;
+				
+				if(eleccion == 1){
+					auxColas.eliminar();
+					system("cls");
+					misColasSectores[posicion] = auxColas;
+					return;
+				}else if(eleccion == 2){
+					cout << endl << "Su Solicitud ha Sido Eliminada" << endl;
+					auxColas.eliminar();
+					system("pause");
+				}
 			}
-			auxUsuario = auxColas.obtener();
 			
-			// Mostrar el Nombre
-			cout << auxUsuario.getNombre() << endl;	
-		}else if(eleccion == 2){
-			return;
+			cout << endl << "No Hay mas Usuarios en Cola" << endl;
+			system("pause");
+			
 		}
 	}
+	// Guardar los Cambios en el Sector que se Modifico
+	misColasSectores[posicion] = auxColas;
+	system("cls");
 }
 
 

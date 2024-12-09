@@ -22,7 +22,7 @@ void ColaSector::eliminar(){
 }
 
 Usuario ColaSector::obtener(){
-	return cola.back();
+	return cola.front();
 }
 
 int ColaSector::cantElementos(){
