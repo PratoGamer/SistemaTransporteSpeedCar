@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <queue>
 
 #include "Persona.h"
 #include "Chofer.h"
@@ -51,8 +52,7 @@ void Aplicacion::Menu(){
 		    	this->FinalizarDia();
 		    	terminarDia = true;
 		    	break;
-		    	
-		  	default:
+			default:
 		  		cout << "\tSeleccion no Valida" << endl;
 		  		cout << endl;
 		}
@@ -291,7 +291,8 @@ void Aplicacion::MenuServicioDiario(){
 		switch(this->eleccion) {
 		case 1:
 			// Submenu para el metodo para actualizar ubicacion
-			misChoferes.actualizarUbicacion();
+			auxNuevoSector = misChoferes.actualizarUbicacion();
+			obtenerCola(auxNuevoSector - 1);
 		   	break;
 		   	
 		case 2:
@@ -325,7 +326,7 @@ void Aplicacion::MenuServicioDiario(){
 //solicitar traslado
 void Aplicacion::solicitarTraslado(){
 	string auxSectorOrigen, auxSectorDestino;
-	int auxCedula, sectorOrigen, sectorDestino, selChofer = 0; 
+	int auxCedula, sectorOrigen, sectorDestino, selChofer = 0, resp; 
 	bool encontrado = false;
 	bool choferDisponible = false;
 	bool choferSelecionado = false;
@@ -398,13 +399,16 @@ void Aplicacion::solicitarTraslado(){
 			//En caso que no se encuentre un chofer en el sector origen se muestra este mensaje
 			if(!choferDisponible){
 				cout << "\tNo hay Ningun Chofer Disponible en su Zona Intente Mas Tarde" << endl;
-				/*
 				
-				Creo que se implementa aqui lo de las colas.
+				//CONSULTA PARA TOMAR LA COLA
+				cout << "\tDesea entrar en la cola de espera? \n\t1 -> Si\n\t2 -> No"<<endl;
+				cout << "\tIngrese su Seleccion: ";
+				cin >>resp;
 				
-				*/
-			}
-			else{
+				if(resp==1){
+					agregarUsuarioCola(sectorOrigen - 1,i);
+				}
+			}else{
 				// si se encuentran choferes se muestra una lista con las opc y se pide seleccionar uno
 				while(true){
 					cout << endl << "\tSeleccione su Chofer: "; 
@@ -506,13 +510,68 @@ void Aplicacion::cargarColas(){
 		misColasSectores.push_back(ColaSector());
 	}
 	
-	auxCola = misColasSectores[0];
+	/*auxCola = misColasSectores[0];
 	auxCola.agregar(misUsuarios.darUsuario(0));
 	
-	auxUsuario = auxCola.obtener();
+	auxUsuario = auxCola.obtener();*/
 	
-	cout << auxUsuario.getNombre() << endl;
+	//cout << auxUsuario.getNombre() << endl;
+}
+void Aplicacion::agregarUsuarioCola(int origen, int posUser){
 	
+	ColaSector auxCola;
+	Usuario auxUsuario;
+	
+	auxUsuario = misUsuarios.darUsuario(posUser); //se obtiene el usuario
+	//Ajuste que se queria hacer para no dar servicio a alguien que ya estaba en una cola, no se pudo 
+	//if(auxUsuario.getEspera()==false){
+		
+		auxCola = misColasSectores[origen];//se saca la cola del vector de cola
+    	auxCola.agregar(auxUsuario);//se guarda el usuario en la cola
+    	misColasSectores[origen] = auxCola;//se vuelve a guardar la cola ajustada con el nuevo usuario en espera
+    	cout<<"\n\tSe ha agregado a "<<auxUsuario.getNombre()<<" a la cola"<<endl;
+    	fflush(stdin);
+	//}
+}
+
+void Aplicacion::obtenerCola(int posicion){
+	ColaSector auxColas;
+	Usuario auxUsuario;
+	auxColas = misColasSectores[posicion];
+	
+	if(auxColas.vacia()){
+		return;
+	}else{
+		cout << "\tSe encontro una Solicitud de traslado, desea aceptarla: ";
+		cout << "\n\t1 -> Si";
+		cout << "\n\t2 -> No";
+		cout << endl;
+		cout << "\tIngrese su Seleccion: ";
+		cin >> this->eleccion;
+		if(eleccion == 1){
+			system("cls");
+			cout << "\t*** USUARIO ***" << endl << endl;
+			cout << endl << "\tAun desea el traslado?: ";
+			cout << endl << "\t1 -> Si";
+			cout << endl << "\t2 -> No";
+			cout << endl;
+			cout << "\tIngrese su Seleccion: ";
+			cin >> this->eleccion;
+			
+			if(eleccion == 1){
+				
+			}else if(eleccion == 2){
+				//AQUI SE DEBE ELIMINAR LA SOLICITUD
+				cout << endl << "Su solicitud a sido eliminada" << endl;
+				system("pause");
+				return;
+			}
+			auxUsuario = auxColas.obtener();
+			cout << auxUsuario.getNombre() << endl;	
+		}else if(eleccion == 2){
+			return;
+		}
+	}
 }
 
 

@@ -1,4 +1,5 @@
 #include "Chofer.h"
+#include "Aplicacion.h"
 #include <string>
 #include <vector>
 #include <fstream>
@@ -123,11 +124,11 @@ void Chofer::imprimirChoferes(){
 }
 
 //Actualizar la ubicacion
-void Chofer::actualizarUbicacion(){
+int Chofer::actualizarUbicacion() {
     string auxPlaca, nuevoSector;
     int valorSector;
     bool encontrado = false;
-
+    
     // Solicitar datos del chofer
     cout << "\t *** Actualizar Ubicacion del Vehiculo ***" << endl << endl;
     
@@ -142,21 +143,21 @@ void Chofer::actualizarUbicacion(){
             // Mostrando los sectores disponibles
             misSectores.imprimirSectores();
             
-			// Solicitar el sector nuevo
+            // Solicitar el sector nuevo
             while(true){
-            	cout << endl << "\t Ingrese el Nuevo Sector: ";
-            	cin >> valorSector;
-            	if( (valorSector < 0) || (valorSector > misSectores.cantSectores()) ){
-            		cout << endl << "\t Valor Invalido" << endl;
-				}
-				else{
-					break;
-				}
-			}
-			
-            nuevoSector = misSectores.darSector( (valorSector - 1) );
+                cout << endl << "\t Ingrese el Nuevo Sector: ";
+                cin >> valorSector;
+                if( (valorSector < 0) || (valorSector > misSectores.cantSectores()) ){
+                    cout << endl << "\t Valor Invalido" << endl;
+                }
+                else{
+                    break;
+                }
+            }
+            
+            nuevoSector = misSectores.darSector((valorSector - 1));
 
-			cout << endl << "\t Sector Seleccionado: " << nuevoSector << endl;
+            cout << endl << "\t Sector Seleccionado: " << nuevoSector << endl;
 
             choferes[i].setSector(nuevoSector);
 
@@ -167,10 +168,16 @@ void Chofer::actualizarUbicacion(){
     }
     if (!encontrado) {
         cout << endl << "\t No se Encontro Ningun Chofer con la Placa: " << auxPlaca << endl;
+        // Si no se encuentra el chofer, podemos retornar un valor especial, por ejemplo, -1.
+        return -1;
     }
     system("PAUSE");
     system("cls");
+    
+    // Retornar el valor del sector seleccionado
+    return valorSector;
 }
+
 
 // Agregar nuevo chofer
 void Chofer::agregarChofer() {

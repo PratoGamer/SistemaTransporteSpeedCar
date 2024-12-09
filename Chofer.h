@@ -44,7 +44,7 @@ public:
     // Metodos
     void cargarChoferes();
     void imprimirChoferes();
-    void actualizarUbicacion();
+    int actualizarUbicacion();
     void agregarChofer();
     void modificarChofer(int cedula);
 	void eliminarChofer(int cedula);

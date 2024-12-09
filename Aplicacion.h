@@ -20,6 +20,7 @@ class Aplicacion{
 		Usuario misUsuarios;
 		Chofer misChoferes;
 		vector<ColaSector> misColasSectores;
+		int auxNuevoSector;
 		
 	public:
 		// Constructor
@@ -54,6 +55,8 @@ class Aplicacion{
 		
 		// Metodos para las Colas
 		void cargarColas();
+		void agregarUsuarioCola(int origen, int posUser);
+		void obtenerCola(int posicion);
 };
 
 #endif
