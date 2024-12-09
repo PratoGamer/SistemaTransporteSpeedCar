@@ -21,6 +21,7 @@ Aplicacion::Aplicacion(){
 	eleccion = 0;
 	terminarDia = false;
 	cargarColas();
+	cargarListas();
 }
 
 // Menu principal
@@ -503,19 +504,11 @@ void Aplicacion::FinalizarDia(){
 // Metodos para las Colas
 void Aplicacion::cargarColas(){
 	int i;
-	ColaSector auxCola;
-	Usuario auxUsuario;
 	
 	for(i = 0; i < misSectores.cantSectores(); i++){
 		misColasSectores.push_back(ColaSector());
 	}
 	
-	/*auxCola = misColasSectores[0];
-	auxCola.agregar(misUsuarios.darUsuario(0));
-	
-	auxUsuario = auxCola.obtener();*/
-	
-	//cout << auxUsuario.getNombre() << endl;
 }
 void Aplicacion::agregarUsuarioCola(int origen, int posUser){
 	
@@ -587,6 +580,32 @@ void Aplicacion::obtenerCola(int posicion){
 	misColasSectores[posicion] = auxColas;
 	system("cls");
 }
+
+// Metodos para las Listas
+void Aplicacion::cargarListas(){
+	int i;
+	
+	for(i = 0; i < misSectores.cantSectores(); i++){
+		misListasSectores.push_back(ListaSector());
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
