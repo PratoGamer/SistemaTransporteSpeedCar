@@ -617,34 +617,34 @@ void Aplicacion::agregarChoferesLista(){
 		// Ordenar el Vector Auxiliar segun el ahno del vehiculo
 		// Bubble Sort Improved
 		
-		bandera = true;
+		cout << auxChoferes.size() << endl;
 		
-		for(j = 0; (j < auxChoferes.size()) && (bandera == true); j++){
-			
-			bandera = false;
-			
-			for(k = 0; k < (auxChoferes.size() - j); k++){
+		if(auxChoferes.size() > 1){
+			bandera = true;
+		
+			for(j = 0; (j < auxChoferes.size()) && (bandera == true); j++){
 				
-				izq = auxChoferes.at(k);
+				bandera = false;
 				
-				// Esta Fallando en esta parte Dice: Fuera de rango
-				/*
-				der = auxChoferes.at(k+1);
-				
-				if(izq.getAnho() > der.getAnho()){
-					bandera = true;
-					aux = auxChoferes[k];
-					auxChoferes[k] = auxChoferes[k+1];
-					auxChoferes[k+1] = aux;
+				for(k = 0; k < (auxChoferes.size() - j); k++){
+					
+					if(auxChoferes[k].getAnho() > auxChoferes[k+1].getAnho()){
+						bandera = true;
+						aux = auxChoferes[k];
+						auxChoferes[k] = auxChoferes[k+1];
+						auxChoferes[k+1] = aux;
+					}
 				}
-				*/
 			}
 		}
 		
-		// Agregar el auxliar a la Lista Segun el Sector
-		for(j = 0; j < auxChoferes.size(); j++){
-			misListasSectores[i].agregar(auxChoferes[j]);
+		if(auxChoferes.size() > 0){
+			// Agregar el auxliar a la Lista Segun el Sector
+			for(j = 0; j < auxChoferes.size(); j++){
+				misListasSectores[i].agregar(auxChoferes[j]);
+			}
 		}
+		
 	}
 	
 }
@@ -658,10 +658,15 @@ void Aplicacion::mostrarChoferesLista(int sector){
 	
 	cout << "\t El Sector es: " << misSectores.darSector(sector) << endl;
 	
-	for(i = 0; i < auxLista.cantElementos(); i++){
-		auxChofer = auxLista.obtener(i);
+	if(auxLista.vacia()){
+		cout << "\t No hay Choferes en esta zona" << endl;
+	}else{
 		
-		cout << "\t " << (i+1) << ". " << auxChofer.getNombre() << " / " << auxChofer.getSector() << " / " << auxChofer.getAnho() << endl;
+		for(i = 0; i < auxLista.cantElementos(); i++){
+			auxChofer = auxLista.obtener(i);
+			
+			cout << "\t " << (i+1) << ". " << auxChofer.getNombre() << " / " << auxChofer.getSector() << " / " << auxChofer.getAnho() << endl;
+		}
 	}
 	
 }

@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 	Aplicacion* app = new Aplicacion();
 	
 	
-	app->mostrarChoferesLista(4);
+	app->mostrarChoferesLista(7);
 	
 	/*
 	app->Menu();
