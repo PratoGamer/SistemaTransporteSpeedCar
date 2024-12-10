@@ -280,6 +280,8 @@ void Aplicacion::opciones(){
 // Menu de Servicio Diario
 void Aplicacion::MenuServicioDiario(){
 	bool salir = false;
+	int valorsector, valorId;
+	string auxSector, auxId, auxNuevoSector;
 	//Mostrando opciones del menu de Servicio Diario
 	while(true){
 		cout << "\t *** Menu de Servicio Diario ***" << endl << endl;
@@ -294,11 +296,25 @@ void Aplicacion::MenuServicioDiario(){
 		cin.get();
 		system("cls");
 		switch(this->eleccion) {
-		case 1:
+		case 1:{
 			// Submenu para el metodo para actualizar ubicacion
 			auxNuevoSector = misChoferes.actualizarUbicacion();
-			obtenerCola(auxNuevoSector - 1);
+			
+			if(auxNuevoSector != "no"){
+				//Separando los valores retornados
+				stringstream input_stringstream(auxNuevoSector);
+				
+				getline(input_stringstream, auxSector, ',');
+	    		getline(input_stringstream, auxId, ',');
+				
+				valorsector = atoi(auxSector.c_str());
+				valorId = atoi(auxId.c_str());
+				
+				obtenerCola(valorsector - 1, valorId);
+			}
+			
 		   	break;
+		}
 		   	
 		case 2:
 			// Submenu para el metodo para solicitar traslado
@@ -458,12 +474,28 @@ void Aplicacion::solicitarTraslado(){
 
 //finalizar traslado
 void Aplicacion::finalizarTraslado() {
+	string auxFinalizar, auxSector, auxId;
+	int auxIdSector, valorId;
 	cout << "\t *** Finalizar Traslado ***" << endl << endl;
 	string placa;
 	cout << "\tIngrese la placa: ";
 	getline(cin, placa);
+	
 	//usando metodo de la clase chofer para finalizar el traslado
-	misChoferes.finalizarTrasladoChofer(placa);
+	auxFinalizar = misChoferes.finalizarTrasladoChofer(placa);
+	
+	stringstream input_stringstream(auxFinalizar);
+				
+	getline(input_stringstream, auxSector, ',');
+	getline(input_stringstream, auxId, ',');
+	
+	valorId = atoi(auxId.c_str());
+	
+	auxIdSector = misSectores.buscarSectorPorNombre(auxSector);
+	
+	if(auxIdSector != -1){
+		obtenerCola(auxIdSector, valorId);	
+	}
 }
 
 //Metodo Crear reporte
@@ -532,7 +564,7 @@ void Aplicacion::agregarUsuarioCola(int origen, int posUser){
 	//}
 }
 
-void Aplicacion::obtenerCola(int posicion){
+void Aplicacion::obtenerCola(int posicion, int idChofer){
 	ColaSector auxColas;
 	Usuario auxUsuario;
 	auxColas = misColasSectores[posicion];
@@ -554,7 +586,7 @@ void Aplicacion::obtenerCola(int posicion){
 				auxUsuario = auxColas.obtener();
 			
 				// Mostrar el Nombre del Usuario a Preguntar
-				cout << "\t*** USUARIO: " << auxUsuario.getNombre() << " ***" << endl << endl;
+				cout << "\t*** USUARIO: " << auxUsuario.getNombre() << " ***" << endl;
 				
 				// Seleccion
 				cout << endl << "\tAun desea el traslado?: ";
@@ -565,6 +597,9 @@ void Aplicacion::obtenerCola(int posicion){
 				cin >> this->eleccion;
 				
 				if(eleccion == 1){
+					//misChoferes.actualizarSector(idChofer, misSectores.darSector(auxUsuario.getSectorDestino()));
+					//misChoferes.noDisponible(idChofer);
+					misChoferes.noDisponible(idChofer);
 					auxColas.eliminar();
 					system("cls");
 					misColasSectores[posicion] = auxColas;
@@ -585,6 +620,7 @@ void Aplicacion::obtenerCola(int posicion){
 	misColasSectores[posicion] = auxColas;
 	system("cls");
 }
+
 
 // Metodos para las Listas
 void Aplicacion::cargarListas(){

@@ -124,10 +124,13 @@ void Chofer::imprimirChoferes(){
 }
 
 //Actualizar la ubicacion
-int Chofer::actualizarUbicacion() {
+string Chofer::actualizarUbicacion() {
     string auxPlaca, nuevoSector;
     int valorSector;
     bool encontrado = false;
+    
+    string aux;
+    int auxIdChofer;
     
     // Solicitar datos del chofer
     cout << "\t *** Actualizar Ubicacion del Vehiculo ***" << endl << endl;
@@ -139,7 +142,7 @@ int Chofer::actualizarUbicacion() {
         if (choferes[i].getPlaca() == auxPlaca) {
             // Mostrar el sector actual
             cout << endl << "\t Ubicacion Actual: " << choferes[i].getSector() << endl << endl;
-
+			auxIdChofer = i;
             // Mostrando los sectores disponibles
             misSectores.imprimirSectores();
             
@@ -168,15 +171,21 @@ int Chofer::actualizarUbicacion() {
     }
     if (!encontrado) {
         cout << endl << "\t No se Encontro Ningun Chofer con la Placa: " << auxPlaca << endl;
-        // Si no se encuentra el chofer, podemos retornar un valor especial, por ejemplo, -1.
-        return -1;
+        system("pause");
+        system("cls");
+        return "no";
     }
     system("PAUSE");
     system("cls");
     
-    // Retornar el valor del sector seleccionado
-    return valorSector;
+    ostringstream oss;
+    oss << valorSector << "," << auxIdChofer;
+
+    aux = oss.str();
+    
+    return aux;
 }
+
 
 
 // Agregar nuevo chofer
@@ -314,7 +323,8 @@ void Chofer::actualizarSector(int i, string destino){
 	choferes[i].sector = destino;
 }
 // metodo para finalozar el traslado y pasar al chofer a disponible
-void Chofer::finalizarTrasladoChofer(string placa) {
+string  Chofer::finalizarTrasladoChofer(string placa) {
+	string aux;
 	for(int i = 0; i < choferes.size(); ++i) {
         if(choferes[i].placa == placa && !choferes[i].disponible) {
         	system("cls");
@@ -332,7 +342,13 @@ void Chofer::finalizarTrasladoChofer(string placa) {
         	system("cls");
         	// pasando el chofer a disponible
         	choferes[i].disponible = true;
-            return;
+        	
+        	ostringstream oss;
+    		oss << choferes[i].sector << "," << i;
+
+    		aux = oss.str();
+        	
+            return aux;
         }
     }
     //mostrando mensaje en caso que no se a realizado un traslado
@@ -340,6 +356,7 @@ void Chofer::finalizarTrasladoChofer(string placa) {
     system("pause");
     system("cls");
 }
+
 
 // Mostrar Todos los Datos del Chofer
 void Chofer::mostrarTodo(int j){

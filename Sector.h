@@ -21,7 +21,7 @@ public:
     void eliminarSector(int posicion);
     void modificarSector(int posicion);
     void guardarSectores();
-    
+    int buscarSectorPorNombre(string nombreSector);
     
 };
 

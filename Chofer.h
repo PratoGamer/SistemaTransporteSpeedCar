@@ -44,7 +44,7 @@ public:
     // Metodos
     void cargarChoferes();
     void imprimirChoferes();
-    int actualizarUbicacion();
+    string actualizarUbicacion();
     void agregarChofer();
     void modificarChofer(int cedula);
 	void eliminarChofer(int cedula);
@@ -58,7 +58,7 @@ public:
     bool disponibilidad(int i);
     void noDisponible(int i);
     void actualizarSector(int i, string destino);
-    void finalizarTrasladoChofer(string placa);
+    string finalizarTrasladoChofer(string placa);
     
     // Mostrar el Chofer Completo
     void mostrarTodo(int j);

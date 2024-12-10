@@ -58,7 +58,7 @@ class Aplicacion{
 		// Metodos para las Colas
 		void cargarColas();
 		void agregarUsuarioCola(int origen, int posUser);
-		void obtenerCola(int posicion);
+		void obtenerCola(int posicion, int idChofer);
 		
 		// Metodos para las Listas
 		void cargarListas();
