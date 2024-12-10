@@ -32,3 +32,12 @@ bool ListaSector::vacia(){
 	return lista.empty();
 }
 
+bool ListaSector::estaInicializada() {
+    // Verifica si la lista tiene elementos o si está preparada para almacenar datos.
+    return !lista.empty();
+}
+
+void ListaSector::inicializar() {
+    // Inicializa la lista de choferes, dejando el contenedor preparado para almacenar datos.
+    lista.clear();
+}

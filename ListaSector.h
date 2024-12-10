@@ -21,7 +21,8 @@ public:
     Chofer obtener(int posicion);
     int cantElementos();
     bool vacia();
-    
+    bool estaInicializada();
+    void inicializar();
 };
 
 #endif

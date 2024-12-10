@@ -371,7 +371,7 @@ void Aplicacion::solicitarTraslado(){
 			
 			while(true){
 				//Pidiendo donde se encuentra y comparando que sea una opc valida
-            	cout << endl << "\tIngresar número del sector de origen: ";
+            	cout << endl << "\tIngresar numero del sector de origen: ";
             	cin >> sectorOrigen;
             	if( (sectorOrigen < 0) || (sectorOrigen > misSectores.cantSectores()) ){
             		cout << endl << "\tValor Invalido" << endl;
@@ -383,7 +383,7 @@ void Aplicacion::solicitarTraslado(){
 			
 			while(true){
 				//Pidiendo hacia donde se dirige y comparando que sea una opc valida
-            	cout << endl << "\tIngresar número del sector de Destino: ";
+            	cout << endl << "\tIngresar numero del sector de Destino: ";
             	cin >> sectorDestino;
             	if( (sectorOrigen < 0) || (sectorDestino > misSectores.cantSectores()) ){
             		cout << endl << "\tValor Invalido" << endl;
@@ -632,57 +632,58 @@ void Aplicacion::cargarListas(){
 	
 }
 
-void Aplicacion::agregarChoferesLista(){
-	int i, j, k;
-	vector<Chofer> auxChoferes;
-	bool bandera;
-	Chofer aux, izq, der;
-	
-	
-	for(i = 0; i < misSectores.cantSectores(); i++){
+void Aplicacion::agregarChoferesLista() {
+    int i, j, k;
+    vector<Chofer> auxChoferes;
+
+    // Verificar si los sectores y los choferes están inicializados
+    if (misSectores.cantSectores() == 0 || misChoferes.cantChoferes() == 0) {
+        cout << "Error: Sectores o choferes no inicializados correctamente." << std::endl;
+        return;
+    }
+
+    for (i = 0; i < misSectores.cantSectores(); i++) {
+        auxChoferes.clear();
+
+        // Obtener el sector actual
+        string sectorActual = misSectores.darSector(i);
+
+        // Filtrar choferes que pertenecen al sector actual
+        for (j = 0; j < misChoferes.cantChoferes(); j++) {
+            string sectorChofer = misChoferes.darSector(j);
+
+            // Comparar sectores (asegurando igualdad robusta)
+            if (sectorActual == sectorChofer) {
+                auxChoferes.push_back(misChoferes.darChofer(j));
+            }
+        }
+
+        // Ordenar los choferes del sector por año del vehículo usando Bubble Sort
+        if (auxChoferes.size() > 1) {
+            for (j = 0; j < auxChoferes.size() - 1; j++) {
+                for (k = 0; k < auxChoferes.size() - j - 1; k++) {
+                    if (auxChoferes[k].getAnho() > auxChoferes[k + 1].getAnho()) {
+                        Chofer temp = auxChoferes[k];
+                        auxChoferes[k] = auxChoferes[k + 1];
+                        auxChoferes[k + 1] = temp;
+                    }
+                }
+            }
+        }
 		
-		auxChoferes.clear();
-		
-		for(j = 0; j < misChoferes.cantChoferes(); j++){
-			// Si el Sector es el mismo se guarda en el Auxiliar de Choferes
-			if(misSectores.darSector(i).compare(misChoferes.darSector(j)) == 0){
-				auxChoferes.push_back(misChoferes.darChofer(j));
-			}
-		}
-		
-		// Ordenar el Vector Auxiliar segun el ahno del vehiculo
-		// Bubble Sort Improved
-		
-		cout << auxChoferes.size() << endl;
-		
-		if(auxChoferes.size() > 1){
-			bandera = true;
-		
-			for(j = 0; (j < auxChoferes.size()) && (bandera == true); j++){
-				
-				bandera = false;
-				
-				for(k = 0; k < (auxChoferes.size() - j); k++){
-					
-					if(auxChoferes[k].getAnho() > auxChoferes[k+1].getAnho()){
-						bandera = true;
-						aux = auxChoferes[k];
-						auxChoferes[k] = auxChoferes[k+1];
-						auxChoferes[k+1] = aux;
-					}
-				}
-			}
-		}
-		
-		if(auxChoferes.size() > 0){
-			// Agregar el auxliar a la Lista Segun el Sector
-			for(j = 0; j < auxChoferes.size(); j++){
-				misListasSectores[i].agregar(auxChoferes[j]);
-			}
-		}
-		
-	}
-	
+        // Verificar si hay choferes para agregar a la lista de sectores
+        if (!auxChoferes.empty()) {
+            // Asegurarse de que la lista del sector esté inicializada
+            if (!misListasSectores[i].estaInicializada()) {
+                misListasSectores[i].inicializar();
+            }
+
+            // Agregar los choferes ordenados a la lista correspondiente
+            for (j = 0; j < auxChoferes.size(); j++) {
+                misListasSectores[i].agregar(auxChoferes[j]);
+            }
+        }
+    }
 }
 
 void Aplicacion::mostrarChoferesLista(int sector){

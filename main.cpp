@@ -19,11 +19,11 @@ int main(int argc, char** argv) {
 	Aplicacion* app = new Aplicacion();
 	
 	
-	app->mostrarChoferesLista(7);
+	app->mostrarChoferesLista(19);
 	
-	/*
-	app->Menu();
-	*/
+	
+	//app->Menu();
+	
 	
 	cout << "\tFin de la Aplicacion" << endl;
 	system("PAUSE");
