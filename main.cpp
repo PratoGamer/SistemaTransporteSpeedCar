@@ -18,7 +18,12 @@ using namespace std;
 int main(int argc, char** argv) {
 	Aplicacion* app = new Aplicacion();
 	
+	
+	app->mostrarChoferesLista(4);
+	
+	/*
 	app->Menu();
+	*/
 	
 	cout << "\tFin de la Aplicacion" << endl;
 	system("PAUSE");

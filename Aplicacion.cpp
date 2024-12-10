@@ -10,6 +10,9 @@
 #include "Persona.h"
 #include "Chofer.h"
 #include "Usuario.h"
+#include "Sector.h"
+#include "ColaSector.h"
+#include "ListaSector.h"
 
 #include "Aplicacion.h"
 #include "Sector.h"
@@ -22,6 +25,7 @@ Aplicacion::Aplicacion(){
 	terminarDia = false;
 	cargarColas();
 	cargarListas();
+	agregarChoferesLista();
 }
 
 // Menu principal
@@ -510,6 +514,7 @@ void Aplicacion::cargarColas(){
 	}
 	
 }
+
 void Aplicacion::agregarUsuarioCola(int origen, int posUser){
 	
 	ColaSector auxCola;
@@ -591,9 +596,75 @@ void Aplicacion::cargarListas(){
 	
 }
 
+void Aplicacion::agregarChoferesLista(){
+	int i, j, k;
+	vector<Chofer> auxChoferes;
+	bool bandera;
+	Chofer aux, izq, der;
+	
+	
+	for(i = 0; i < misSectores.cantSectores(); i++){
+		
+		auxChoferes.clear();
+		
+		for(j = 0; j < misChoferes.cantChoferes(); j++){
+			// Si el Sector es el mismo se guarda en el Auxiliar de Choferes
+			if(misSectores.darSector(i).compare(misChoferes.darSector(j)) == 0){
+				auxChoferes.push_back(misChoferes.darChofer(j));
+			}
+		}
+		
+		// Ordenar el Vector Auxiliar segun el ahno del vehiculo
+		// Bubble Sort Improved
+		
+		bandera = true;
+		
+		for(j = 0; (j < auxChoferes.size()) && (bandera == true); j++){
+			
+			bandera = false;
+			
+			for(k = 0; k < (auxChoferes.size() - j); k++){
+				
+				izq = auxChoferes.at(k);
+				
+				// Esta Fallando en esta parte Dice: Fuera de rango
+				/*
+				der = auxChoferes.at(k+1);
+				
+				if(izq.getAnho() > der.getAnho()){
+					bandera = true;
+					aux = auxChoferes[k];
+					auxChoferes[k] = auxChoferes[k+1];
+					auxChoferes[k+1] = aux;
+				}
+				*/
+			}
+		}
+		
+		// Agregar el auxliar a la Lista Segun el Sector
+		for(j = 0; j < auxChoferes.size(); j++){
+			misListasSectores[i].agregar(auxChoferes[j]);
+		}
+	}
+	
+}
 
-
-
+void Aplicacion::mostrarChoferesLista(int sector){
+	int i;
+	ListaSector auxLista;
+	Chofer auxChofer;
+	
+	auxLista = misListasSectores[sector];
+	
+	cout << "\t El Sector es: " << misSectores.darSector(sector) << endl;
+	
+	for(i = 0; i < auxLista.cantElementos(); i++){
+		auxChofer = auxLista.obtener(i);
+		
+		cout << "\t " << (i+1) << ". " << auxChofer.getNombre() << " / " << auxChofer.getSector() << " / " << auxChofer.getAnho() << endl;
+	}
+	
+}
 
 
 

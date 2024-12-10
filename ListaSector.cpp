@@ -12,21 +12,17 @@ ListaSector::ListaSector(){
 	
 }
 
-void ListaSector::agregarFinal(Chofer user){
+void ListaSector::agregar(Chofer user){
 	lista.push_back(user);
 }
 
-/*
-void ListaSector::eliminar(Chofer user){
-	lista.remove(user);
+void ListaSector::eliminar(int posicion){
+	lista.erase(lista.begin() + posicion);
 }
-*/
 
-/*
 Chofer ListaSector::obtener(int posicion){
 	return lista[posicion];
 }
-*/
 
 int ListaSector::cantElementos(){
 	return lista.size();

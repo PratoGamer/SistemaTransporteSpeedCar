@@ -51,6 +51,7 @@ public:
     void guardarChoferes();
     int cantChoferes();
     string darSector(int j);
+    Chofer darChofer(int j);
     void imprimirChofer(int j);
     void sumarUso(int j);
     int cantUsosChofer(int j);
@@ -58,6 +59,10 @@ public:
     void noDisponible(int i);
     void actualizarSector(int i, string destino);
     void finalizarTrasladoChofer(string placa);
+    
+    // Mostrar el Chofer Completo
+    void mostrarTodo(int j);
+    
     // Metodo generarreporte
     void generarReporte(ofstream& reporte);
 };

@@ -284,6 +284,11 @@ int Chofer::cantChoferes(){
 string Chofer::darSector(int j){
 	return choferes[j].getSector();
 }
+// Dando el Chofer en la posicion
+Chofer Chofer::darChofer(int j){
+	return choferes[j];
+}
+
 // imprimiendo los choferes disponibles en el origen
 void Chofer::imprimirChofer(int j){
 	cout << "Nombre: " << choferes[j].getNombre() << " Marca: " << choferes[j].getMarca() << " Modelo: " << choferes[j].getModelo() << " Placa: " << choferes[j].getPlaca();
@@ -335,6 +340,20 @@ void Chofer::finalizarTrasladoChofer(string placa) {
     system("pause");
     system("cls");
 }
+
+// Mostrar Todos los Datos del Chofer
+void Chofer::mostrarTodo(int j){
+	cout << "Nombre: " << choferes[j].getNombre() 
+		 << " Apellido: " << choferes[j].getApellido()
+		 << " Marca: " << choferes[j].getMarca() 
+		 << " Modelo: " << choferes[j].getModelo() 
+		 << " Placa: " << choferes[j].getPlaca()
+		 << " Ahno: " << choferes[j].getAnho()
+		 << " Sector: " << choferes[j].getSector()
+		 << endl;
+}
+
+
 // Generando el reporte de chofer
 void Chofer::generarReporte(ofstream& reporte){
     for (int i = 0; i < choferes.size(); ++i) {

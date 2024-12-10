@@ -62,6 +62,8 @@ class Aplicacion{
 		
 		// Metodos para las Listas
 		void cargarListas();
+		void agregarChoferesLista();
+		void mostrarChoferesLista(int sector);
 };
 
 #endif
