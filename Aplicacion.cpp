@@ -407,6 +407,13 @@ void Aplicacion::solicitarTraslado(){
 			
 			for(int j = 0; j < misChoferes.cantChoferes(); j++){
 				if( auxSectorOrigen.compare(misChoferes.darSector(j))==0 && misChoferes.disponibilidad(j)){
+					/*cout << "\t " << (j+1) << ". ";
+					//Imprimiendo los choferes que se encuentran en el sector origen
+					misChoferes.imprimirChofer(j);
+					cout << endl;
+					
+					valorChofer.push_back( (j+1) );*/
+					
 					choferDisponible = true;
 				}
 			}
@@ -434,16 +441,18 @@ void Aplicacion::solicitarTraslado(){
 					ListaSector auxLista;
 					Chofer auxChofer;
 					
-					auxLista = misListasSectores[sectorOrigen-1];
+					auxLista = misListasSectores[sectorOrigen - 1];
 					auxLista.eliminar(selChofer);
+					auxChofer = auxLista.obtener(selChofer - 1);
 					
-					auxChofer = auxLista.obtener( selChofer - 1 );
+					cout << auxChofer.getNombre();
 					
+					//auxLista.eliminar(selChofer);
 					for(int j = 0; j < misChoferes.cantChoferes(); j++){
-						if(auxChofer.getCedula()  == misChoferes.darCedulaChofer(j) ){
+						if( auxChofer.getCedula() == misChoferes.darCedulaChofer(j) ){
 							choferSelecionado = true;
 							//Metodo para actualizar el sector del chofer al sector de destino
-							misChoferes.actualizarSector(j - 1, auxSectorDestino);
+							misChoferes.actualizarSector(j, auxSectorDestino);
 							misChoferes.noDisponible(j - 1);
 							break;
 						}
@@ -458,6 +467,7 @@ void Aplicacion::solicitarTraslado(){
 						misChoferes.sumarUso(selChofer);
 						break;
 					}
+					
 				}
 			}
 			// sumando la solicitud del usuario para luego mostrar en el reporte
@@ -471,9 +481,11 @@ void Aplicacion::solicitarTraslado(){
 	if(!encontrado){
 		cout << endl << "\tNo se Encontro Ningun Usuario con la Cedula: " << auxCedula << endl;
 	}
+	
 	misListasSectores.clear();
 	cargarListas();
 	agregarChoferesLista();
+	
 	system("pause");
 	system("cls");
 }
@@ -501,12 +513,6 @@ void Aplicacion::finalizarTraslado() {
 	
 	if(auxIdSector != -1){
 		obtenerCola(auxIdSector, valorId);	
-	}
-	
-	if(auxIdSector != -1){
-		misListasSectores.clear();
-		cargarListas();
-		agregarChoferesLista();		
 	}
 }
 
@@ -653,7 +659,7 @@ void Aplicacion::agregarChoferesLista() {
         cout << "Error: Sectores o choferes no inicializados correctamente." << std::endl;
         return;
     }
-    
+
     for (i = 0; i < misSectores.cantSectores(); i++) {
         auxChoferes.clear();
 
@@ -719,15 +725,5 @@ void Aplicacion::mostrarChoferesLista(int sector){
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
 
 

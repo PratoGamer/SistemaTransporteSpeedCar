@@ -18,11 +18,11 @@ using namespace std;
 int main(int argc, char** argv) {
 	Aplicacion* app = new Aplicacion();
 	
+	//for(int i = 0 ; i < 21 ; i ++)
+	//	app->mostrarChoferesLista(i);
 	
-	app->mostrarChoferesLista(19);
 	
-	
-	//app->Menu();
+	app->Menu();
 	
 	
 	cout << "\tFin de la Aplicacion" << endl;
