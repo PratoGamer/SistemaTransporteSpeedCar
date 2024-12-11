@@ -442,10 +442,8 @@ void Aplicacion::solicitarTraslado(){
 					Chofer auxChofer;
 					
 					auxLista = misListasSectores[sectorOrigen - 1];
-					auxLista.eliminar(selChofer);
+					//auxLista.eliminar(selChofer);
 					auxChofer = auxLista.obtener(selChofer - 1);
-					
-					cout << auxChofer.getNombre();
 					
 					//auxLista.eliminar(selChofer);
 					for(int j = 0; j < misChoferes.cantChoferes(); j++){
@@ -453,7 +451,7 @@ void Aplicacion::solicitarTraslado(){
 							choferSelecionado = true;
 							//Metodo para actualizar el sector del chofer al sector de destino
 							misChoferes.actualizarSector(j, auxSectorDestino);
-							misChoferes.noDisponible(j - 1);
+							misChoferes.noDisponible(j);
 							break;
 						}
 					}
@@ -513,6 +511,12 @@ void Aplicacion::finalizarTraslado() {
 	
 	if(auxIdSector != -1){
 		obtenerCola(auxIdSector, valorId);	
+	}
+	
+	if(auxIdSector != -1){
+		misListasSectores.clear();
+		cargarListas();
+		agregarChoferesLista();
 	}
 }
 
@@ -649,7 +653,6 @@ void Aplicacion::cargarListas(){
 	}
 	
 }
-
 void Aplicacion::agregarChoferesLista() {
     int i, j, k;
     vector<Chofer> auxChoferes;
@@ -666,12 +669,12 @@ void Aplicacion::agregarChoferesLista() {
         // Obtener el sector actual
         string sectorActual = misSectores.darSector(i);
 
-        // Filtrar choferes que pertenecen al sector actual
+        // Filtrar choferes que pertenecen al sector actual y están disponibles
         for (j = 0; j < misChoferes.cantChoferes(); j++) {
             string sectorChofer = misChoferes.darSector(j);
 
             // Comparar sectores (asegurando igualdad robusta)
-            if (sectorActual == sectorChofer) {
+            if (sectorActual == sectorChofer && misChoferes.disponibilidad(j)) {
                 auxChoferes.push_back(misChoferes.darChofer(j));
             }
         }
@@ -688,7 +691,7 @@ void Aplicacion::agregarChoferesLista() {
                 }
             }
         }
-		
+
         // Verificar si hay choferes para agregar a la lista de sectores
         if (!auxChoferes.empty()) {
             // Asegurarse de que la lista del sector esté inicializada
@@ -703,6 +706,7 @@ void Aplicacion::agregarChoferesLista() {
         }
     }
 }
+
 
 void Aplicacion::mostrarChoferesLista(int sector){
 	int i;
