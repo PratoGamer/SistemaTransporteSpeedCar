@@ -60,6 +60,8 @@ public:
     void actualizarSector(int i, string destino);
     string finalizarTrasladoChofer(string placa);
     
+    int darCedulaChofer(int j);
+    
     // Mostrar el Chofer Completo
     void mostrarTodo(int j);
     
