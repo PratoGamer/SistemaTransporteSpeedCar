@@ -44,20 +44,27 @@ public:
     // Metodos
     void cargarChoferes();
     void imprimirChoferes();
-    int actualizarUbicacion();
+    string actualizarUbicacion();
     void agregarChofer();
     void modificarChofer(int cedula);
 	void eliminarChofer(int cedula);
     void guardarChoferes();
     int cantChoferes();
     string darSector(int j);
+    Chofer darChofer(int j);
     void imprimirChofer(int j);
     void sumarUso(int j);
     int cantUsosChofer(int j);
     bool disponibilidad(int i);
     void noDisponible(int i);
     void actualizarSector(int i, string destino);
-    void finalizarTrasladoChofer(string placa);
+    string finalizarTrasladoChofer(string placa);
+    
+    int darCedulaChofer(int j);
+    
+    // Mostrar el Chofer Completo
+    void mostrarTodo(int j);
+    
     // Metodo generarreporte
     void generarReporte(ofstream& reporte);
 };

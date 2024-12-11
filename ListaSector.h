@@ -2,7 +2,7 @@
 #define LISTASECTOR_H
 
 #include <string>
-#include <list>
+#include <vector>
 
 #include "Chofer.h"
 
@@ -10,18 +10,19 @@ using namespace std;
 
 class ListaSector {
 private:
-    list<Chofer> lista;
+    vector<Chofer> lista;
 public:
 	// Constructor
     ListaSector();
     
     // Metodos 
-    void agregarFinal(Chofer user);
-    //void eliminar(Chofer user);
-    //Chofer obtener(int posicion);
+    void agregar(Chofer user);
+    void eliminar(int posicion);
+    Chofer obtener(int posicion);
     int cantElementos();
     bool vacia();
-    
+    bool estaInicializada();
+    void inicializar();
 };
 
 #endif

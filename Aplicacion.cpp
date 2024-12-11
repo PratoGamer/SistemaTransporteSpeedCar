@@ -10,6 +10,9 @@
 #include "Persona.h"
 #include "Chofer.h"
 #include "Usuario.h"
+#include "Sector.h"
+#include "ColaSector.h"
+#include "ListaSector.h"
 
 #include "Aplicacion.h"
 #include "Sector.h"
@@ -22,6 +25,7 @@ Aplicacion::Aplicacion(){
 	terminarDia = false;
 	cargarColas();
 	cargarListas();
+	agregarChoferesLista();
 }
 
 // Menu principal
@@ -276,6 +280,8 @@ void Aplicacion::opciones(){
 // Menu de Servicio Diario
 void Aplicacion::MenuServicioDiario(){
 	bool salir = false;
+	int valorsector, valorId;
+	string auxSector, auxId, auxNuevoSector;
 	//Mostrando opciones del menu de Servicio Diario
 	while(true){
 		cout << "\t *** Menu de Servicio Diario ***" << endl << endl;
@@ -290,11 +296,25 @@ void Aplicacion::MenuServicioDiario(){
 		cin.get();
 		system("cls");
 		switch(this->eleccion) {
-		case 1:
+		case 1:{
 			// Submenu para el metodo para actualizar ubicacion
 			auxNuevoSector = misChoferes.actualizarUbicacion();
-			obtenerCola(auxNuevoSector - 1);
+			
+			if(auxNuevoSector != "no"){
+				//Separando los valores retornados
+				stringstream input_stringstream(auxNuevoSector);
+				
+				getline(input_stringstream, auxSector, ',');
+	    		getline(input_stringstream, auxId, ',');
+				
+				valorsector = atoi(auxSector.c_str());
+				valorId = atoi(auxId.c_str());
+				
+				obtenerCola(valorsector - 1, valorId);
+			}
+			
 		   	break;
+		}
 		   	
 		case 2:
 			// Submenu para el metodo para solicitar traslado
@@ -351,7 +371,7 @@ void Aplicacion::solicitarTraslado(){
 			
 			while(true){
 				//Pidiendo donde se encuentra y comparando que sea una opc valida
-            	cout << endl << "\tIngresar número del sector de origen: ";
+            	cout << endl << "\tIngresar numero del sector de origen: ";
             	cin >> sectorOrigen;
             	if( (sectorOrigen < 0) || (sectorOrigen > misSectores.cantSectores()) ){
             		cout << endl << "\tValor Invalido" << endl;
@@ -363,7 +383,7 @@ void Aplicacion::solicitarTraslado(){
 			
 			while(true){
 				//Pidiendo hacia donde se dirige y comparando que sea una opc valida
-            	cout << endl << "\tIngresar número del sector de Destino: ";
+            	cout << endl << "\tIngresar numero del sector de Destino: ";
             	cin >> sectorDestino;
             	if( (sectorOrigen < 0) || (sectorDestino > misSectores.cantSectores()) ){
             		cout << endl << "\tValor Invalido" << endl;
@@ -387,16 +407,12 @@ void Aplicacion::solicitarTraslado(){
 			
 			for(int j = 0; j < misChoferes.cantChoferes(); j++){
 				if( auxSectorOrigen.compare(misChoferes.darSector(j))==0 && misChoferes.disponibilidad(j)){
-					cout << "\t " << (j+1) << ". ";
-					//Imprimiendo los choferes que se encuentran en el sector origen
-					misChoferes.imprimirChofer(j);
-					cout << endl;
-					
-					valorChofer.push_back( (j+1) );
-					
 					choferDisponible = true;
 				}
 			}
+			
+			mostrarChoferesLista(sectorOrigen-1);
+			
 			//En caso que no se encuentre un chofer en el sector origen se muestra este mensaje
 			if(!choferDisponible){
 				cout << "\tNo hay Ningun Chofer Disponible en su Zona Intente Mas Tarde" << endl;
@@ -415,12 +431,20 @@ void Aplicacion::solicitarTraslado(){
 					cout << endl << "\tSeleccione su Chofer: "; 
 					cin >> selChofer;
 					
-					for(int j = 0; j < valorChofer.size(); j++){
-						if( selChofer == valorChofer[j] ){
+					ListaSector auxLista;
+					Chofer auxChofer;
+					
+					auxLista = misListasSectores[sectorOrigen-1];
+					auxLista.eliminar(selChofer);
+					
+					auxChofer = auxLista.obtener( selChofer - 1 );
+					
+					for(int j = 0; j < misChoferes.cantChoferes(); j++){
+						if(auxChofer.getCedula()  == misChoferes.darCedulaChofer(j) ){
 							choferSelecionado = true;
 							//Metodo para actualizar el sector del chofer al sector de destino
-							misChoferes.actualizarSector(selChofer - 1, auxSectorDestino);
-							misChoferes.noDisponible(selChofer - 1);
+							misChoferes.actualizarSector(j - 1, auxSectorDestino);
+							misChoferes.noDisponible(j - 1);
 							break;
 						}
 					}
@@ -447,19 +471,43 @@ void Aplicacion::solicitarTraslado(){
 	if(!encontrado){
 		cout << endl << "\tNo se Encontro Ningun Usuario con la Cedula: " << auxCedula << endl;
 	}
-	
+	misListasSectores.clear();
+	cargarListas();
+	agregarChoferesLista();
 	system("pause");
 	system("cls");
 }
 
 //finalizar traslado
 void Aplicacion::finalizarTraslado() {
+	string auxFinalizar, auxSector, auxId;
+	int auxIdSector, valorId;
 	cout << "\t *** Finalizar Traslado ***" << endl << endl;
 	string placa;
 	cout << "\tIngrese la placa: ";
 	getline(cin, placa);
+	
 	//usando metodo de la clase chofer para finalizar el traslado
-	misChoferes.finalizarTrasladoChofer(placa);
+	auxFinalizar = misChoferes.finalizarTrasladoChofer(placa);
+	
+	stringstream input_stringstream(auxFinalizar);
+				
+	getline(input_stringstream, auxSector, ',');
+	getline(input_stringstream, auxId, ',');
+	
+	valorId = atoi(auxId.c_str());
+	
+	auxIdSector = misSectores.buscarSectorPorNombre(auxSector);
+	
+	if(auxIdSector != -1){
+		obtenerCola(auxIdSector, valorId);	
+	}
+	
+	if(auxIdSector != -1){
+		misListasSectores.clear();
+		cargarListas();
+		agregarChoferesLista();		
+	}
 }
 
 //Metodo Crear reporte
@@ -510,6 +558,7 @@ void Aplicacion::cargarColas(){
 	}
 	
 }
+
 void Aplicacion::agregarUsuarioCola(int origen, int posUser){
 	
 	ColaSector auxCola;
@@ -527,7 +576,7 @@ void Aplicacion::agregarUsuarioCola(int origen, int posUser){
 	//}
 }
 
-void Aplicacion::obtenerCola(int posicion){
+void Aplicacion::obtenerCola(int posicion, int idChofer){
 	ColaSector auxColas;
 	Usuario auxUsuario;
 	auxColas = misColasSectores[posicion];
@@ -549,7 +598,7 @@ void Aplicacion::obtenerCola(int posicion){
 				auxUsuario = auxColas.obtener();
 			
 				// Mostrar el Nombre del Usuario a Preguntar
-				cout << "\t*** USUARIO: " << auxUsuario.getNombre() << " ***" << endl << endl;
+				cout << "\t*** USUARIO: " << auxUsuario.getNombre() << " ***" << endl;
 				
 				// Seleccion
 				cout << endl << "\tAun desea el traslado?: ";
@@ -560,6 +609,9 @@ void Aplicacion::obtenerCola(int posicion){
 				cin >> this->eleccion;
 				
 				if(eleccion == 1){
+					//misChoferes.actualizarSector(idChofer, misSectores.darSector(auxUsuario.getSectorDestino()));
+					//misChoferes.noDisponible(idChofer);
+					misChoferes.noDisponible(idChofer);
 					auxColas.eliminar();
 					system("cls");
 					misColasSectores[posicion] = auxColas;
@@ -581,6 +633,7 @@ void Aplicacion::obtenerCola(int posicion){
 	system("cls");
 }
 
+
 // Metodos para las Listas
 void Aplicacion::cargarListas(){
 	int i;
@@ -591,12 +644,81 @@ void Aplicacion::cargarListas(){
 	
 }
 
+void Aplicacion::agregarChoferesLista() {
+    int i, j, k;
+    vector<Chofer> auxChoferes;
 
+    // Verificar si los sectores y los choferes están inicializados
+    if (misSectores.cantSectores() == 0 || misChoferes.cantChoferes() == 0) {
+        cout << "Error: Sectores o choferes no inicializados correctamente." << std::endl;
+        return;
+    }
+    
+    for (i = 0; i < misSectores.cantSectores(); i++) {
+        auxChoferes.clear();
 
+        // Obtener el sector actual
+        string sectorActual = misSectores.darSector(i);
 
+        // Filtrar choferes que pertenecen al sector actual
+        for (j = 0; j < misChoferes.cantChoferes(); j++) {
+            string sectorChofer = misChoferes.darSector(j);
 
+            // Comparar sectores (asegurando igualdad robusta)
+            if (sectorActual == sectorChofer) {
+                auxChoferes.push_back(misChoferes.darChofer(j));
+            }
+        }
 
+        // Ordenar los choferes del sector por año del vehículo usando Bubble Sort
+        if (auxChoferes.size() > 1) {
+            for (j = 0; j < auxChoferes.size() - 1; j++) {
+                for (k = 0; k < auxChoferes.size() - j - 1; k++) {
+                    if (auxChoferes[k].getAnho() > auxChoferes[k + 1].getAnho()) {
+                        Chofer temp = auxChoferes[k];
+                        auxChoferes[k] = auxChoferes[k + 1];
+                        auxChoferes[k + 1] = temp;
+                    }
+                }
+            }
+        }
+		
+        // Verificar si hay choferes para agregar a la lista de sectores
+        if (!auxChoferes.empty()) {
+            // Asegurarse de que la lista del sector esté inicializada
+            if (!misListasSectores[i].estaInicializada()) {
+                misListasSectores[i].inicializar();
+            }
 
+            // Agregar los choferes ordenados a la lista correspondiente
+            for (j = 0; j < auxChoferes.size(); j++) {
+                misListasSectores[i].agregar(auxChoferes[j]);
+            }
+        }
+    }
+}
+
+void Aplicacion::mostrarChoferesLista(int sector){
+	int i;
+	ListaSector auxLista;
+	Chofer auxChofer;
+	
+	auxLista = misListasSectores[sector];
+	
+	cout << "\t El Sector es: " << misSectores.darSector(sector) << endl;
+	
+	if(auxLista.vacia()){
+		cout << "\t No hay Choferes en esta zona" << endl;
+	}else{
+		
+		for(i = 0; i < auxLista.cantElementos(); i++){
+			auxChofer = auxLista.obtener(i);
+			
+			cout << "\t " << (i+1) << ". " << auxChofer.getNombre() << " / " << auxChofer.getMarca() << " / " << auxChofer.getModelo() << " / " << auxChofer.getAnho() << endl;
+		}
+	}
+	
+}
 
 
 

@@ -101,3 +101,12 @@ void Sector::guardarSectores(){
 	}
 	archivo.close();
 }
+
+int Sector::buscarSectorPorNombre(string nombreSector) {
+	for (int i = 0; i < sectores.size(); ++i) { 
+		if (sectores[i] == nombreSector) { 
+			return i; // Devuelve la posición si lo encuentra 
+		} 
+	} 
+	return -1; // Devuelve -1 si no lo encuentra 
+}

@@ -12,21 +12,17 @@ ListaSector::ListaSector(){
 	
 }
 
-void ListaSector::agregarFinal(Chofer user){
+void ListaSector::agregar(Chofer user){
 	lista.push_back(user);
 }
 
-/*
-void ListaSector::eliminar(Chofer user){
-	lista.remove(user);
+void ListaSector::eliminar(int posicion){
+	lista.erase(lista.begin() + posicion);
 }
-*/
 
-/*
 Chofer ListaSector::obtener(int posicion){
 	return lista[posicion];
 }
-*/
 
 int ListaSector::cantElementos(){
 	return lista.size();
@@ -36,3 +32,12 @@ bool ListaSector::vacia(){
 	return lista.empty();
 }
 
+bool ListaSector::estaInicializada() {
+    // Verifica si la lista tiene elementos o si está preparada para almacenar datos.
+    return !lista.empty();
+}
+
+void ListaSector::inicializar() {
+    // Inicializa la lista de choferes, dejando el contenedor preparado para almacenar datos.
+    lista.clear();
+}
