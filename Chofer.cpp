@@ -1,6 +1,6 @@
 #include "Chofer.h"
 #include "Aplicacion.h"
-#include <string>
+#include <string.h>
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -125,7 +125,7 @@ void Chofer::imprimirChoferes(){
 
 //Actualizar la ubicacion
 string Chofer::actualizarUbicacion() {
-    string auxPlaca, nuevoSector;
+    string auxPlaca, nuevoSector, antiguoSector;//!
     int valorSector;
     bool encontrado = false;
     
@@ -143,6 +143,8 @@ string Chofer::actualizarUbicacion() {
             // Mostrar el sector actual
             cout << endl << "\t Ubicacion Actual: " << choferes[i].getSector() << endl << endl;
 			auxIdChofer = i;
+			antiguoSector = choferes[i].getSector();
+			//strcpy(antiguoSector,choferes[i].getSector());
             // Mostrando los sectores disponibles
             misSectores.imprimirSectores();
             
@@ -163,6 +165,7 @@ string Chofer::actualizarUbicacion() {
             cout << endl << "\t Sector Seleccionado: " << nuevoSector << endl;
 
             choferes[i].setSector(nuevoSector);
+            cout<<"\n"<<choferes[i].getSector()<<endl;
 
             cout << endl << "\t Ubicacion del Chofer Modificada Correctamente." << endl;
             encontrado = true;
@@ -178,8 +181,9 @@ string Chofer::actualizarUbicacion() {
     system("PAUSE");
     system("cls");
     
+    //En el string se guarda el id del chofer, el el valor del sector nuevo y el valor del sector en donde se encontraba
     ostringstream oss;
-    oss << valorSector << "," << auxIdChofer;
+    oss << valorSector << "," << auxIdChofer <<","<<antiguoSector;
 
     aux = oss.str();
     

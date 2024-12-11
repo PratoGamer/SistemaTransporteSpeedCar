@@ -280,8 +280,10 @@ void Aplicacion::opciones(){
 // Menu de Servicio Diario
 void Aplicacion::MenuServicioDiario(){
 	bool salir = false;
-	int valorsector, valorId;
-	string auxSector, auxId, auxNuevoSector;
+	int valorsector, valorId, valorSectorAntiguo;
+	string auxSector, auxId, auxNuevoSector, auxSectorAntiguo;
+	ListaSector auxLista1, auxLista2;
+	Chofer auxchofer;
 	//Mostrando opciones del menu de Servicio Diario
 	while(true){
 		cout << "\t *** Menu de Servicio Diario ***" << endl << endl;
@@ -306,10 +308,27 @@ void Aplicacion::MenuServicioDiario(){
 				
 				getline(input_stringstream, auxSector, ',');
 	    		getline(input_stringstream, auxId, ',');
-				
+	    		getline(input_stringstream, auxSectorAntiguo,',');
+	    		
+	    		valorSectorAntiguo=misSectores.buscarSectorPorNombre(auxSectorAntiguo);				
 				valorsector = atoi(auxSector.c_str());
 				valorId = atoi(auxId.c_str());
+				//se extraen las listas de los sectores a modificar
+				auxLista1 =misListasSectores[valorSectorAntiguo];
+				auxLista2 =misListasSectores[valorsector-1];
 				
+				for(int i =0; i<auxLista1.cantElementos();i++){
+					auxchofer = auxLista1.obtener(i);
+					//se busca el chofer el cual se movera
+					if(auxchofer.getCedula() == misChoferes.darCedulaChofer(valorId)){
+						//se hacen las modificaciones para luego volver a guardar las listas
+						auxLista1.eliminar(i);
+						auxLista2.agregar(auxchofer);
+						misListasSectores[valorSectorAntiguo] = auxLista1;
+						misListasSectores[valorsector-1] = auxLista2;
+
+					}
+				}
 				obtenerCola(valorsector - 1, valorId);
 			}
 			
