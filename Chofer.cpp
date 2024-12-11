@@ -298,10 +298,6 @@ Chofer Chofer::darChofer(int j){
 	return choferes[j];
 }
 
-int Chofer::darCedulaChofer(int j){
-	return choferes[j].getCedula();
-}
-
 // imprimiendo los choferes disponibles en el origen
 void Chofer::imprimirChofer(int j){
 	cout << "Nombre: " << choferes[j].getNombre() << " Marca: " << choferes[j].getMarca() << " Modelo: " << choferes[j].getModelo() << " Placa: " << choferes[j].getPlaca();
@@ -387,4 +383,8 @@ void Chofer::generarReporte(ofstream& reporte){
                 << endl;
         }
     }
+}
+
+int Chofer::darCedulaChofer(int j){
+	return choferes[j].getCedula();
 }
