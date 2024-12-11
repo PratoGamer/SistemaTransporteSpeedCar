@@ -59,7 +59,6 @@ public:
     void noDisponible(int i);
     void actualizarSector(int i, string destino);
     string finalizarTrasladoChofer(string placa);
-    
     int darCedulaChofer(int j);
     
     // Mostrar el Chofer Completo

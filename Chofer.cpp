@@ -142,9 +142,9 @@ string Chofer::actualizarUbicacion() {
         if (choferes[i].getPlaca() == auxPlaca) {
             // Mostrar el sector actual
             cout << endl << "\t Ubicacion Actual: " << choferes[i].getSector() << endl << endl;
+			//guardando el sector actual
 			auxIdChofer = i;
 			antiguoSector = choferes[i].getSector();
-			//strcpy(antiguoSector,choferes[i].getSector());
             // Mostrando los sectores disponibles
             misSectores.imprimirSectores();
             
@@ -388,7 +388,7 @@ void Chofer::generarReporte(ofstream& reporte){
         }
     }
 }
-
+// metodo para retornar el num de cedula
 int Chofer::darCedulaChofer(int j){
 	return choferes[j].getCedula();
 }
