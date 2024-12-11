@@ -435,7 +435,7 @@ void Aplicacion::solicitarTraslado(){
 			
 			//En caso que no se encuentre un chofer en el sector origen se muestra este mensaje
 			if(!choferDisponible){
-				cout << "\tNo hay Ningun Chofer Disponible en su Zona Intente Mas Tarde" << endl;
+				cout << endl << "\tNo hay Ningun Chofer Disponible en su Zona Intente Mas Tarde" << endl << endl;
 				
 				//CONSULTA PARA TOMAR LA COLA
 				cout << "\tDesea entrar en la cola de espera? \n\t1 -> Si\n\t2 -> No"<<endl;
@@ -636,6 +636,9 @@ void Aplicacion::obtenerCola(int posicion, int idChofer){
 					auxColas.eliminar();
 					system("cls");
 					misColasSectores[posicion] = auxColas;
+					misListasSectores.clear();
+					cargarListas();
+					agregarChoferesLista();
 					return;
 				}else if(eleccion == 2){
 					cout << endl << "Su Solicitud ha Sido Eliminada" << endl;

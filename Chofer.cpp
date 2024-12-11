@@ -165,7 +165,6 @@ string Chofer::actualizarUbicacion() {
             cout << endl << "\t Sector Seleccionado: " << nuevoSector << endl;
 
             choferes[i].setSector(nuevoSector);
-            cout<<"\n"<<choferes[i].getSector()<<endl;
 
             cout << endl << "\t Ubicacion del Chofer Modificada Correctamente." << endl;
             encontrado = true;
