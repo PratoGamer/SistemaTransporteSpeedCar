@@ -9,6 +9,7 @@
 #include "Sector.h"
 #include "ColaSector.h"
 #include "ListaSector.h"
+#include "Grafo.h"
 
 using namespace std;
 
@@ -23,6 +24,7 @@ class Aplicacion{
 		vector<ColaSector> misColasSectores;
 		vector<ListaSector> misListasSectores;
 		int auxNuevoSector;
+		Grafo* miGrafo;
 		
 	public:
 		// Constructor
@@ -64,6 +66,9 @@ class Aplicacion{
 		void cargarListas();
 		void agregarChoferesLista();
 		void mostrarChoferesLista(int sector);
+		
+		// Metodos para el Grafo
+		void mostrarGrafo();
 };
 
 #endif

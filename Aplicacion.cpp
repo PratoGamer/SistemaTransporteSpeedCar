@@ -16,6 +16,7 @@
 
 #include "Aplicacion.h"
 #include "Sector.h"
+#include "Grafo.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ Aplicacion::Aplicacion(){
 	cargarColas();
 	cargarListas();
 	agregarChoferesLista();
+	miGrafo = new Grafo(misSectores.cantSectores());
 }
 
 // Menu principal
@@ -740,3 +742,13 @@ void Aplicacion::mostrarChoferesLista(int sector){
 		}
 	}
 }
+
+void Aplicacion::mostrarGrafo(){
+	miGrafo->imprimirMatriz();
+}
+
+
+
+
+
+

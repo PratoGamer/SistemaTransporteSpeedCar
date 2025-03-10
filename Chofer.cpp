@@ -99,7 +99,7 @@ void Chofer::cargarChoferes(){
 		getline(input_stringstream, auxPlaca, '-');
 		getline(input_stringstream, auxAnho, '-');
 		auxAnhoInt = atoi(auxAnho.c_str());
-		//dando un sector de forma aleatoria
+		// Dando un Sector de Forma Aleatoria
 		auxSector = misSectores.darSector(rand() % cantSectores);
 		
 		choferes.push_back(Chofer(auxNombre, auxApellido, auxEdadInt, auxCedulaInt, auxMarca, auxModelo, auxAnhoInt, auxPlaca, auxSector));
