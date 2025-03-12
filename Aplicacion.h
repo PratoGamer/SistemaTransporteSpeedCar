@@ -24,7 +24,7 @@ class Aplicacion{
 		vector<ColaSector> misColasSectores;
 		vector<ListaSector> misListasSectores;
 		int auxNuevoSector;
-		Grafo* miGrafo;
+		Grafo miGrafo;
 		
 	public:
 		// Constructor

@@ -9,11 +9,11 @@
 using namespace std;
 
 // Constructor
-Grafo::Grafo(int n){
-	this->numSectores = n;
+Grafo::Grafo(){
+	this->numSectores = misSectores.cantSectores();
 	
     // Inicializar la matriz de adyacencia con tamaño n x n y valores iniciales 0
-    matrizAdyacencia.resize(n, vector<int>(n, 0));
+    matrizAdyacencia.resize(numSectores, vector<int>(numSectores, 0));
     
     // Cargar las Aristas
     cargarAristas();
@@ -32,8 +32,10 @@ void Grafo::cargarAristas(){
 		
 		getline(input_stringstream, sector1, '-');
 		sector1Int = atoi(sector1.c_str());
+		sector1Int--;
 		getline(input_stringstream, sector2, '-');
 		sector2Int = atoi(sector2.c_str());
+		sector2Int--;
 		getline(input_stringstream, distancia, '-');
 		distanciaInt = atoi(distancia.c_str());
 		
@@ -49,8 +51,8 @@ void Grafo::cargarAristas(){
 void Grafo::imprimirMatriz(){
 	
 	int i, j;
-	for (i = 1; i <= numSectores; i++) {
-            for (j = 1; j <= numSectores; j++) {
+	for (i = 0; i < numSectores; i++) {
+            for (j = 0; j < numSectores; j++) {
                 cout << matrizAdyacencia[i][j] << " ";
             }
             cout << endl;

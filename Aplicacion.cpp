@@ -27,7 +27,7 @@ Aplicacion::Aplicacion(){
 	cargarColas();
 	cargarListas();
 	agregarChoferesLista();
-	miGrafo = new Grafo(misSectores.cantSectores());
+	
 }
 
 // Menu principal
@@ -744,7 +744,7 @@ void Aplicacion::mostrarChoferesLista(int sector){
 }
 
 void Aplicacion::mostrarGrafo(){
-	miGrafo->imprimirMatriz();
+	miGrafo.imprimirMatriz();
 }
 
 

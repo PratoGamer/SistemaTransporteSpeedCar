@@ -3,19 +3,20 @@
 
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <vector>
+#include "Sector.h"
 
 using namespace std;
 
 class Grafo {
 private:
-    int numSectores; // Número de sectores
+	Sector misSectores;
+    int numSectores; // Cantidad de Cectores
     vector< vector<int> > matrizAdyacencia; // Matriz de adyacencia
-
+    
 public:
     // Constructor
-    Grafo(int n);
+    Grafo();
     
     // Metodos
     void cargarAristas();
