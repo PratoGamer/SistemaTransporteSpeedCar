@@ -18,10 +18,15 @@ public:
     // Constructor
     Grafo();
     
+    //GETS
+    int getNumSectores(); // Obtener el número de sectores
+   	vector< vector<int> > getMatrizAdyacencia(); // Obtener la matriz de adyacencia
+    
     // Metodos
     void cargarAristas();
     void imprimirMatriz();
-
+	vector<int> dijkstra(int origen, int destino);
+	void imprimirRuta(vector<int> ruta);
 };
 
 #endif

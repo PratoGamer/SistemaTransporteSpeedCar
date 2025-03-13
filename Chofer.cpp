@@ -303,7 +303,7 @@ Chofer Chofer::darChofer(int j){
 
 // imprimiendo los choferes disponibles en el origen
 void Chofer::imprimirChofer(int j){
-	cout << "Nombre: " << choferes[j].getNombre() << " Marca: " << choferes[j].getMarca() << " Modelo: " << choferes[j].getModelo() << " Placa: " << choferes[j].getPlaca();
+	cout << choferes[j].getNombre() << " / " << choferes[j].getMarca() << " / " << choferes[j].getModelo() << " / " << choferes[j].getPlaca();
 }
 // suamando los traslados al chofer
 void Chofer::sumarUso(int j){

@@ -424,16 +424,18 @@ void Aplicacion::solicitarTraslado(){
 			system("cls");
 			
 			//Buscando choferes que se encuentren en el sector origen seleccionado
-			cout << "\tBuscando Choferes en el Mismo Sector" << endl << endl;
+			cout << "\tBuscando Choferes" << endl << endl;
 			
 			//revisando si hay chiferes disponibles
+			
+			//mostrando choferes
 			for(int j = 0; j < misChoferes.cantChoferes(); j++){
-				if( auxSectorOrigen.compare(misChoferes.darSector(j))==0 && misChoferes.disponibilidad(j)){
-					choferDisponible = true;
-				}
+				cout << "\t " << (j+1) << ". "; misChoferes.imprimirChofer(j); cout << endl;
 			}
+			
+			choferDisponible = true;
 			//mostrando los choferes disponibles
-			mostrarChoferesLista(sectorOrigen-1);
+			//mostrarChoferesLista(sectorOrigen-1);
 			
 			//En caso que no se encuentre un chofer en el sector origen se muestra este mensaje
 			if(!choferDisponible){
@@ -453,20 +455,45 @@ void Aplicacion::solicitarTraslado(){
 					cout << endl << "\tSeleccione su Chofer: "; 
 					cin >> selChofer;
 					
-					ListaSector auxLista;
-					Chofer auxChofer;
+					//ListaSector auxLista;
+					//Chofer auxChofer;
 					
-					auxLista = misListasSectores[sectorOrigen - 1];
-					auxChofer = auxLista.obtener(selChofer - 1);
+					//auxLista = misListasSectores[sectorOrigen - 1];
+					//auxChofer = auxLista.obtener(selChofer - 1);
 					//comparando el chofer de la lista y recuperando su posicion
 					for(int j = 0; j < misChoferes.cantChoferes(); j++){
-						if( auxChofer.getCedula() == misChoferes.darCedulaChofer(j) ){
+						
+							system("pause");
+							system("cls");
+							
+							cout << "\t Rutas mas cortas encontradas" << endl << endl;
+							
+							vector<int> rutaChofer = miGrafo.dijkstra(misSectores.buscarSectorPorNombre(misChoferes.darSector(selChofer)), sectorOrigen - 1);
+							cout << "\t Ruta mas corta para buscar al usuario: ";
+							for (int i = 0; i < rutaChofer.size(); i++) {
+						        cout << misSectores.darSector(rutaChofer[i]); // Ajustar índices (sumar 1)
+						        if (i < rutaChofer.size() - 1) {
+						            cout << " -> ";
+						        }
+						    }
+						    cout << endl;
+						    
+							vector<int> rutaUsuario = miGrafo.dijkstra(sectorOrigen - 1, sectorDestino - 1);
+							cout << endl << "\t Ruta mas corta: ";
+						    for (int i = 0; i < rutaUsuario.size(); i++) {
+						        cout << misSectores.darSector(rutaUsuario[i]); // Ajustar índices (sumar 1)
+						        if (i < rutaUsuario.size() - 1) {
+						            cout << " -> ";
+						        }
+						    }
+						    cout << endl << endl;
+
 							choferSelecionado = true;
 							//Metodo para actualizar el sector del chofer al sector de destino
 							misChoferes.actualizarSector(j, auxSectorDestino);
 							misChoferes.noDisponible(j);
 							break;
-						}
+						
 					}
 					
 					if(!choferSelecionado){
