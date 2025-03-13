@@ -466,27 +466,29 @@ void Aplicacion::solicitarTraslado(){
 							system("pause");
 							system("cls");
 							
-							cout << "\t Rutas mas cortas encontradas" << endl << endl;
+							cout << "\t Rutas Mas Cortas Encontradas" << endl << endl;
 							
 							vector<int> rutaChofer = miGrafo.dijkstra(misSectores.buscarSectorPorNombre(misChoferes.darSector(selChofer)), sectorOrigen - 1);
-							cout << "\t Ruta mas corta para buscar al usuario: ";
+							
+							cout << "\t Ruta Mas Corta para Buscar al Usuario: ";
 							for (int i = 0; i < rutaChofer.size(); i++) {
 						        cout << misSectores.darSector(rutaChofer[i]); // Ajustar índices (sumar 1)
 						        if (i < rutaChofer.size() - 1) {
 						            cout << " -> ";
 						        }
 						    }
-						    cout << endl;
+						    cout << " || Distancia: " << miGrafo.obtenerDistanciaKm(rutaChofer) << "Km" << endl;
 						    
 							vector<int> rutaUsuario = miGrafo.dijkstra(sectorOrigen - 1, sectorDestino - 1);
-							cout << endl << "\t Ruta mas corta: ";
+							cout << endl << "\t Ruta Mas Corta Hacia el Destino: ";
 						    for (int i = 0; i < rutaUsuario.size(); i++) {
 						        cout << misSectores.darSector(rutaUsuario[i]); // Ajustar índices (sumar 1)
 						        if (i < rutaUsuario.size() - 1) {
 						            cout << " -> ";
 						        }
 						    }
-						    cout << endl << endl;
+						    
+						    cout << " || Distancia: " << miGrafo.obtenerDistanciaKm(rutaUsuario) << "Km" << endl;
 
 							choferSelecionado = true;
 							//Metodo para actualizar el sector del chofer al sector de destino
@@ -749,6 +751,7 @@ void Aplicacion::agregarChoferesLista() {
     }
 }
 
+// Mostrar la Lista de los Choferes
 void Aplicacion::mostrarChoferesLista(int sector){
 	int i;
 	ListaSector auxLista;
@@ -770,6 +773,7 @@ void Aplicacion::mostrarChoferesLista(int sector){
 	}
 }
 
+// Mostrar la Matriz Cuadrada del Grafo
 void Aplicacion::mostrarGrafo(){
 	miGrafo.imprimirMatriz();
 }

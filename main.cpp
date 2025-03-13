@@ -11,7 +11,7 @@ using namespace std;
 	-> Osmar Porras CI: 31509694
 	
 	Entrega:
-	11-12-24
+	13-03-25
 */
 
 
@@ -19,8 +19,6 @@ int main(int argc, char** argv) {
 	Aplicacion* app = new Aplicacion();
 	
 	app->Menu();
-	
-	//app->mostrarGrafo();
 	
 	cout << "\t Fin de la Aplicacion" << endl;
 	system("PAUSE");

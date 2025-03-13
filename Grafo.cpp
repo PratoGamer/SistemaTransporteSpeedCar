@@ -14,7 +14,7 @@ using namespace std;
 Grafo::Grafo(){
 	this->numSectores = misSectores.cantSectores();
 	
-    // Inicializar la matriz de adyacencia con tamaño n x n y valores iniciales 0
+    // Inicializar la Matriz de Adyacencia Cuadrada y Valores Iniciales en Cero
     matrizAdyacencia.resize(numSectores, vector<int>(numSectores, 0));
     
     // Cargar las Aristas
@@ -129,16 +129,36 @@ vector<int> Grafo::dijkstra(int origen, int destino) {
     return ruta;
 }
 
-
+// Imprimir la Ruta 
 void Grafo::imprimirRuta(vector<int> ruta) {
-        if (ruta.empty()) {
-            cout << "No hay ruta disponible." << endl;
-            return;
-        }
-        cout << "Ruta más corta: ";
-        for (size_t i = 0; i < ruta.size(); i++) {
-            cout << (ruta[i] + 1);
-            if (i < ruta.size() - 1) cout << " -> ";
-        }
-        cout << endl;
+	
+    if (ruta.empty()) {
+        cout << "No hay ruta disponible." << endl;
+        return;
     }
+    cout << "Ruta más corta: ";
+    for (int i = 0; i < ruta.size(); i++) {
+        	
+        cout << (ruta[i] + 1);
+        if (i < ruta.size() - 1) cout << " -> ";
+    }
+    cout << endl;
+}
+
+// Obtener la Distancia en Km para la Ruta Minima
+int Grafo::obtenerDistanciaKm(vector<int> ruta){
+	
+	int distanciaKm = 0;
+	
+	for (int i = 0; i < ruta.size(); i++) {
+        
+        // Sumar de la Matriz de Adyacencia
+        if(i < (ruta.size()-1)){
+        	distanciaKm += matrizAdyacencia[ruta[i]][ruta[i+1]];
+		}
+    }
+	
+	return distanciaKm;
+	
+}
+    
